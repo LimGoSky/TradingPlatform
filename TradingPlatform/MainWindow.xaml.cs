@@ -26,7 +26,7 @@ namespace TradingPlatform
         public MainWindow()
         {
             LoginLogic model = new LoginLogic();
-            model.SendMessage("15620938880", CheckCodeTypeEnum.REGISTER.ToString());
+            ResultModel result = model.SendMessage("15620938880", CheckCodeTypeEnum.REGISTER.ToString());
             //Log4Helper.Info(this.GetType(), "abc");
             InitializeComponent();
         }
