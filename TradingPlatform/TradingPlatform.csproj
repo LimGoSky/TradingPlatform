@@ -120,6 +120,14 @@
       <Project>{e379abc2-725b-4466-aa87-5f1cc422155c}</Project>
       <Name>Trading.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Trading.Logic\Trading.Logic.csproj">
+      <Project>{22808456-1700-4eb4-adb6-971e91a27e25}</Project>
+      <Name>Trading.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trading.Model\Trading.Model.csproj">
+      <Project>{f686f42b-dabd-4c29-a40d-c39a59679681}</Project>
+      <Name>Trading.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewMarket\" />
