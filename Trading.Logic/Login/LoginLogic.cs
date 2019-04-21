@@ -19,12 +19,10 @@ namespace Trading.Logic
         {
             try
             {
-                Dictionary<string, string> dic = new Dictionary<string, string>();
-                dic.Add("checkCodeType", checkCodeType);
-                dic.Add("mobile", mobile);
                 string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
+                //WebUtils.BuildRequestUrl(strUrl, dic);
 
-                ResultModel res = HttpUtility<ResultModel>.Factory(strUrl,new { checkCodeType, mobile }).Post();
+                //WebUtils web = new WebUtils();
                 //string result = web.DoPost(strUrl, dic);
             }
             catch (Exception ex)
