@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Trading.Common;
+using Trading.Logic;
+using Trading.Model.Common;
 
 namespace TradingPlatform
 {
@@ -23,7 +25,9 @@ namespace TradingPlatform
     {
         public MainWindow()
         {
-            Log4Helper.Info(this.GetType(), "abc");
+            LoginLogic model = new LoginLogic();
+            model.SendMessage("15620938880", CheckCodeTypeEnum.REGISTER.ToString());
+            //Log4Helper.Info(this.GetType(), "abc");
             InitializeComponent();
         }
     }
