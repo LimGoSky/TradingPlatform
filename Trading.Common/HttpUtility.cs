@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Reflection;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Trading.Common
 {
@@ -38,6 +40,17 @@ namespace Trading.Common
         }
 
 
+        private T StreamToObj(Stream stream)
+        {
+            string str = string.Empty;
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                str = sr.ReadToEnd();
+            }
+            var obj = JsonConvert.DeserializeObject<T>(str);
+            return obj;
+        }
+
         public T Get()
         {
             PropertyInfo[] ps = data.GetType().GetProperties();
@@ -51,12 +64,43 @@ namespace Trading.Common
                 }
             }
 
-
             WebRequest request = WebRequest.Create(url);
             request.Method = "get";
 
-            return default(T);
+            var response = request.GetResponse();
 
+            var stream = response.GetResponseStream();
+
+            return StreamToObj(stream);
+        }
+
+        public T Post(string methods= "post")
+        {
+            WebRequest request = WebRequest.Create(url);
+            request.Method = methods;
+
+            request.ContentType = "application/json";
+
+            string _params = JsonConvert.SerializeObject(this.data);
+
+            byte[] data = Encoding.UTF8.GetBytes(_params);
+
+            request.ContentLength = data.Length;
+
+            Stream requestStream = request.GetRequestStream();
+
+            requestStream.Write(data, 0, data.Length);
+
+            WebResponse response = request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+
+            return StreamToObj(stream);
+        }
+
+        public T Put()
+        {
+            return Post("put");
         }
     }
 }
