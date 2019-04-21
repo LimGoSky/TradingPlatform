@@ -23,9 +23,8 @@ namespace Trading.Logic
                 dic.Add("checkCodeType", checkCodeType);
                 dic.Add("mobile", mobile);
                 string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
-                //WebUtils.BuildRequestUrl(strUrl, dic);
 
-                //WebUtils web = new WebUtils();
+                ResultModel res = HttpUtility<ResultModel>.Factory(strUrl,new { checkCodeType, mobile }).Post();
                 //string result = web.DoPost(strUrl, dic);
             }
             catch (Exception ex)
