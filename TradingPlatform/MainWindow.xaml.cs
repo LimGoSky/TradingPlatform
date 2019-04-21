@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Trading.Common;
 
 namespace TradingPlatform
 {
@@ -22,6 +23,7 @@ namespace TradingPlatform
     {
         public MainWindow()
         {
+            Log4Helper.Info(this.GetType(), "abc");
             InitializeComponent();
         }
     }
