@@ -30,7 +30,7 @@ namespace Trading.Model.Common
     public enum CheckCodeTypeEnum
     {
         LOGIN = 1,
-        REGISTER =2,
+        REGISTER = 2,
         RESET_PASSWORD = 3
     }
 }
