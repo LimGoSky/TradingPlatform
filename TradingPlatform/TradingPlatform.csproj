@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,11 +98,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="CSS\imgaes\guanbi.png" />
-    <Resource Include="CSS\imgaes\suoxiao.png" />
+    <Resource Include="Styles\imgaes\guanbi.png" />
+    <Resource Include="Styles\imgaes\suoxiao.png" />
+    <None Include="Resources\DSC05128.JPG" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Config\Interface.config" />
     <Content Include="Config\log4net.config">
@@ -117,10 +128,6 @@
     <ProjectReference Include="..\Trading.Common\Trading.Common.csproj">
       <Project>{e379abc2-725b-4466-aa87-5f1cc422155c}</Project>
       <Name>Trading.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Trading.Model\Trading.Model.csproj">
-      <Project>{f686f42b-dabd-4c29-a40d-c39a59679681}</Project>
-      <Name>Trading.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

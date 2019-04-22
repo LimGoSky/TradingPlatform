@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingPlatform"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF4B4949" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <WrapPanel HorizontalAlignment="Left" Height="45" Margin="0,0,0,0" VerticalAlignment="Top" Width="1024">
+        <WrapPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF383535" Offset="1"/>
+                <GradientStop Color="#FF595353"/>
+                <GradientStop Color="#FF302C2C" Offset="0.509"/>
+            </LinearGradientBrush>
+        </WrapPanel.Background>
+        <Ellipse Height="35" Margin="20,0,0,0" Stroke="#FFE9F313" Width="35">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <TextBlock Height="20" TextWrapping="Wrap" Margin="10,5,0,0" Text="157****3362" FontSize="16" Foreground="#FF8B8787"/>
+        <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
+            <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="交易" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+        </Viewbox>
+        <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
+            <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="资讯" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+        </Viewbox>
+        <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
+            <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="消息" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+        </Viewbox>
+        <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
+            <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="设置" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+        </Viewbox>
+        <TextBox VerticalContentAlignment="Center" Height="35" FontSize="18" Text="输入期货代码/名称/拼音" Width="290" Background="#FF252222" TextDecorations="{x:Null}" IsUndoEnabled="True" TextWrapping="Wrap" BorderThickness="1,1,1,0" SnapsToDevicePixels="True" ClipToBounds="True" AllowDrop="True"/>
+        <WrapPanel Height="405" Width="1024" >
+            <StackPanel  Height="375" Width="1024"/>
+            <WrapPanel Height="30" Width="1024" OpacityMask="#FFB41515">
+                <WrapPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF535553" Offset="1"/>
+                        <GradientStop Color="#FF41443F"/>
+                        <GradientStop Color="#FF0F0F0F" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </WrapPanel.Background>
+            </WrapPanel>
+        </WrapPanel>
+
+    </WrapPanel>
 </Window>
