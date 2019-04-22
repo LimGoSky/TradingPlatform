@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Business.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Page_Business\MainPage.xaml.cs">
@@ -98,9 +102,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Styles\imgaes\search.png" />
+    <Resource Include="Styles\imgaes\fangda.png" />
     <Resource Include="Styles\imgaes\guanbi.png" />
     <Resource Include="Styles\imgaes\suoxiao.png" />
-    <None Include="Resources\DSC05128.JPG" />
+    <None Include="Resources\DSC05128.JPG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -108,6 +116,7 @@
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Config\Interface.config" />
     <Content Include="Config\log4net.config">
@@ -128,6 +137,14 @@
     <ProjectReference Include="..\Trading.Common\Trading.Common.csproj">
       <Project>{e379abc2-725b-4466-aa87-5f1cc422155c}</Project>
       <Name>Trading.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trading.Logic\Trading.Logic.csproj">
+      <Project>{22808456-1700-4eb4-adb6-971e91a27e25}</Project>
+      <Name>Trading.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trading.Model\Trading.Model.csproj">
+      <Project>{f686f42b-dabd-4c29-a40d-c39a59679681}</Project>
+      <Name>Trading.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
