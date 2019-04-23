@@ -102,6 +102,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Styles\imgaes\zixun.png" />
     <Resource Include="Styles\imgaes\huanyuan.png" />
     <Resource Include="Styles\imgaes\search.png" />
     <Resource Include="Styles\imgaes\fangda.png" />
