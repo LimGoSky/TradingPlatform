@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TradingPlatform"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
+    <Application.Resources><!--by 胡冰冰 样式字典-->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Resources/Business.xaml"/>

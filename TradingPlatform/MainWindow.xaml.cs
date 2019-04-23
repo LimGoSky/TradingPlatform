@@ -33,6 +33,7 @@ namespace TradingPlatform
 
         #region 标题栏事件
 
+        Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
         /// <summary>
         /// 窗口移动事件
         /// </summary>
@@ -74,18 +75,31 @@ namespace TradingPlatform
         }
 
         /// <summary>
-        /// 窗口最大化与还原
+        /// 窗口最大化
         /// </summary>
         private void btn_max_Click(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
-            {
-                this.WindowState = WindowState.Normal; //设置窗口还原
-            }
-            else
-            {
-                this.WindowState = WindowState.Maximized; //设置窗口最大化
-            }
+            rcnormal = new Rect(this.Left, this.Top, this.Width, this.Height);//保存下当前位置与大小
+            this.Left = 0;//设置位置
+            this.Top = 0;
+            Rect rc = SystemParameters.WorkArea;//获取工作区大小
+            this.Width = rc.Width;
+            this.Height = rc.Height;
+            this.btn_fangda.Visibility =Visibility.Collapsed;
+            this.btn_huanyuan.Visibility = Visibility.Visible;
+
+        }
+        /// <summary>
+        /// 窗口还原
+        /// </summary>
+        private void btn_normal_Click(object sender, RoutedEventArgs e)
+        {
+            this.btn_fangda.Visibility =Visibility.Visible;
+            this.btn_huanyuan.Visibility = Visibility.Collapsed;
+            this.Left = rcnormal.Left;
+            this.Top = rcnormal.Top;
+            this.Width = rcnormal.Width;
+            this.Height = rcnormal.Height;
         }
 
         /// <summary>
