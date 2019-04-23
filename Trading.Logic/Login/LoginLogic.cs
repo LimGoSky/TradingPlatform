@@ -21,7 +21,7 @@ namespace Trading.Logic
             {
                 string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
                 //WebUtils.BuildRequestUrl(strUrl, dic);
-
+                ResultModel res = HttpUtility<ResultModel>.Factory(strUrl, new { checkCodeType, mobile }).Post();
                 //WebUtils web = new WebUtils();
                 //string result = web.DoPost(strUrl, dic);
             }
