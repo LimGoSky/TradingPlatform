@@ -43,4 +43,9 @@ namespace Trading.Model.Common
         /// </summary>
         public string msg { get; set; }
     }
+
+    public class Token
+    {
+        public string token { get; set; }
+    }
 }
