@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingPlatform"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
+        Title="MainWindow" Height="500" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
@@ -78,7 +78,13 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
-            <StackPanel  Height="375" Width="1024"/>
+            <StackPanel  Height="425" Width="1024">
+                <TabControl Height="425" Width="1024" Margin="0,0,0,0">
+                    <TabItem Header="行情" Width="180" Height="38" Background="White" Foreground="#FFF7E209" IsSelected="True" FontSize="16">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
             <StackPanel  Height="30" Width="1024" Background="#FF323030">
                 <StackPanel Width="120px" WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Image x:Name="btn_zixun" Source="/Styles/imgaes/zixun.png" Height="25" Width="25" Margin="0,2,15,0" MouseLeftButtonDown="btn_max_Click" />
