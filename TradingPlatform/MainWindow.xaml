@@ -72,7 +72,7 @@
         <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
             <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_min_Click" />
             <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_max_Click" />
-            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/fangda.png" Margin="0,0,15,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
+            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,15,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
             <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_close_Click"  />
         </StackPanel>
         
