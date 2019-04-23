@@ -45,7 +45,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <WrapPanel WindowChrome.IsHitTestVisibleInChrome="True" Grid.Column="0" Grid.Row="0" Height="45" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
+        <WrapPanel Grid.Column="0" Grid.Row="0" Height="45" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
            
             <Ellipse Height="35" Margin="20,5,0,0" Stroke="#FFE9F313" Width="35">
                 <Ellipse.Fill>
@@ -53,17 +53,17 @@
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock Height="20" TextWrapping="Wrap" Margin="10,10,0,0" Text="157****3362" FontSize="16" Foreground="#FF8B8787"/>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="交易" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="20,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="20" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="交易" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="资讯" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="20,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="20" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="资讯" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="消息" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="20,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="20" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="消息" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="设置" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="20,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="20" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="设置" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
             <TextBox Style="{StaticResource TextBoxSearch}" Margin="0,5,0,0">
             </TextBox>
@@ -77,7 +77,19 @@
         </StackPanel>
         
         <WrapPanel  Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
-            <StackPanel  Height="375" Width="1024"/>
+            <StackPanel Height="375" Width="1024">
+                <TabControl Style="{StaticResource TabControlStyle}">
+                    <TabItem Header="行情" Name="TabItem1">
+                        <StackPanel >
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="K1"  Name="TabItem2">
+                        <Grid Background="#FFE5E5E5">
+                            <TextBlock  Margin="3"  Text="选项卡2" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
         </WrapPanel>
 
     </Grid>
