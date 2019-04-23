@@ -79,6 +79,8 @@ namespace TradingPlatform
         /// </summary>
         private void btn_max_Click(object sender, RoutedEventArgs e)
         {
+            this.btn_fangda.Visibility = Visibility.Collapsed;
+            this.btn_huanyuan.Visibility = Visibility.Visible;
             rcnormal = new Rect(this.Left, this.Top, this.Width, this.Height);//保存下当前位置与大小
             this.Left = 0;//设置位置
             this.Top = 0;

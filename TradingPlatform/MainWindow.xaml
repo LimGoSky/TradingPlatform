@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TradingPlatform"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
-    <Window.Style><!--窗口拖动-->
+    <Window.Style>
+        <!--窗口拖动-->
         <Style TargetType="Window">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="WindowStyle" Value="ToolWindow" />
@@ -72,23 +73,16 @@
         <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
             <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_min_Click" />
             <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_max_Click" />
-            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/fangda.png" Margin="0,0,15,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
+            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,15,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
             <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_close_Click"  />
         </StackPanel>
-        
-        <WrapPanel  Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
-            <StackPanel Height="375" Width="1024">
-                <TabControl Style="{StaticResource TabControlStyle}">
-                    <TabItem Header="行情" Name="TabItem1">
-                        <StackPanel >
-                        </StackPanel>
-                    </TabItem>
-                    <TabItem Header="K1"  Name="TabItem2">
-                        <Grid Background="#FFE5E5E5">
-                            <TextBlock  Margin="3"  Text="选项卡2" VerticalAlignment="Top"/>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
+
+        <WrapPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
+            <StackPanel  Height="375" Width="1024"/>
+            <StackPanel  Height="30" Width="1024" Background="#FF323030">
+                <StackPanel Width="120px" WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Image x:Name="btn_zixun" Source="/Styles/imgaes/zixun.png" Height="25" Width="25" Margin="0,2,15,0" MouseLeftButtonDown="btn_max_Click" />
+                </StackPanel>
             </StackPanel>
         </WrapPanel>
 
