@@ -7,132 +7,117 @@
         mc:Ignorable="d"
         Title="" Height="450" Width="800"
         WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BackGround}">
-    <Grid>
-        <StackPanel Orientation="Horizontal" Height="50" Margin="0,0,0,410">
-            <Label Content="KM028372" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
-            <Image Source="../Styles/imgaes/suoxiao.png" Height="20" Width="20" Margin="600,0,0,10"  MouseLeftButtonDown="btn_min_Click" />
-            <Image Source="../Styles/imgaes/guanbi.png" Height="20" Width="20" Margin="10,0,0,10" MouseLeftButtonDown="btn_close_Click" />
+    <Grid MouseLeftButtonDown="TitleBar_MouseMove">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Margin="0,0,0,0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
+            <WrapPanel Height="50" Grid.Row="0" Grid.Column="0">
+                <Label Content="KM028372" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
+            </WrapPanel>
+        </Border>
+        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+            <Image Source="../Styles/imgaes/guanbi.png" Height="20" Width="20" Margin="0,0,10,0" MouseLeftButtonDown="btn_close_Click" />
         </StackPanel>
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="14" BorderBrush="{StaticResource Line}" Margin="0,35,0,0" BorderThickness="0,1,0,0"/>
+        <WrapPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">合约代码</Label>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">手数</Label>
+                <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">价格</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="25" Width="120"></TextBox>
+                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelFontStyle}">当前合约</Label>
+                <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="25" Width="40"></TextBox>
+                <ComboBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="100" ItemsSource="{Binding PriceStruct}" ItemTemplate="{StaticResource key1}"  SelectedIndex="0" ></ComboBox>
 
-        <Label Margin="20,35,0,0" Style="{StaticResource LabelFontStyle}">合约代码</Label>
-        <Label Margin="200,35,0,0" Style="{StaticResource LabelFontStyle}">手数</Label>
-        <Label Margin="300,35,0,0" Style="{StaticResource LabelFontStyle}">价格</Label>
-        <TextBox Margin="-530,0,100,300" Height="25" Width="120"></TextBox>
-        <Label Margin="145,65,0,0" Style="{StaticResource LabelFontStyle}">当前合约</Label>
-        <TextBox Margin="0,0,350,300" Height="25" Width="40"></TextBox>
-        <ComboBox Margin="0,0,150,300" Height="25" Width="100" ItemsSource="{Binding PriceStruct}" ItemTemplate="{StaticResource key1}"  SelectedIndex="0" ></ComboBox>
+                <WrapPanel Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" VerticalAlignment="Center">
 
-
-        <Button Margin="100,0,0,300" Height="35" Width="80" Foreground="White">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="Blue" Offset="0.1" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <ContentPresenter Content="买入" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Margin="300,0,0,300" Height="35" Width="80" Foreground="White">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="Blue" Offset="0.1" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <ContentPresenter Content="卖出" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <Grid Margin="0,120,0,0" Background="{StaticResource BackGround}">
-            <Border BorderBrush="{StaticResource Line}" Margin="0,-10,0,0" BorderThickness="0,1,0,0"/>
-            <Label Margin="20,35,0,0" Foreground="Gray">合约代码</Label>
-
-            <TabControl Name="tabControl1"  Background="{StaticResource BackGround}">
-                <TabControl.Template>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="True"  Background="{StaticResource BackGround}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Name="ColumnDefinition0" Width="*"/>
-                                <ColumnDefinition Name="ColumnDefinition2" Width="0"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition Name="RowDefinition1" Height="*"/>
-                            </Grid.RowDefinitions>
-                            <DockPanel
-              Name="HeaderPanel"
-              Grid.Column="0"
-              Grid.Row="0"
-              Margin="2,2,2,0"
-              Panel.ZIndex="1"
-              IsItemsHost="True"
-              KeyboardNavigation.TabIndex="1"/>
-                            <Border
-              Name="ContentPanel"
-              Grid.Column="0"
-              Grid.Row="1"
-              Background="{TemplateBinding Panel.Background}"
-              BorderBrush="{TemplateBinding Border.BorderBrush}"
-              BorderThickness="{TemplateBinding Border.BorderThickness}"
-              KeyboardNavigation.DirectionalNavigation="Contained"
-              KeyboardNavigation.TabIndex="2"
-              KeyboardNavigation.TabNavigation="Local">
-                                <ContentPresenter
-                 Name="PART_SelectedContentHost"
-                 Margin="{TemplateBinding Control.Padding}"
-                 Content="{TemplateBinding TabControl.SelectedContent}"
-                 ContentSource="SelectedContent"
-                 ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}"
-                 ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}"
-                 SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </TabControl.Template>
-                <TabItem Header="持仓" Name="TabItem1" Foreground="Gray" Background="{StaticResource BackGround}">
-                    <ListView Margin="0" Name="lstProducts" BorderBrush="Black"  Background="{StaticResource BackGround}">
-                        <ListView.View>
-                            <GridView>
-                                <GridView.Columns>
-                                    <GridViewColumn Header="品种" DisplayMemberBinding="{Binding Path=ModelName}" />
-                                    <GridViewColumn Header="合约" DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="多空" DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="多用" DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="总仓" DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="开仓价" DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="当前价"  DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="逐笔浮盈"  DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="止盈价"  DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="止损价"  DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                    <GridViewColumn Header="已设置"  DisplayMemberBinding="{Binding Path=ModelNumber}" />
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-                <TabItem Header="待成交"  Name="TabItem2">
-                    TabItem2
-                </TabItem>
-                <TabItem Header="平仓"  Name="TabItem3">
-                    TabItem3
-                </TabItem>
-                <TabItem Header="记录"  Name="TabItem4">
-                    TabItem4
-                </TabItem>
-                <TabItem Header="账户资金"  Name="TabItem5" DockPanel.Dock="Right" HorizontalAlignment="Right" >
-                    TabItem5
-                </TabItem>
-            </TabControl>
+                    <Button Height="35" Width="80" Foreground="White" Margin="50,0,0,0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="Blue" Offset="0.1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter Content="买入" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button  Height="35" Width="80" Foreground="White" Margin="50,0,0,0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="Blue" Offset="0.1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter Content="卖出" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </WrapPanel>
+        <Border Grid.Row="2" Grid.Column="0" BorderThickness="0,1,0,1" BorderBrush="{StaticResource Line}">
+            <Grid Margin="0" Background="{StaticResource BackGround}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0">
+                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="持仓" FontSize="12" Foreground="#FF8B8787" />
+                </Viewbox>
+                <Viewbox Grid.Column="1">
+                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="待成交" FontSize="12" Foreground="#FF8B8787" />
+                </Viewbox>
+                <Viewbox Grid.Column="2">
+                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="平仓" FontSize="12" Foreground="#FF8B8787" />
+                </Viewbox>
+                <Viewbox Grid.Column="3">
+                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="记录" FontSize="12" Foreground="#FF8B8787" />
+                </Viewbox>
+                <Viewbox Grid.Column="4" HorizontalAlignment="Right">
+                    <TextBlock Height="23" Margin="0,5,20,0" TextWrapping="Wrap" Text="账户资金" FontSize="12" Foreground="#FF8B8787" />
+                </Viewbox>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="3" Background="{StaticResource BackGround}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="202*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
         </Grid>
+        
     </Grid>
 </Window>

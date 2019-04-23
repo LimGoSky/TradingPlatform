@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:TradingPlatform.Styles.Dictionary">
     <LinearGradientBrush x:Key="BackGround">
         <!--背景颜色-->
-        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FF383535" Offset="0"/>
     </LinearGradientBrush>
     <SolidColorBrush x:Key="FadeBrush" Color="Red"/>
     <Style x:Key="LabelFontStyle" TargetType="{x:Type Label}">
@@ -103,7 +103,7 @@
         </StackPanel>
     </DataTemplate>
     <!--中间线-->
-    <SolidColorBrush x:Key="Line" Color="Chocolate"/>
+    <SolidColorBrush x:Key="Line" Color="Gray"/>
 
     <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="Black" Offset="0"/>
