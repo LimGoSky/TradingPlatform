@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TradingPlatform"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
+        Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
@@ -42,31 +41,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <WrapPanel WindowChrome.IsHitTestVisibleInChrome="True" Grid.Column="0" Grid.Row="0" Height="45" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
-
+        <WrapPanel Grid.Column="0" Grid.Row="0" Height="45" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
+           
             <Ellipse Height="35" Margin="20,5,0,0" Stroke="#FFE9F313" Width="35">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock Height="20" TextWrapping="Wrap" Margin="10,10,0,0" Text="157****3362" FontSize="16" Foreground="#FF8B8787"/>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="交易" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <TextBlock Height="20" TextWrapping="Wrap" Margin="10,0,0,0" Text="157****3362" FontSize="16" Foreground="#FF8B8787"/>
+            <Viewbox Height="45"  Margin="20,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="交易" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="资讯" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="10,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="资讯" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="消息" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="10,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="消息" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <Viewbox Height="45"  Margin="20,0,0,0" Width="100">
-                <TextBlock Height="23" Margin="15,3,0,0" TextWrapping="Wrap" Text="设置" FontSize="20" Foreground="#FF8B8787" Width="120"/>
+            <Viewbox Height="45"  Margin="10,0,0,0">
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="设置" FontSize="8" Foreground="#FF8B8787"/>
             </Viewbox>
-            <TextBox Style="{StaticResource TextBoxSearch}" Margin="0,5,0,0">
+            <TextBox Style="{StaticResource TextBoxSearch}" Margin="50,5,0,0">
             </TextBox>
         </WrapPanel>
 
@@ -78,19 +78,14 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
-            <StackPanel  Height="425" Width="1024">
-                <TabControl Height="425" Width="1024" Margin="0,0,0,0">
-                    <TabItem Header="行情" Width="180" Height="38" Background="White" Foreground="#FFF7E209" IsSelected="True" FontSize="16">
-                        <Grid Background="#FFE5E5E5"/>
-                    </TabItem>
-                </TabControl>
-            </StackPanel>
-            <StackPanel  Height="30" Width="1024" Background="#FF323030">
-                <StackPanel Width="120px" WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Image x:Name="btn_zixun" Source="/Styles/imgaes/zixun.png" Height="25" Width="25" Margin="0,2,15,0" MouseLeftButtonDown="btn_max_Click" />
-                </StackPanel>
-            </StackPanel>
+            <StackPanel Height="375" Width="1024"></StackPanel>
         </WrapPanel>
+
+        <Grid Grid.Row="2" Background="{StaticResource TitleBackGround}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Image x:Name="btn_zixun" Source="/Styles/imgaes/zixun.png" Height="25" Width="25"  MouseLeftButtonDown="btn_max_Click" />
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </Window>

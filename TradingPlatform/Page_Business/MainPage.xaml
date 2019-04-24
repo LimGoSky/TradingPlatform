@@ -26,7 +26,7 @@
             <Image Source="../Styles/imgaes/guanbi.png" Height="20" Width="20" Margin="0,0,10,0" MouseLeftButtonDown="btn_close_Click" />
         </StackPanel>
         <WrapPanel Grid.Row="1" Grid.Column="0">
-            <Grid>
+            <Grid Margin="10,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="50"/>
