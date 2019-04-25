@@ -25,7 +25,7 @@
             <RowDefinition  />
         </Grid.RowDefinitions>
 
-        <Button x:Name="BtnClose" Click="BtnClose_OnClick" Margin="315,10,10,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="4.418,-0.314">
+        <Button x:Name="BtnClose" Click="BtnClose_OnClick" Margin="315,10,10,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="4.418,-0.314" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -89,7 +89,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <CheckBox Name="RemeberPwd" Grid.Row="2" Content="记住密码" IsChecked="{Binding UserChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="34,0,231,14" Width="77" Background="#FF444444" Foreground="Silver" Grid.RowSpan="2" >
+        <CheckBox Name="RemeberPwd" Grid.Row="2" Content="记住密码" IsChecked="{Binding UserChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="34,0,239,14" Width="77" Background="#FF444444" Foreground="Silver" Grid.RowSpan="2" >
             <CheckBox.Style>
                 <Style>
 
@@ -97,7 +97,7 @@
             </CheckBox.Style>
         </CheckBox>
         <CheckBox Grid.Row="2" Content="自动登录" IsChecked="{Binding UserChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="124,0,136,14" Width="82" Background="#FF444444" Foreground="Silver" Grid.RowSpan="2" />
-        <Button Name="BtnLogin" Grid.Row="4" Content="登录" IsEnabled="{Binding IsCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="274" Command="{Binding SignCommand}" Height="35" Margin="34,7,34,10" Background="#FFCDC78A" FontSize="14" Foreground="#FF6A6262" >
+        <Button Name="BtnLogin" Grid.Row="4" Content="登录" IsEnabled="{Binding IsCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="282" Command="{Binding SignCommand}" Height="35" Margin="34,6,34,9" Background="#FFCDC78A" FontSize="14" Foreground="#FF6A6262" >
             <Button.Style>
                 <Style  TargetType="{x:Type Button}">
                     <Setter Property="BorderThickness" Value="1"/>
