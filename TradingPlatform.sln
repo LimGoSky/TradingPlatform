@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Model", "Trading.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Logic", "Trading.Logic\Trading.Logic.csproj", "{22808456-1700-4EB4-ADB6-971E91A27E25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.ILayer", "Trading.ILayer\Trading.ILayer.csproj", "{415E35D1-0CF6-4C94-9F96-FE7BF5DBD24F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{22808456-1700-4EB4-ADB6-971E91A27E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22808456-1700-4EB4-ADB6-971E91A27E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22808456-1700-4EB4-ADB6-971E91A27E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415E35D1-0CF6-4C94-9F96-FE7BF5DBD24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415E35D1-0CF6-4C94-9F96-FE7BF5DBD24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415E35D1-0CF6-4C94-9F96-FE7BF5DBD24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415E35D1-0CF6-4C94-9F96-FE7BF5DBD24F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
