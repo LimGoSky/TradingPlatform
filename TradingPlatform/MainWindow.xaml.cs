@@ -124,7 +124,7 @@ namespace TradingPlatform
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            Page_Business.MainPage win = new Page_Business.MainPage();
+            Business.MainPage win = new Business.MainPage();
             this.frame1.Content = win.Content;
         }
     }
