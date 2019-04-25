@@ -111,7 +111,21 @@ namespace TradingPlatform
         {
             this.Close();
         }
-
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.ActualHeight > SystemParameters.WorkArea.Height || this.ActualWidth > SystemParameters.WorkArea.Width)
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+                btn_max_Click(null, null);
+            }
+        }
         #endregion 标题栏事件
+
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            Page_Business.MainPage win = new Page_Business.MainPage();
+            this.frame1.Content = win.Content;
+        }
     }
 }
