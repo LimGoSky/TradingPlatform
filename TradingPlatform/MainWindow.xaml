@@ -101,27 +101,34 @@
                                 <TextBlock>自选</TextBlock>
                                 <TextBlock>主连合约</TextBlock>
                             </ListBox>
-                            
                         </StackPanel>
                         <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF383531">
                             <TextBlock Height="100"></TextBlock>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF373737">
-                            <DataGrid Name="grid_saffer"
-                                  Grid.Row="1"
-                                  IsReadOnly="True"
-                                  AlternationCount="2"  BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="true" >
+                        <WrapPanel Grid.Row="2" Margin="0,0,0,0" Background="#FF373737">
+                            <DataGrid Name="grid_saffer" RowHeaderWidth="0"
+                                  AlternationCount="4"  BorderThickness="0,0,0,1"
+                                  AutoGenerateColumns="False" RowStyle="{StaticResource GridList_Row}" >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="开始时间"
-                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
-                                    <DataGridTextColumn Header="结束时间"
-                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
-                                    <DataGridTextColumn Header="地点"
-                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
+                                    <DataGridTextColumn Header="合约编号"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Left}" 
+                                                         Binding="{Binding data.contractCode}"/>
+                                    <DataGridTextColumn Header="买价" 
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.ask}"/>
+                                    <DataGridTextColumn Header="买量"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.askVol}"/>
+                                    <DataGridTextColumn Header="卖价"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.bid}"/>
+                                    <DataGridTextColumn Header="卖量"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.bidVol}"/>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
-                        </StackPanel>
+                        </WrapPanel>
 
                     </Grid>
                 </TabItem>

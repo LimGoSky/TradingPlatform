@@ -150,7 +150,7 @@ namespace Trading.Common
             else if (msg.Command == StompFrame.MESSAGE) //返回消息
             {
                 //var text = e.Data;
-                onMessage(e.Data);
+                onMessage(msg.Body);//msg.Body:消息主体 e.Data:包含请求头和消息主体
             }
         }
 
