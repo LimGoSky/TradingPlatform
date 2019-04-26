@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace Trading.Demo
 {
+    using System.Threading;
     using Trading.Common;
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -28,21 +29,24 @@ namespace Trading.Demo
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.btn1.IsEnabled = false;
-            var dic = new Dictionary<string, string>();
-            dic.Add("sub-1", "/topic/latest_quotation_detail_CL1906");
-            WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market",dic);
-            ws.Connect(onMessage);
+
+            //耗时长或有阻塞情况的不用线程池中的线程
+            //ThreadPool.QueueUserWorkItem(fn => {
+            //    Connect();
+            //});
+
+            Task task = Task.Factory.StartNew(() => {
+                var dic = new Dictionary<string, string>();
+                dic.Add("sub-1", "/topic/latest_quotation_detail_CL1906");
+                dic.Add("sub-2", "/topic/ask_bid_CL1906");
+                WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+                ws.Connect(onMessage);
+            }, TaskCreationOptions.LongRunning);
         }
         
         void onMessage(string data)
         {
             this.txtBox.Dispatcher.Invoke(new Action(() => { this.txtBox.Text = data; }));
-            //Action action = () =>
-            //{
-            //    txtBox.Text = data;
-            //};
-            //this.txtBox.Dispatcher.BeginInvoke(action);
-            //_this.txtBox.Text = data;
         }
     }
 }
