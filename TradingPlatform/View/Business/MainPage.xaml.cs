@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Trading.Model.Model_Business;
 
-namespace TradingPlatform.Page_Business
+namespace TradingPlatform.Business
 {
     /// <summary>
     /// MainPage.xaml 的交互逻辑
@@ -23,8 +23,6 @@ namespace TradingPlatform.Page_Business
         public MainPage()
         {
             InitializeComponent();
-            test test = new test();
-            this.DataContext = test;
         }
         #region 标题栏事件
 
@@ -58,15 +56,5 @@ namespace TradingPlatform.Page_Business
         }
 
         #endregion 标题栏事件
-    }
-    public class test {
-
-        public List<PriceStruct> PriceStruct { get; set; }
-
-        public test() {
-            PriceStruct = new List<PriceStruct>();
-            PriceStruct.Add(new PriceStruct("对手价", "1"));
-            PriceStruct.Add(new PriceStruct("当前价", "2"));
-        }
     }
 }

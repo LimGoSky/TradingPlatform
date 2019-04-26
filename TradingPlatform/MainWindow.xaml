@@ -91,15 +91,36 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,0,0,0">
-                            <TextBlock Style="{StaticResource TextBlockFontStyle}">自选</TextBlock>
-                            <TextBlock Style="{StaticResource TextBlockFontStyle}" Margin="30,0,0,0">主连合约</TextBlock>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                            <ListBox Background="#FF383535" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <TextBlock>自选</TextBlock>
+                                <TextBlock>主连合约</TextBlock>
+                            </ListBox>
+                            
                         </StackPanel>
                         <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF383531">
                             <TextBlock Height="100"></TextBlock>
                         </StackPanel>
-                        <StackPanel Grid.Row="2" Margin="0,0,0,0" Background="#FF373737">
-                            <TextBlock></TextBlock>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF373737">
+                            <DataGrid Name="grid_saffer"
+                                  Grid.Row="1"
+                                  IsReadOnly="True"
+                                  AlternationCount="2"  BorderThickness="0,0,0,1" 
+                                  AutoGenerateColumns="true" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="开始时间"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
+                                    <DataGridTextColumn Header="结束时间"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
+                                    <DataGridTextColumn Header="地点"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
 
                     </Grid>

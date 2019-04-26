@@ -2,11 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TradingPlatform"
-             StartupUri="MainWindow.xaml"> <!--MainWindow.xaml--> <!--./Page_Business/MainPage.xaml-->
+             StartupUri="MainWindow.xaml"> <!--MainWindow.xaml--> <!--./Business/MainPage.xaml-->
     <Application.Resources><!--by 胡冰冰 样式字典-->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Resources/Business.xaml"/>
+                <ResourceDictionary Source="./Resources/GridList.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
