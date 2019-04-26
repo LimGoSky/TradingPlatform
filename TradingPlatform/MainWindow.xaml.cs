@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Trading.Common;
-using Trading.Logic;
 using Trading.Model.Common;
+using TradingPlatform.ViewModel.Quotation;
 
 namespace TradingPlatform
 {
@@ -29,6 +19,19 @@ namespace TradingPlatform
             //ResultModel result = model.SendMessage("15620938880", CheckCodeTypeEnum.REGISTER.ToString());
             //Log4Helper.Info(this.GetType(), "abc");
             InitializeComponent();
+
+
+            var dic = new Dictionary<string, string>();
+            dic.Add("sub-1", "/topic/latest_quotation");
+            dic.Add("sub-2", "/topic/ask_bid_CL1906");
+            WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+            ws.Connect(delegate (string data)
+            {
+                Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
+                List<Quotation> objList = new List<Quotation>();
+                objList.Add(obj);
+                this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
+            });
         }
 
         #region 标题栏事件
@@ -122,9 +125,10 @@ namespace TradingPlatform
         #endregion 标题栏事件
 
 
+
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            Page_Business.MainPage win = new Page_Business.MainPage();
+            Business.MainPage win = new Business.MainPage();
             this.frame1.Content = win.Content;
         }
     }

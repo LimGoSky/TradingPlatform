@@ -9,10 +9,6 @@
         <!--字体样式-->
         <Setter Property="Foreground" Value="Gray"/>
     </Style>
-    <Style x:Key="TextBlockFontStyle" TargetType="{x:Type TextBlock}">
-        <!--字体样式-->
-        <Setter Property="Foreground" Value="#FF8B8787"/>
-    </Style>
     <!--标签页-->
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -141,6 +137,31 @@
                             <Setter Property="Foreground" Value="White" />
                         </Trigger>
                         
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CheckTextBlockFontStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="border" CornerRadius="1" Padding="0,0,0,0" Margin="30,0,0,0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF6B6B6B" Offset="0.5"/>
+                                        <GradientStop Color="#FF535353" Offset="0.5"/>
+                                        <GradientStop Color="#FF535353" Offset="0.022"/>
+                                        <GradientStop Color="#FF555555" Offset="0.991"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

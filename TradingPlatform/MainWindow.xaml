@@ -91,16 +91,44 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,0,0,0">
-                            <TextBlock Style="{StaticResource TextBlockFontStyle}">自选</TextBlock>
-                            <TextBlock Style="{StaticResource TextBlockFontStyle}" Margin="30,0,0,0">主连合约</TextBlock>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                            <ListBox Background="#FF383535" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <TextBlock>自选</TextBlock>
+                                <TextBlock>主连合约</TextBlock>
+                            </ListBox>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF383531">
                             <TextBlock Height="100"></TextBlock>
                         </StackPanel>
-                        <StackPanel Grid.Row="2" Margin="0,0,0,0" Background="#FF373737">
-                            <TextBlock></TextBlock>
-                        </StackPanel>
+                        <WrapPanel Grid.Row="2" Margin="0,0,0,0" Background="#FF373737">
+                            <DataGrid Name="grid_saffer" RowHeaderWidth="0"
+                                  AlternationCount="4"  BorderThickness="0,0,0,1"
+                                  AutoGenerateColumns="False" RowStyle="{StaticResource GridList_Row}" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="合约编号"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Left}" 
+                                                         Binding="{Binding data.contractCode}"/>
+                                    <DataGridTextColumn Header="买价" 
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.ask}"/>
+                                    <DataGridTextColumn Header="买量"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.askVol}"/>
+                                    <DataGridTextColumn Header="卖价"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.bid}"/>
+                                    <DataGridTextColumn Header="卖量"
+                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}" 
+                                                         Binding="{Binding data.bidVol}"/>
+                                </DataGrid.Columns>
+                                
+                            </DataGrid>
+                        </WrapPanel>
 
                     </Grid>
                 </TabItem>

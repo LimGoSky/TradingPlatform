@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Resources/Business.xaml"/>
+                <ResourceDictionary Source="./Resources/GridList.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--初始化-->
             <!--<vm1:ViewModelLocator x:Key="Locator" xmlns:vm="clr-namespace:TradingPlatform.ViewModel;assembly=TradingPlatform.ViewModel" />-->
