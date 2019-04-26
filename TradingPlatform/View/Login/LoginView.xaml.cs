@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradingPlatform.ViewModel.Login;
 
 namespace TradingPlatform.View.Login
 {
@@ -36,6 +38,33 @@ namespace TradingPlatform.View.Login
                 }
 
             });
+
+            //监听ViewModel发来的异步消息
+            Messenger.Default.Register<string>(this, "LoginOK", new Action<string>(LoginOK));
+
+            LoginViewModel view = new LoginViewModel();
+            view.ReadConfigInfo(); //读写配置参数
+
+            UserTextBox.Text = view.UserName;
+            PwdTextBox.Text = view.Password;
+            RemeberPwd.IsChecked = view.UserChecked;
+            UserLogin.IsChecked = view.UserChecked;
+        }
+
+        /// <summary>
+        /// 登陆成功
+        /// </summary>
+        /// <param name="msg">消息</param>
+        private void LoginOK(String msg)
+        {
+            if(msg == "LoginOK")
+            {
+                MainWindow model = new MainWindow();
+                //打开主窗体
+                model.Show();
+                //关闭登陆框
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -69,7 +98,7 @@ namespace TradingPlatform.View.Login
                 Brush bru = conv.ConvertFromInvariantString("#FFEEE052") as Brush;
                 BtnLogin.Background = (Brush)bru;
                 BtnLogin.Foreground = Brushes.Black;
-                
+
                 BtnLogin.Cursor = Cursors.Hand;
             }
             else

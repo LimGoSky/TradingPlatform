@@ -513,4 +513,21 @@ namespace TradingPlatform.SysModule
 
 
     }
+
+    public class BaseViewModel: ViewModelBase
+    {
+        public BaseViewModel()
+        {
+
+        }
+
+        public void ShowMsg(String msg)
+        {
+            Messenger.Default.Send<String>(msg, "LoginOK");
+        }
+        public void SendMsg<T>(String token, T msg)
+        {
+            Messenger.Default.Send<T>(msg, token);
+        }
+    }
 }

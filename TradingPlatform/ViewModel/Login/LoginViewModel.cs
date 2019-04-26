@@ -1,14 +1,24 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trading.Common;
+using Trading.Common.Common;
+using Trading.Logic;
 using TradingPlatform.SysModule;
 
 namespace TradingPlatform.ViewModel.Login
 {
-    public class LoginViewModel: BaseHostDialogOperation
+    public class LoginViewModel: BaseViewModel
     {
+
+        //登录按钮绑定的命令
+        public RelayCommand LoginCmd { get; private set; }
         #region 用户名/密码
 
         private string _Report;
@@ -16,6 +26,7 @@ namespace TradingPlatform.ViewModel.Login
         private string passWord = string.Empty;
         private bool _IsCancel = true;
         private bool _UserChecked;
+        private bool _UserLogin;
         private string _SkinName;
 
         /// <summary>
@@ -54,6 +65,15 @@ namespace TradingPlatform.ViewModel.Login
         }
 
         /// <summary>
+        /// 自动登录
+        /// </summary>
+        public bool UserLogin
+        {
+            get { return _UserLogin; }
+            set { _UserLogin = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
         /// 密码
         /// </summary>
         public string Password
@@ -69,6 +89,142 @@ namespace TradingPlatform.ViewModel.Login
         {
             get { return _IsCancel; }
             set { _IsCancel = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
+
+        #region 命令(Binding Command)
+
+        private RelayCommand _signCommand;
+
+        public RelayCommand SignCommand
+        {
+            get
+            {
+                if (_signCommand == null)
+                {
+                    _signCommand = new RelayCommand(() => Login());
+                }
+                return _signCommand;
+            }
+        }
+
+        private RelayCommand _exitCommand;
+
+        public RelayCommand ExitCommand
+        {
+            get
+            {
+                if (_exitCommand == null)
+                {
+                    _exitCommand = new RelayCommand(() => ApplicationShutdown());
+                }
+                return _exitCommand;
+            }
+        }
+
+        #endregion
+
+        #region Login/Exit
+
+        /// <summary>
+        /// 登陆系统
+        /// </summary>
+        public async void Login()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
+                {
+                    this.IsCancel = false;
+                    this.Report = "正在验证登录 . . .";
+
+                    var LoginTask = new LoginLogic().Login1(UserName, Password);
+
+                    this.Report = "初始化首页 . . .";
+
+                    if (UserChecked) SaveLoginInfo();
+
+                    var timeouttask = Task.Delay(3000);
+                    var completedTask = await Task.WhenAny(LoginTask, timeouttask);
+                    if (completedTask == timeouttask)
+                    {
+                        this.Report = "系统连接超时,请联系管理员!";
+                    }
+                    else
+                    {
+                        var task = await LoginTask;
+                        if (task.code == 200)
+                        {
+                            if (UserChecked) SaveLoginInfo();
+                            
+
+                            #region 加载用户资料
+                            
+
+                            #endregion
+
+                            this.Report = "初始化首页 . . .";
+
+                            //登陆成功发送消息
+                            SendMsg("LoginOK", "LoginOK");
+                        }
+                        else
+                            this.Report = task.msg;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4Helper.Error(this.GetType(), ex);
+                this.Report = "登录错误，请联系管理员！";
+            }
+            finally
+            {
+                this.IsCancel = true;
+            }
+        }
+
+        /// <summary>
+        /// 关闭系统
+        /// </summary>
+        public void ApplicationShutdown()
+        {
+            Messenger.Default.Send("", "ApplicationShutdown");
+        }
+
+        #endregion
+
+        #region 记住密码
+
+        /// <summary>
+        /// 读取本地配置信息
+        /// </summary>
+        public void ReadConfigInfo()
+        {
+            string cfgINI = AppDomain.CurrentDomain.BaseDirectory + SerivceFiguration.INI_CFG;
+            if (File.Exists(cfgINI))
+            {
+                IniFile ini = new IniFile(cfgINI);
+                UserName = ini.IniReadValue("Login", "User");
+                Password =ini.IniReadValue("Login", "Password");
+                UserChecked = ini.IniReadValue("Login", "SaveInfo") == "Y";
+                UserLogin = ini.IniReadValue("Login", "UserLogin") == "Y";
+                _SkinName = ini.IniReadValue("Skin", "Skin");
+            }
+        }
+
+        /// <summary>
+        /// 保存登录信息
+        /// </summary>
+        private void SaveLoginInfo()
+        {
+            string cfgINI = AppDomain.CurrentDomain.BaseDirectory + SerivceFiguration.INI_CFG;
+            IniFile ini = new IniFile(cfgINI);
+            ini.IniWriteValue("Login", "User", UserName);
+            ini.IniWriteValue("Login", "Password", Password);
+            ini.IniWriteValue("Login", "SaveInfo", UserChecked ? "Y" : "N");
+            ini.IniWriteValue("Login", "UserLogin", UserLogin ? "Y" : "N");
         }
 
         #endregion

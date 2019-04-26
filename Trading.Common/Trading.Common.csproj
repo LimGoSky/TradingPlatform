@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ApiHelper.cs" />
+    <Compile Include="Common\Configuration.cs" />
+    <Compile Include="Common\File\IniFile.cs" />
     <Compile Include="Common\HttpUtility.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\Log4Helper.cs" />

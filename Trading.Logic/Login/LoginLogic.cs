@@ -123,5 +123,37 @@ namespace Trading.Logic
             return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 
+        public static bool Login()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 登录系统
+        /// </summary>
+        /// <param name="Account">账号</param>
+        /// <param name="Password">密码</param>
+        /// <returns>信息</returns>
+        public async Task<ResultModel> Login1(string Account, string Password)
+        {
+            try
+            {
+                var task = await Task.Run(() =>
+                {
+                    return new ResultModel() { code = 200, data = null, msg = "登录成功！" };
+                });
+                bool result = task != null ? true : false;
+                if (result)
+                    return new ResultModel() { code = 200, data = null, msg = "登录成功！" };
+                else
+                    return new ResultModel() { code = 500, data = null, msg = "账号或密码错误,请确认!" };
+
+            }
+            catch (Exception ex)
+            {
+                Log4Helper.Error(this.GetType(), ex);
+                return new ResultModel() { code = 500,data=null, msg="登录失败！" };
+            }
+        }
     }
 }

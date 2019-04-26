@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingPlatform.View.Login"
         mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator},Path=LoginViewModel}"
         Title="LoginView" Height="480" Width="350" WindowStyle="None" ResizeMode="NoResize">
     <Window.Resources>
         <!--窗体正宗无边框-->
@@ -44,7 +45,7 @@
 
         <!--<Button Style="{StaticResource BtnCloseStyle}" Name="btnClose"  Grid.Row="0"  Click="Button_Click" ></Button>-->
         <!--<Image Grid.Row="0"  VerticalAlignment="Center" Width="120"  Height="120" Source="/Resources/QQ截图20161123091013.png" />-->
-        <TextBox x:Name="UserTextBox"  Grid.Row="1" VerticalAlignment="Center"  Height="41" Margin="34,10,34,9" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="1" BorderBrush="#FF737070" Foreground="White" FontSize="14" CaretBrush="White"  >
+        <TextBox x:Name="UserTextBox" Text="{Binding UserName}" Grid.Row="1" VerticalAlignment="Center"  Height="41" Margin="34,10,34,9" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="1" BorderBrush="#FF737070" Foreground="White" FontSize="14" CaretBrush="White"  >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -69,7 +70,7 @@
                 </TextDecorationCollection>
             </TextBlock.TextDecorations>
         </TextBlock>
-        <TextBox  x:Name="PwdTextBox"   Grid.Row="2" VerticalAlignment="Center" Height="41" Margin="34,10,34,9" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="1" BorderBrush="#FF737070" Foreground="Transparent" FontSize="14" CaretBrush="White" KeyUp="PwdTextBox_KeyUp" >
+        <TextBox  x:Name="PwdTextBox" Text="{Binding Password}"  Grid.Row="2" VerticalAlignment="Center" Height="41" Margin="34,10,34,9" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="1" BorderBrush="#FF737070" Foreground="Transparent" FontSize="14" CaretBrush="White" KeyUp="PwdTextBox_KeyUp" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -96,7 +97,7 @@
                 </Style>
             </CheckBox.Style>
         </CheckBox>
-        <CheckBox Grid.Row="2" Content="自动登录" IsChecked="{Binding UserChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="124,0,136,14" Width="82" Background="#FF444444" Foreground="Silver" Grid.RowSpan="2" />
+        <CheckBox Name="UserLogin" Grid.Row="2" Content="自动登录" IsChecked="{Binding UserLogin}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="124,0,136,14" Width="82" Background="#FF444444" Foreground="Silver" Grid.RowSpan="2" />
         <Button Name="BtnLogin" Grid.Row="4" Content="登录" IsEnabled="{Binding IsCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="282" Command="{Binding SignCommand}" Height="35" Margin="34,6,34,9" Background="#FFCDC78A" FontSize="14" Foreground="#FF6A6262" >
             <Button.Style>
                 <Style  TargetType="{x:Type Button}">
@@ -122,6 +123,6 @@
         <Label x:Name="Register" Content="注册账号" HorizontalAlignment="Left" Margin="182,45,0,0" Grid.Row="4" VerticalAlignment="Top" Foreground="#FFCFC5C5" Grid.RowSpan="2"/>
         <Label x:Name="label1" Content="客服电话：010-12345678" HorizontalAlignment="Left" Margin="159,70,0,0" Grid.Row="6" VerticalAlignment="Top" Foreground="#FFCFC5C5"/>
         <Label x:Name="Logo" Content="Logo" HorizontalAlignment="Left" Margin="119,48,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF23A81C"/>
-
+        <Label Grid.Row="6" Content="{Binding Report}" HorizontalAlignment="Center" Foreground="Red" Margin="105,10,110,69" Width="135"/>
     </Grid>
 </Window>

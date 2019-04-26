@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using TradingPlatform.SysModule;
 
 namespace TradingPlatform.ViewModel
 {
@@ -14,7 +15,7 @@ namespace TradingPlatform.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BaseHostDialogOperation
     {
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -30,5 +31,7 @@ namespace TradingPlatform.ViewModel
             ////    // Code runs "for real"
             ////}
         }
+
+        
     }
 }
