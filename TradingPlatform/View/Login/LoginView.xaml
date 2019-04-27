@@ -118,11 +118,11 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Label x:Name="ForgetPwd" Content="忘记密码?" HorizontalAlignment="Left" Margin="95,45,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" RenderTransformOrigin="0.055,0.064" Height="32" Foreground="#FFCFC5C5" Grid.RowSpan="2"/>
+        <Label x:Name="ForgetPwd" Content="忘记密码?" HorizontalAlignment="Left" Margin="95,44.8,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" RenderTransformOrigin="0.055,0.064" Height="25" Foreground="#FFCFC5C5" Grid.RowSpan="2" MouseLeftButtonDown="ForgetPwd_MouseLeftButtonDown" Cursor="Hand"/>
         <Label x:Name="label" Content="|" HorizontalAlignment="Left" Margin="164,45,0,0" Grid.Row="4" VerticalAlignment="Top" Foreground="#FFCFC5C5" RenderTransformOrigin="-0.558,0.375" Grid.RowSpan="2"/>
-        <Label x:Name="Register" Content="注册账号" HorizontalAlignment="Left" Margin="182,45,0,0" Grid.Row="4" VerticalAlignment="Top" Foreground="#FFCFC5C5" Grid.RowSpan="2"/>
+        <Label x:Name="Register" Content="注册账号" HorizontalAlignment="Left" Margin="182,45,0,0" Grid.Row="4" VerticalAlignment="Top" Foreground="#FFCFC5C5" Grid.RowSpan="2" Cursor="Hand" MouseLeftButtonDown="Register_MouseLeftButtonDown"/>
         <Label x:Name="label1" Content="客服电话：010-12345678" HorizontalAlignment="Left" Margin="159,70,0,0" Grid.Row="6" VerticalAlignment="Top" Foreground="#FFCFC5C5"/>
         <Label x:Name="Logo" Content="Logo" HorizontalAlignment="Left" Margin="119,48,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF23A81C"/>
-        <Label Grid.Row="6" Content="{Binding Report}" HorizontalAlignment="Center" Foreground="Red" Margin="105,10,110,69" Width="135"/>
+        <Label Grid.Row="6" Content="{Binding Report}" HorizontalAlignment="Center" Foreground="Red" Margin="95,9.8,110.4,69" Width="145"/>
     </Grid>
 </Window>
