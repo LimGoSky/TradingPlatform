@@ -63,6 +63,9 @@
       <HintPath>..\packages\CommonServiceLocation.1.0.0\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
+    <Reference Include="NPlot, Version=0.9.10.0, Culture=neutral, PublicKeyToken=4eda430eb4395eb1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPlot.0.9.10.0\lib\net20\NPlot.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -99,6 +102,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Chart\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Business.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Chart\ChartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
