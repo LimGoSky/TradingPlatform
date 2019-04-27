@@ -80,7 +80,7 @@
             <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_close_Click"  />
         </StackPanel>
 
-        <Grid Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
+        <DockPanel x:Name="Tab_Dock" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
 
             <TabControl x:Name="Tab_Page" Background="#FF383535" BorderThickness="0" >
                 <TabItem Header="行情" FontSize="14" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
@@ -185,9 +185,16 @@
                         <Frame HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Source="./View/Business/MainPage.xaml" Name="frame1" VerticalAlignment="Top" />
                     </StackPanel>
                 </TabItem>
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
             </TabControl>
 
-        </Grid>
+        </DockPanel>
 
         <Grid Grid.Row="2" Background="{StaticResource TitleBackGround}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

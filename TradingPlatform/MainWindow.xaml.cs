@@ -157,6 +157,11 @@ namespace TradingPlatform
         }
         #endregion 标题栏事件
 
+        /// <summary>
+        /// 行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGrid dg = (DataGrid)sender;
@@ -179,12 +184,14 @@ namespace TradingPlatform
                 }
                 if (!isExists)
                 {
-                    TabItem tab_new = new TabItem() { Header = "New" };
+                    TabItem tab_new = new TabItem() { Header = "New", Margin = new Thickness(2, 0, 0, 0) };
                     Style tabstyle = (Style)this.FindResource("Tab_Page");
                     tab_new.Style = tabstyle; ;
                     tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
                     this.Tab_Page.Items.Add(tab_new);
                     this.Tab_Page.SelectedItem = tab_new;
+
+                    //this.Tab_Page.TabIndex=
                 }
             }
         }
