@@ -139,8 +139,6 @@ namespace Trading.Common
         /// <param name="e"></param>
         void OnMessage(object sender, MessageEventArgs e)
         {
-            Console.WriteLine("-----------------------------");
-            Console.WriteLine(" ws_OnMessage says: " + e.Data);
             StompMessage msg = serializer.Deserialize(e.Data);
             if (msg.Command == StompFrame.CONNECTED) //连接状态
             {
