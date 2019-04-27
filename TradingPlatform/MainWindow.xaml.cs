@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading;
+using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Trading.Common;
 using Trading.Model.Common;
@@ -13,6 +17,7 @@ namespace TradingPlatform
     /// </summary>
     public partial class MainWindow : Window
     {
+        System.Timers.Timer timer;
         public MainWindow()
         {
             //LoginLogic model = new LoginLogic();
@@ -21,17 +26,45 @@ namespace TradingPlatform
             InitializeComponent();
 
 
-            var dic = new Dictionary<string, string>();
-            dic.Add("sub-1", "/topic/latest_quotation");
-            dic.Add("sub-2", "/topic/ask_bid_CL1906");
-            WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
-            ws.Connect(delegate (string data)
-            {
-                Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
-                List<Quotation> objList = new List<Quotation>();
-                objList.Add(obj);
-                this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
-            });
+            //var dic = new Dictionary<string, string>();
+            //dic.Add("sub-1", "/app/quotation/latestDetail");
+            //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+            //ws.Connect(delegate (string data)
+            //{
+            //    Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
+            //    List<Quotation> objList = new List<Quotation>();
+            //    objList.Add(obj);
+            //    this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
+            //});
+            InitTimer();
+            this.timer.Start();
+        }
+
+        private void InitTimer()
+        {
+            //设置定时间隔(毫秒为单位)
+            int interval = 1000;
+            timer = new System.Timers.Timer(interval);
+            //设置执行一次（false）还是一直执行(true)
+            timer.AutoReset = true;
+            //设置是否执行System.Timers.Timer.Elapsed事件
+            timer.Enabled = true;
+            //绑定Elapsed事件
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+        }
+
+        private void TimerUp(object sender, ElapsedEventArgs e)
+        {
+            Random random = new Random();
+            List<Quotation> objList = new List<Quotation>();
+            Quotation quotation = new Quotation();
+            quotation.topic = "topic";
+            quotation.data = new data();
+            quotation.data.contractCode = "合约编号";
+            quotation.data.contractName = "合约名";
+            quotation.data.ask = random.Next(-10,100).ToString();
+            objList.Add(quotation);
+            this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
         }
 
         #region 标题栏事件
@@ -124,12 +157,36 @@ namespace TradingPlatform
         }
         #endregion 标题栏事件
 
-
-
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Business.MainPage win = new Business.MainPage();
-            this.frame1.Content = win.Content;
+            DataGrid dg = (DataGrid)sender;
+            Quotation rowSelected = dg.SelectedItem as Quotation;
+            if (rowSelected != null)
+            {
+                string contractCode = rowSelected.data.contractCode;
+
+
+                bool isExists = false;
+                for (int i = 0; i < this.Tab_Page.Items.Count; i++)
+                {
+                    //var _tabitem = (this.Tab_Page.Items[i] as TabItem);
+                    if ((this.Tab_Page.Items[i] as TabItem).Name == "New" + (new Random().Next(0, 5).ToString()))
+                    {
+                        this.Tab_Page.SelectedIndex = i;
+                        isExists = true;
+                        break;
+                    }
+                }
+                if (!isExists)
+                {
+                    TabItem tab_new = new TabItem() { Header = "New" };
+                    Style tabstyle = (Style)this.FindResource("Tab_Page");
+                    tab_new.Style = tabstyle; ;
+                    tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
+                    this.Tab_Page.Items.Add(tab_new);
+                    this.Tab_Page.SelectedItem = tab_new;
+                }
+            }
         }
     }
 }

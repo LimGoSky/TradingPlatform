@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace TradingPlatform.ViewModel.Quotation
 {
@@ -14,6 +15,13 @@ namespace TradingPlatform.ViewModel.Quotation
     }
     public class data
     {
+
+        //合约编号
+        public string contractCode { get; set; }
+
+
+        //合约名
+        public string contractName { get; set; }
         //买价
         public string ask { get; set; }
         //买量
@@ -24,15 +32,6 @@ namespace TradingPlatform.ViewModel.Quotation
 
         //卖量
         public string bidVol { get; set; }
-
-
-        //合约编号
-        public string contractCode { get; set; }
-
-
-        //合约名
-        public string contractName { get; set; }
-
 
         //最高价
         public string highestPrice { get; set; }

@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Quotation\GuidConvert .cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Login\LoginView.xaml.cs">
