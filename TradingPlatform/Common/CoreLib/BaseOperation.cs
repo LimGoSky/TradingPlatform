@@ -520,11 +520,13 @@ namespace TradingPlatform.SysModule
         {
 
         }
-
-        public void ShowMsg(String msg)
-        {
-            Messenger.Default.Send<String>(msg, "LoginOK");
-        }
+        
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="token"></param>
+        /// <param name="msg"></param>
         public void SendMsg<T>(String token, T msg)
         {
             Messenger.Default.Send<T>(msg, token);

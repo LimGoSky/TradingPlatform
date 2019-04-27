@@ -21,17 +21,17 @@ namespace TradingPlatform
             InitializeComponent();
 
 
-            var dic = new Dictionary<string, string>();
-            dic.Add("sub-1", "/topic/latest_quotation");
-            dic.Add("sub-2", "/topic/ask_bid_CL1906");
-            WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
-            ws.Connect(delegate (string data)
-            {
-                Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
-                List<Quotation> objList = new List<Quotation>();
-                objList.Add(obj);
-                this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
-            });
+            //var dic = new Dictionary<string, string>();
+            //dic.Add("sub-1", "/topic/latest_quotation");
+            //dic.Add("sub-2", "/topic/ask_bid_CL1906");
+            //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+            //ws.Connect(delegate (string data)
+            //{
+            //    Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
+            //    List<Quotation> objList = new List<Quotation>();
+            //    objList.Add(obj);
+            //    this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
+            //});
         }
 
         #region 标题栏事件

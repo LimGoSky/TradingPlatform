@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TradingPlatform.View.Login;
 using TradingPlatform.ViewModel.Login;
 
 namespace TradingPlatform
@@ -21,7 +22,6 @@ namespace TradingPlatform
             cracker.Cracker();
 
             base.OnStartup(e);
-            
         }
     }
 }

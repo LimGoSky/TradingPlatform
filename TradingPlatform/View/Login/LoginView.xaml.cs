@@ -25,6 +25,10 @@ namespace TradingPlatform.View.Login
         {
             InitializeComponent();
 
+            LoginViewModel view = new LoginViewModel();
+            view.ReadConfigInfo(); //读写配置参数
+            this.DataContext = view;
+
             //密码框将文本改为黑点
             PwdTextBox.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
                 new TextDecoration() {
@@ -41,14 +45,6 @@ namespace TradingPlatform.View.Login
 
             //监听ViewModel发来的异步消息
             Messenger.Default.Register<string>(this, "LoginOK", new Action<string>(LoginOK));
-
-            LoginViewModel view = new LoginViewModel();
-            view.ReadConfigInfo(); //读写配置参数
-
-            UserTextBox.Text = view.UserName;
-            PwdTextBox.Text = view.Password;
-            RemeberPwd.IsChecked = view.UserChecked;
-            UserLogin.IsChecked = view.UserChecked;
         }
 
         /// <summary>
