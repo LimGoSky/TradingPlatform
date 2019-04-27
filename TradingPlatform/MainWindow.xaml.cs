@@ -21,9 +21,9 @@ namespace TradingPlatform
             InitializeComponent();
 
 
-            var dic = new Dictionary<string, string>();
-            dic.Add("sub-1", "/topic/latest_quotation");
-            dic.Add("sub-2", "/topic/ask_bid_CL1906");
+            //var dic = new Dictionary<string, string>();
+            //dic.Add("sub-1", "/topic/latest_quotation");
+            //dic.Add("sub-2", "/topic/ask_bid_CL1906");
             //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
             //ws.Connect(delegate (string data)
             //{
