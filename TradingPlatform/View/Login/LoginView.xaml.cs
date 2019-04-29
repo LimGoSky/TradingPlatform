@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,7 @@ namespace TradingPlatform.View.Login
         public LoginView()
         {
             InitializeComponent();
-
-            LoginViewModel view = new LoginViewModel();
-            view.ReadConfigInfo(); //读写配置参数
-            this.DataContext = view;
-
+            
             //密码框将文本改为黑点
             PwdTextBox.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
                 new TextDecoration() {
@@ -45,6 +42,8 @@ namespace TradingPlatform.View.Login
 
             //监听ViewModel发来的异步消息
             Messenger.Default.Register<string>(this, "LoginOK", new Action<string>(LoginOK));
+
+            InitRemeber();
         }
 
         /// <summary>
@@ -60,6 +59,41 @@ namespace TradingPlatform.View.Login
                 model.Show();
                 //关闭登陆框
                 this.Close();
+            }
+        }
+
+        /// <summary>
+        /// 初始化记得密码
+        /// </summary>
+        private void InitRemeber()
+        {
+            LoginViewModel view = new LoginViewModel();
+            view.ReadConfigInfo(); //读写配置参数
+            this.DataContext = view;
+            if (view.UserLogin)
+            {
+                view.Login();
+            }
+            if(view.Password == "")
+            {
+                BrushConverter conv = new BrushConverter();
+                Brush bru = conv.ConvertFromInvariantString("#FFCDC78A") as Brush;
+                BtnLogin.Background = (Brush)bru;
+
+                BrushConverter conv1 = new BrushConverter();
+                Brush bru1 = conv1.ConvertFromInvariantString("#FF6A6262") as Brush;
+                BtnLogin.Foreground = (Brush)bru1;
+                BtnLogin.Cursor = Cursors.Arrow;
+                BtnLogin.IsEnabled = false;
+            }
+            else
+            {
+                BrushConverter conv = new BrushConverter();
+                Brush bru = conv.ConvertFromInvariantString("#FFEEE052") as Brush;
+                BtnLogin.Background = (Brush)bru;
+                BtnLogin.Foreground = Brushes.Black;
+                BtnLogin.Cursor = Cursors.Hand;
+                BtnLogin.IsEnabled = true;
             }
         }
 
@@ -94,8 +128,8 @@ namespace TradingPlatform.View.Login
                 Brush bru = conv.ConvertFromInvariantString("#FFEEE052") as Brush;
                 BtnLogin.Background = (Brush)bru;
                 BtnLogin.Foreground = Brushes.Black;
-
                 BtnLogin.Cursor = Cursors.Hand;
+                BtnLogin.IsEnabled = true;
             }
             else
             {
@@ -107,7 +141,32 @@ namespace TradingPlatform.View.Login
                 Brush bru1 = conv1.ConvertFromInvariantString("#FF6A6262") as Brush;
                 BtnLogin.Foreground = (Brush)bru1;
                 BtnLogin.Cursor = Cursors.Arrow;
+                BtnLogin.IsEnabled = false;
             }
+        }
+
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ForgetPwd_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "http://www.baidu.com";
+            proc.Start();
+        }
+
+        /// <summary>
+        /// 注册账号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Register_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "http://www.baidu.com";
+            proc.Start();
         }
     }
 }

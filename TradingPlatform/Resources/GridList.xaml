@@ -17,37 +17,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--列表文字右对齐-->
-    <Style x:Key="GridList_Title_Right" TargetType="DataGridColumnHeader">
-        <Setter Property="SnapsToDevicePixels"   Value="True" />
-        <Setter Property="MinWidth"   Value="0" />
-        <Setter Property="MinHeight"   Value="28" />
-        <Setter Property="Foreground"    Value="#FF8B8787" />
-        <Setter Property="FontSize"   Value="14" />
-        <Setter Property="Cursor"     Value="Hand" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="DataGridColumnHeader">
-                    <Border x:Name="BackgroundBorder"  Background="#FF373737"  BorderThickness="0"   Width="Auto">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"  />
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter  Margin="0,0,0,0"  VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                            <Path x:Name="SortArrow"  Visibility="Collapsed"   Data="M0,0 L1,0 0.5,1 z"  Stretch="Fill"  Grid.Column="2"    
-                                       Width="8"  
-                                         Height="6"  
-                                         Fill="White" 
-                                          Margin="0,0,50,0"    
-                                       VerticalAlignment="Center"     
-                                      RenderTransformOrigin="1,1" />
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Height" Value="25" />
-    </Style>
     <!--列表文字左对齐-->
     <Style x:Key="GridList_Title_Left" TargetType="DataGridColumnHeader">
         <Setter Property="SnapsToDevicePixels"   Value="True" />
@@ -64,8 +33,40 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"  />
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter  Margin="0,0,0,0"  VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                            <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                             <Path x:Name="SortArrow"  Visibility="Collapsed"   Data="M0,0 L1,0 0.5,1 z"  Stretch="Fill"  Grid.Column="2"    
+                                       Width="8"  
+                                         Height="6"  
+                                         Fill="White" 
+                                          Margin="0,0,50,0"
+                                       VerticalAlignment="Center"     
+                                      RenderTransformOrigin="1,1" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Height" Value="25" />
+    </Style>
+
+    <!--列表文字右对齐-->
+    <Style x:Key="GridList_Title_Right" TargetType="DataGridColumnHeader">
+        <Setter Property="SnapsToDevicePixels"   Value="True" />
+        <Setter Property="MinWidth"   Value="0" />
+        <Setter Property="MinHeight"   Value="28" />
+        <Setter Property="Foreground"    Value="#FF8B8787" />
+        <Setter Property="FontSize"   Value="14" />
+        <Setter Property="Cursor"     Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border x:Name="BackgroundBorder_Right"  Background="#FF373737"  BorderThickness="0"   Width="Auto">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"  />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter  Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                            <Path x:Name="SortArrow_Right"  Visibility="Collapsed"   Data="M0,0 L1,0 0.5,1 z"  Stretch="Fill"  Grid.Column="2"    
                                        Width="8"  
                                          Height="6"  
                                          Fill="White" 
@@ -84,7 +85,7 @@
     <Style x:Key="GridList_Row"  TargetType="DataGridRow">
         <Setter Property="Background" Value="#F2F2F2" />
         <Setter Property="Height" Value="25" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
         <Style.Triggers>
             <!--隔行换色-->
             <Trigger Property="AlternationIndex" Value="0">
@@ -99,6 +100,9 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black" />
             </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
         </Style.Triggers>
     </Style>
     <!--单元格样式触发-->
@@ -106,22 +110,23 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridCell">
-                    <TextBlock TextAlignment="Center"    
-                                    VerticalAlignment="Center">    
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Center">    
                         <ContentPresenter />
                     </TextBlock>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsSelected"   
-                           Value="True">
-                <!--<Setter Property="Background" Value="White"/>
-                <Setter Property="BorderThickness" Value="0"/>-->
-                <Setter Property="Foreground"                
-                 Value="Black" />
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Black" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="Foreground" Value="Red" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="contentRightStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
 </ResourceDictionary>

@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Quotation\GuidConvert .cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Chart\ChartView.xaml.cs">
@@ -160,9 +161,26 @@
     </Compile>
     <Resource Include="Styles\imgaes\zixun.png" />
     <Resource Include="Styles\imgaes\huanyuan.png" />
+    <Resource Include="document\pc定稿\Web 1920 – 2.png" />
+    <Resource Include="document\pc定稿\交易窗口.png" />
+    <Resource Include="document\pc定稿\交易账号登录.jpg" />
+    <Resource Include="document\pc定稿\交易账号登录开户.jpg" />
+    <Resource Include="document\pc定稿\密码登录.jpg" />
+    <Resource Include="document\pc定稿\快捷登录.jpg" />
+    <Resource Include="document\pc定稿\找回密码.jpg" />
+    <Resource Include="document\pc定稿\未登录状态.jpg" />
+    <Resource Include="document\pc定稿\条件单窗口.jpg" />
+    <Resource Include="document\pc定稿\止盈止损窗口.jpg" />
+    <Resource Include="document\pc定稿\注册.jpg" />
+    <Resource Include="document\pc定稿\短信登录.png" />
+    <Resource Include="document\pc定稿\行情列表.jpg" />
+    <Resource Include="document\pc定稿\行情详情页 - 副本.jpg" />
+    <Resource Include="document\pc定稿\行情详情页.jpg" />
+    <Content Include="document\UI规范.html" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <None Include="document\PC需求文档2019-04-26.docx" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <Resource Include="Styles\imgaes\search.png" />
     <Resource Include="Styles\imgaes\fangda.png" />

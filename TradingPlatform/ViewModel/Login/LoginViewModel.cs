@@ -27,15 +27,6 @@ namespace TradingPlatform.ViewModel.Login
         private bool _IsCancel = true;
         private bool _UserChecked;
         private bool _UserLogin;
-        private string _SkinName;
-
-        /// <summary>
-        /// 皮肤样式
-        /// </summary>
-        public string SkinName
-        {
-            get { return _SkinName; }
-        }
 
         /// <summary>
         /// 进度报告
@@ -108,20 +99,7 @@ namespace TradingPlatform.ViewModel.Login
                 return _signCommand;
             }
         }
-
-        private RelayCommand _exitCommand;
-
-        public RelayCommand ExitCommand
-        {
-            get
-            {
-                if (_exitCommand == null)
-                {
-                    _exitCommand = new RelayCommand(() => ApplicationShutdown());
-                }
-                return _exitCommand;
-            }
-        }
+        
 
         #endregion
 
@@ -141,10 +119,6 @@ namespace TradingPlatform.ViewModel.Login
 
                     var LoginTask = new LoginLogic().Login1(UserName, Password);
 
-                    this.Report = "初始化首页 . . .";
-
-                    if (UserChecked) SaveLoginInfo();
-
                     var timeouttask = Task.Delay(3000);
                     var completedTask = await Task.WhenAny(LoginTask, timeouttask);
                     if (completedTask == timeouttask)
@@ -156,16 +130,17 @@ namespace TradingPlatform.ViewModel.Login
                         var task = await LoginTask;
                         if (task.code == 200)
                         {
-                            if (UserChecked) SaveLoginInfo();
-                            
+                            SaveLoginInfo();
+
 
                             #region 加载用户资料
-                            
+
+                            this.Report = "加载用户资料 . . .";
 
                             #endregion
 
                             this.Report = "初始化首页 . . .";
-
+                            
                             //登陆成功发送消息
                             SendMsg("LoginOK", "LoginOK");
                         }
@@ -185,14 +160,6 @@ namespace TradingPlatform.ViewModel.Login
             }
         }
 
-        /// <summary>
-        /// 关闭系统
-        /// </summary>
-        public void ApplicationShutdown()
-        {
-            Messenger.Default.Send("", "ApplicationShutdown");
-        }
-
         #endregion
 
         #region 记住密码
@@ -210,7 +177,6 @@ namespace TradingPlatform.ViewModel.Login
                 Password =ini.IniReadValue("Login", "Password");
                 UserChecked = ini.IniReadValue("Login", "SaveInfo") == "Y";
                 UserLogin = ini.IniReadValue("Login", "UserLogin") == "Y";
-                _SkinName = ini.IniReadValue("Skin", "Skin");
             }
         }
 
@@ -221,10 +187,20 @@ namespace TradingPlatform.ViewModel.Login
         {
             string cfgINI = AppDomain.CurrentDomain.BaseDirectory + SerivceFiguration.INI_CFG;
             IniFile ini = new IniFile(cfgINI);
-            ini.IniWriteValue("Login", "User", UserName);
-            ini.IniWriteValue("Login", "Password", Password);
-            ini.IniWriteValue("Login", "SaveInfo", UserChecked ? "Y" : "N");
-            ini.IniWriteValue("Login", "UserLogin", UserLogin ? "Y" : "N");
+            if (UserChecked)
+            {
+                ini.IniWriteValue("Login", "User", UserName);
+                ini.IniWriteValue("Login", "Password", Password);
+                ini.IniWriteValue("Login", "SaveInfo", UserChecked ? "Y" : "N");
+                ini.IniWriteValue("Login", "UserLogin", UserLogin ? "Y" : "N");
+            }
+            else
+            {
+                ini.IniWriteValue("Login", "User", "");
+                ini.IniWriteValue("Login", "Password", "");
+                ini.IniWriteValue("Login", "SaveInfo", "N");
+                ini.IniWriteValue("Login", "UserLogin","N");
+            }
         }
 
         #endregion
