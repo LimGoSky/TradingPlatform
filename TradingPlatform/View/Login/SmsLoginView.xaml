@@ -1,0 +1,57 @@
+﻿<Page x:Class="TradingPlatform.View.Login.SmsLoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingPlatform.View.Login"
+        mc:Ignorable="d"
+         xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        Title="SmsLoginView"  Height="400" Width="450">
+    <Grid Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Background="#1e1e1e" Grid.Row="0" Grid.Column="0">
+            <Label x:Name="label" Content="Hello!" Canvas.Left="24" Canvas.Top="76" Foreground="White" FontSize="20"/>
+            <Label x:Name="label1" Content="输入您的手机号，立即注册体验" Canvas.Left="24" Canvas.Top="147" Foreground="#FF858080"/>
+            <Button x:Name="BtnRegister" Content="注册" Canvas.Left="59" Canvas.Top="238" Width="100" Height="29" Background="Red" Foreground="White" FontSize="14" Click="BtnRegister_Click"/>
+        </Canvas>
+        <Canvas Grid.Row="0" Grid.Column="1" Background="#2a2a2a">
+            <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="24" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
+            <TextBox x:Name="SmsText" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="146" Width="74" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入验证码" VerticalAlignment="Center" Width="80" FontFamily="Microsoft YaHei" Panel.ZIndex="5" Canvas.Left="40" Canvas.Top="155">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SmsText}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <TextBlock.TextDecorations>
+                    <TextDecorationCollection>
+
+                    </TextDecorationCollection>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <Button x:Name="BtnSure" Content="确认" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="60" Canvas.Top="234" Click="BtnSure_Click"/>
+            <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="139" Height="49" Width="163" Background="#FF1E1E1E"/>
+            <Label x:Name="label4" Content="重发" Canvas.Left="155" Canvas.Top="151" Height="22" Width="30" Foreground="#FF858080" FontSize="10" Cursor="Hand"/>
+            <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
+            <Label x:Name="label6" Content="已发送验证码至一下手机" Canvas.Left="73" Canvas.Top="75" Width="122" Foreground="#FF858080" FontSize="10" />
+            <Label x:Name="label7" Content="+86 ▪▪▪ ▪▪▪▪" Canvas.Left="73" Canvas.Top="95" Foreground="White" FontSize="10"/>
+            <Label x:Name="Second" Content="59s" Canvas.Left="134" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
+            <Label x:Name="label8" Content="9412" Grid.Column="1" HorizontalAlignment="Left" Margin="129,96,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10"/>
+        </Canvas>
+    </Grid>
+</Page>
