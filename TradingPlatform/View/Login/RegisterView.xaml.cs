@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,20 +37,23 @@ namespace TradingPlatform.View.Login
                 }
 
             });
+
+            //监听ViewModel发来的异步消息
+            Messenger.Default.Register<string>(this, "register", new Action<string>(Sure));
         }
 
-        /// <summary>
-        /// 无边框拖动
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //    {
-        //        DragMove();
-        //    }
-        //}
+        private void Sure(string msg)
+        {
+            if(msg == "OK")
+            {
+                MessageBox.Show("注册成功！");
+            }
+            else if(msg == "timeout" || msg == "error")
+            {
+                MessageBox.Show("注册失败！");
+            }
+        }
+
 
         private void tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -68,14 +72,5 @@ namespace TradingPlatform.View.Login
             NavigationService.Navigate(v);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnSure_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("注册成功！");
-        }
     }
 }

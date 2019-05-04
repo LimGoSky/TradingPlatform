@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,21 @@ namespace TradingPlatform.View.Login
                 }
 
             });
+
+            //监听ViewModel发来的异步消息
+            Messenger.Default.Register<string>(this, "resetPassWord", new Action<string>(Sure));
+        }
+
+        public void Sure(string msg)
+        {
+            if (msg == "OK")
+            {
+                MessageBox.Show("重置成功！");
+            }
+            else if (msg == "timeout" || msg == "error")
+            {
+                MessageBox.Show("重置失败！");
+            }
         }
 
         private void tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -45,16 +61,6 @@ namespace TradingPlatform.View.Login
 
             e.Handled = re.IsMatch(e.Text);
 
-        }
-
-        /// <summary>
-        /// 确认
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnSure_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("找回成功！");
         }
 
         /// <summary>

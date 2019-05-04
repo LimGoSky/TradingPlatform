@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TradingPlatform.View.Login"
         xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource Locator},Path=FindPwdViewModel}"
         Title="FindPwdView" Height="400" Width="450">
     <Grid Name="gridMain" >
         <Grid.ColumnDefinitions>
@@ -13,7 +14,7 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Row="0" Grid.Column="0" Background="#2a2a2a">
-            <TextBox x:Name="PhoneNo" Text="" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="82" Width="145" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11" >
+            <TextBox x:Name="PhoneNo" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="82" Width="145" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -39,7 +40,7 @@
                 </TextBlock.TextDecorations>
             </TextBlock>
             <Label x:Name="label2" Content="找回密码" Canvas.Left="31" Canvas.Top="24" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
-            <TextBox x:Name="SmsText" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="146" Width="74" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
+            <TextBox x:Name="SmsText" Text="{Binding CheckCode}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="146" Width="74" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -64,7 +65,7 @@
                     </TextDecorationCollection>
                 </TextBlock.TextDecorations>
             </TextBlock>
-            <Button x:Name="BtnSure" Content="确认" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="60" Canvas.Top="285" Click="BtnSure_Click" />
+            <Button x:Name="BtnSure" Content="确认" Command="{Binding SureCommand}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="60" Canvas.Top="285" />
             <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="139" Height="49" Width="163" Background="#FF1E1E1E"/>
             <Label x:Name="label4" Content="重发" Canvas.Left="155" Canvas.Top="151" Height="22" Width="30" Foreground="#FF858080" FontSize="10" Cursor="Hand"/>
             <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
@@ -72,7 +73,7 @@
             <Label x:Name="label6" Content="" Canvas.Left="31" Canvas.Top="74" Width="163" Height="49" Background="#FF1E1E1E"/>
             <Label x:Name="label7" Content="" Canvas.Left="31" Canvas.Top="204" Width="163" Height="49" Background="#FF1E1E1E"/>
 
-            <TextBox x:Name="Pwd" Text="" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="212" Width="145" FontFamily="Apple Braille" BorderBrush="{x:Null}" BorderThickness="0" Foreground="Transparent"/>
+            <TextBox x:Name="Pwd" Text="{Binding Password}" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="212" Width="145" FontFamily="Apple Braille" BorderBrush="{x:Null}" BorderThickness="0" Foreground="Transparent"/>
             <TextBlock Foreground="#FF858080" Grid.Row="2"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入密码" VerticalAlignment="Center" Width="116" FontFamily="Microsoft YaHei" Canvas.Left="40" Canvas.Top="220">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">

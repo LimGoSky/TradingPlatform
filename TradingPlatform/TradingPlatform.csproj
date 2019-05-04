@@ -96,7 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Login\FindPwdViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Login\RegisterViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Quotation\GuidConvert .cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
