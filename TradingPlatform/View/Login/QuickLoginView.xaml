@@ -18,7 +18,7 @@
             <Button x:Name="BtnRegister" Content="注册" Canvas.Left="59" Canvas.Top="238" Width="100" Height="29" Background="Red" Foreground="White" FontSize="14" Click="BtnRegister_Click"/>
         </Canvas>
         <Canvas Grid.Row="0" Grid.Column="1" Background="#2a2a2a">
-            <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="24" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
+            <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="33" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
             <TextBox x:Name="UserTextBox" Text="{Binding UserName}" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" Foreground="White" FontSize="14" CaretBrush="White" Canvas.Left="70" Canvas.Top="76" Width="124" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
             </TextBox>
             <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="17" Text="请输入手机号" VerticalAlignment="Center" Width="128" FontFamily="Microsoft YaHei" Canvas.Left="73" Canvas.Top="84" FontSize="14" Panel.ZIndex="5">
@@ -42,6 +42,7 @@
             <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="69" Height="49" Width="163" Background="#FF1E1E1E"/>
             <Label x:Name="label4" Content="+86" Canvas.Left="31" Canvas.Top="81" Height="27" Width="34" Foreground="#FF858080"/>
             <Label x:Name="label5" Content="|" Canvas.Left="60" Canvas.Top="80" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
+            <Label x:Name="PwdLogin" Content="使用「密码登录」" Foreground="#FF858080" Canvas.Left="104" Canvas.Top="10" FontSize="10" MouseLeftButtonDown="PwdLogin_MouseLeftButtonDown" Cursor="Hand" />
         </Canvas>
 
 

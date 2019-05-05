@@ -21,12 +21,9 @@ namespace TradingPlatform.View.Login
     {
         public LoginMainView()
         {
-            //InitializeComponent();
-            //LoginViewNew v = new LoginViewNew();
-            //Page_Change.Content = new Frame()
-            //{
-            //    Content = v
-            //};
+            InitializeComponent();
+            //默认屏幕中间位置
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
         /// <summary>
         /// 无边框拖动

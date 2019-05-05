@@ -67,9 +67,9 @@
             </TextBlock>
             <Button x:Name="BtnSure" Content="确认"  Command="{Binding SureCommand}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="56" Canvas.Top="347" />
             <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="139" Height="49" Width="163" Background="#FF1E1E1E"/>
-            <Label x:Name="label4" Content="重发" Canvas.Left="155" Canvas.Top="151" Height="22" Width="30" Foreground="#FF858080" FontSize="10" Cursor="Hand"/>
+            <Label x:Name="BtnRepeat" Content="发短信" Canvas.Left="150" Canvas.Top="152" Height="24" Width="41" Foreground="#FF858080" FontSize="10" Cursor="Hand" MouseLeftButtonDown="BtnRepeat_MouseLeftButtonDown"/>
             <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
-            <Label x:Name="Second" Content="59s" Canvas.Left="134" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
+            <Label x:Name="Second" Content="" Canvas.Left="130" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
             <Label x:Name="label6" Content="" Canvas.Left="31" Canvas.Top="74" Width="163" Height="49" Background="#FF1E1E1E"/>
             <Label x:Name="label7" Content="" Canvas.Left="31" Canvas.Top="204" Width="163" Height="49" Background="#FF1E1E1E"/>
 

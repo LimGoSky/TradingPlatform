@@ -55,5 +55,17 @@ namespace TradingPlatform.View.Login
             SmsLoginView v = new SmsLoginView();
             NavigationService.Navigate(v);
         }
+
+        /// <summary>
+        /// 使用密码登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PwdLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            LoginView v = new LoginView();
+            NavigationService.Navigate(v);
+        }
     }
 }
