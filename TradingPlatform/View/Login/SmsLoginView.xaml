@@ -18,7 +18,7 @@
             <Button x:Name="BtnRegister" Content="注册" Canvas.Left="59" Canvas.Top="238" Width="100" Height="29" Background="Red" Foreground="White" FontSize="14" Click="BtnRegister_Click"/>
         </Canvas>
         <Canvas Grid.Row="0" Grid.Column="1" Background="#2a2a2a">
-            <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="24" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
+            <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="42" Foreground="#FF79A3EE" FontSize="14" Width="83" RenderTransformOrigin="0.328,0.462"/>
             <TextBox x:Name="SmsText" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="146" Width="74" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -46,12 +46,14 @@
             </TextBlock>
             <Button x:Name="BtnSure" Content="确认" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="60" Canvas.Top="234" Click="BtnSure_Click"/>
             <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="139" Height="49" Width="163" Background="#FF1E1E1E"/>
-            <Label x:Name="label4" Content="重发" Canvas.Left="155" Canvas.Top="151" Height="22" Width="30" Foreground="#FF858080" FontSize="10" Cursor="Hand"/>
+            <Label x:Name="BtnRepeat" Content="重发" Canvas.Left="155" Canvas.Top="151" Height="22" Width="30" Foreground="#FF858080" FontSize="10" Cursor="Hand" MouseLeftButtonDown="BtnRepeat_MouseLeftButtonDown"/>
             <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
             <Label x:Name="label6" Content="已发送验证码至一下手机" Canvas.Left="73" Canvas.Top="75" Width="122" Foreground="#FF858080" FontSize="10" />
             <Label x:Name="label7" Content="+86 ▪▪▪ ▪▪▪▪" Canvas.Left="73" Canvas.Top="95" Foreground="White" FontSize="10"/>
-            <Label x:Name="Second" Content="59s" Canvas.Left="134" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
+            <Label x:Name="Second" Content="59s" Canvas.Left="130" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
             <Label x:Name="label8" Content="9412" Grid.Column="1" HorizontalAlignment="Left" Margin="129,96,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10"/>
+            <Label x:Name="BtnBack" Content="&lt; 返回" Foreground="#FF858080" Canvas.Left="10" Canvas.Top="10" Width="47" FontSize="10" Height="23" Cursor="Hand" MouseLeftButtonDown="BtnBack_MouseLeftButtonDown"/>
+            <Label x:Name="PwdLogin" Content="使用「密码登录」" Foreground="#FF858080" Canvas.Left="105" Canvas.Top="10" FontSize="10" MouseLeftButtonDown="PwdLogin_MouseLeftButtonDown" Cursor="Hand" />
         </Canvas>
     </Grid>
 </Page>
