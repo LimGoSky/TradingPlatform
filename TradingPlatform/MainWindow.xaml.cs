@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Trading.Common;
 using Trading.Model.Common;
+using TradingPlatform.View.MainWindowControl;
 using TradingPlatform.ViewModel.Quotation;
 
 namespace TradingPlatform
@@ -26,18 +28,24 @@ namespace TradingPlatform
             InitializeComponent();
 
 
+            //Task task = Task.Factory.StartNew(() => {
+            //    var dic = new Dictionary<string, string>();
+            //    dic.Add("contractCode", "FDAX1906");
+            //    WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+            //    ws.Connect(delegate (string data)
+            //    {
+            //        Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
+            //        List<Quotation> objList = new List<Quotation>();
+            //        objList.Add(obj);
+            //        this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
+            //    });
+            //}, TaskCreationOptions.LongRunning);
+
             //var dic = new Dictionary<string, string>();
-            //dic.Add("sub-1", "/app/quotation/latestDetail");
-            //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
-            //ws.Connect(delegate (string data)
-            //{
-            //    Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
-            //    List<Quotation> objList = new List<Quotation>();
-            //    objList.Add(obj);
-            //    this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
-            //});
-            InitTimer();
-            this.timer.Start();
+            //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
+
+            //InitTimer();
+            //this.timer.Start();
         }
 
         private void InitTimer()
@@ -164,6 +172,9 @@ namespace TradingPlatform
         /// <param name="e"></param>
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
+
+
             DataGrid dg = (DataGrid)sender;
             Quotation rowSelected = dg.SelectedItem as Quotation;
             if (rowSelected != null)
@@ -174,7 +185,6 @@ namespace TradingPlatform
                 bool isExists = false;
                 for (int i = 0; i < this.Tab_Page.Items.Count; i++)
                 {
-                    //var _tabitem = (this.Tab_Page.Items[i] as TabItem);
                     if ((this.Tab_Page.Items[i] as TabItem).Name == "New" + (new Random().Next(0, 5).ToString()))
                     {
                         this.Tab_Page.SelectedIndex = i;
@@ -184,14 +194,25 @@ namespace TradingPlatform
                 }
                 if (!isExists)
                 {
-                    TabItem tab_new = new TabItem() { Header = "New", Margin = new Thickness(2, 0, 0, 0) };
-                    Style tabstyle = (Style)this.FindResource("Tab_Page");
-                    tab_new.Style = tabstyle; ;
-                    tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
-                    this.Tab_Page.Items.Add(tab_new);
-                    this.Tab_Page.SelectedItem = tab_new;
+                    //TabItem tab_new = new TabItem() { Header = "New", Margin = new Thickness(2, 0, 0, 0) };
+                    //Style tabstyle = (Style)this.FindResource("Tab_Page");
+                    //tab_new.Style = tabstyle; ;
+                    //tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
+                    //this.Tab_Page.Items.Add(tab_new);
+                    //this.Tab_Page.SelectedItem = tab_new;
 
-                    //this.Tab_Page.TabIndex=
+                    TabItemWithClose item = new TabItemWithClose();
+                    item.Header = string.Format("Header{0}", Tab_Page.Items.Count);
+                    item.ToolTip = string.Format("Header{0}", Tab_Page.Items.Count);
+                    item.Margin = new Thickness(1, 0, 1, 0);
+                    item.Height = 35;
+                    item.Name = "New" + (new Random().Next(0, 5).ToString());
+                    Label lbl = new Label() { Content = string.Format("Label{0}", Tab_Page.Items.Count) };
+                    StackPanel sPanel = new StackPanel();
+                    sPanel.Children.Add(lbl);
+                    item.Content = sPanel;
+                    Tab_Page.Items.Add(item);
+                    this.Tab_Page.SelectedItem = item;
                 }
             }
         }
