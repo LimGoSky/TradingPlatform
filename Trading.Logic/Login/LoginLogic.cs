@@ -84,7 +84,7 @@ namespace Trading.Logic
         }
 
         /// <summary>
-        /// 密码注册
+        /// 账户注册
         /// </summary>
         /// <param name="checkCode">验证码</param>
         /// <param name="mobile">手机号</param>
@@ -153,6 +153,67 @@ namespace Trading.Logic
             {
                 Log4Helper.Error(this.GetType(), ex);
                 return new ResultModel() { code = 500,data=null, msg="登录失败！" };
+            }
+        }
+
+        /// <summary>
+        /// 账户注册
+        /// </summary>
+        /// <param name="checkCode">验证码</param>
+        /// <param name="mobile">手机号</param>
+        /// <param name="nickname">昵称</param>
+        /// <param name="password">密码</param>
+        /// <param name="profilePhoto">头像</param>
+        /// <param name="qq">qq</param>
+        /// <returns></returns>
+        public async Task<ResultModel> Register1(string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
+        {
+            try
+            {
+                var task = await Task.Run(() =>
+                {
+                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
+                });
+                bool result = task != null ? true : false;
+                if (result)
+                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
+                else
+                    return new ResultModel() { code = 500, data = null, msg = "失败,请确认!" };
+
+            }
+            catch (Exception ex)
+            {
+                Log4Helper.Error(this.GetType(), ex);
+                return new ResultModel() { code = 500, data = null, msg = "失败！" };
+            }
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="checkCode">验证码</param>
+        /// <param name="mobile">手机号</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        public async Task<ResultModel> ResetPassWord1(string checkCode, string mobile, string password)
+        {
+            try
+            {
+                var task = await Task.Run(() =>
+                {
+                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
+                });
+                bool result = task != null ? true : false;
+                if (result)
+                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
+                else
+                    return new ResultModel() { code = 500, data = null, msg = "失败,请确认!" };
+
+            }
+            catch (Exception ex)
+            {
+                Log4Helper.Error(this.GetType(), ex);
+                return new ResultModel() { code = 500, data = null, msg = "失败！" };
             }
         }
     }

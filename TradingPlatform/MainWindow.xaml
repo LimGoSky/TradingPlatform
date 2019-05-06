@@ -82,7 +82,7 @@
 
         <DockPanel x:Name="Tab_Dock" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
 
-            <TabControl x:Name="Tab_Page" Background="#FF383535" BorderThickness="0" >
+            <TabControl x:Name="Tab_Page" Background="#FF383535" BorderThickness="0" Tag="175">
                 <TabItem Header="行情" FontSize="14" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
                     <Grid Background="#FF383535" Margin="0">
                         <Grid.RowDefinitions>
@@ -171,7 +171,7 @@
                         </WrapPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" Name="K1">
+                <!--<TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" Name="K1">
                     <TabItem.Header>
                         <StackPanel>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">K1</TextBlock>
@@ -184,14 +184,8 @@
                     <StackPanel>
                         <Frame HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Source="./View/Business/MainPage.xaml" Name="frame1" VerticalAlignment="Top" />
                     </StackPanel>
-                </TabItem>
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
-                <TabItem Margin="2,0,0,0" Style="{StaticResource Tab_Page}" />
+                </TabItem>-->
+                
             </TabControl>
 
         </DockPanel>

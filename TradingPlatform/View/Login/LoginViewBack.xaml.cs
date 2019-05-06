@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,21 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradingPlatform.ViewModel.Login;
 
 namespace TradingPlatform.View.Login
 {
     /// <summary>
-    /// LoginViewNew.xaml 的交互逻辑
+    /// LoginView.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginView : Page
+    public partial class LoginViewBack : Window
     {
-        public LoginView()
+        public LoginViewBack()
         {
             InitializeComponent();
-
+            
             //密码框将文本改为黑点
             PwdTextBox.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
                 new TextDecoration() {
@@ -38,6 +37,7 @@ namespace TradingPlatform.View.Login
                              DashStyle= new DashStyle(new double[] {0.0,1.2 }, 0.6f)
                       }
                 }
+
             });
 
             //监听ViewModel发来的异步消息
@@ -49,22 +49,16 @@ namespace TradingPlatform.View.Login
         /// <summary>
         /// 登陆成功
         /// </summary>
-        /// <param name="msg"></param>
-
-        private void LoginOK(string msg) {
-            if (msg == "LoginOK")
+        /// <param name="msg">消息</param>
+        private void LoginOK(String msg)
+        {
+            if(msg == "LoginOK")
             {
-                var windowCollection = Application.Current.Windows;
-                foreach (var item in windowCollection)
-                {
-                    if (item.GetType() == typeof(LoginMainView))
-                    {
-                        Window w = (Window)item;
-                        MainWindow m = new MainWindow();
-                        m.Show();
-                        w.Close();
-                    }
-                }
+                MainWindow model = new MainWindow();
+                //打开主窗体
+                model.Show();
+                //关闭登陆框
+                this.Close();
             }
         }
 
@@ -76,8 +70,11 @@ namespace TradingPlatform.View.Login
             LoginViewModel view = new LoginViewModel();
             view.ReadConfigInfo(); //读写配置参数
             this.DataContext = view;
-            
-            if (view.Password == "")
+            if (view.UserLogin)
+            {
+                view.Login();
+            }
+            if(view.Password == "")
             {
                 BrushConverter conv = new BrushConverter();
                 Brush bru = conv.ConvertFromInvariantString("#FFCDC78A") as Brush;
@@ -97,6 +94,29 @@ namespace TradingPlatform.View.Login
                 BtnLogin.Foreground = Brushes.Black;
                 BtnLogin.Cursor = Cursors.Hand;
                 BtnLogin.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// 关闭按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnClose_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 无边框拖动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
             }
         }
 
@@ -132,39 +152,21 @@ namespace TradingPlatform.View.Login
         /// <param name="e"></param>
         private void ForgetPwd_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            FindPwdView v = new FindPwdView();
-            NavigationService.Navigate(v);
-        }
-
-        private void tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
-            Regex re = new Regex("[^0-9.-]+");
-
-            e.Handled = re.IsMatch(e.Text);
-
+            Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "http://www.baidu.com";
+            proc.Start();
         }
 
         /// <summary>
-        /// 注册按钮
+        /// 注册账号
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        private void Register_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            RegisterView v = new RegisterView();
-            NavigationService.Navigate(v);
-        }
-
-        /// <summary>
-        /// 快捷登陆
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnQuick_Click(object sender, RoutedEventArgs e)
-        {
-            QuickLoginView v = new QuickLoginView();
-            NavigationService.Navigate(v);
+            Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "http://www.baidu.com";
+            proc.Start();
         }
     }
 }

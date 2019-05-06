@@ -34,6 +34,8 @@ namespace TradingPlatform.ViewModel
 
             //SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<RegisterViewModel>();
+            SimpleIoc.Default.Register<FindPwdViewModel>();
         }
 
         //public MainViewModel Main
@@ -49,6 +51,21 @@ namespace TradingPlatform.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        }
+        public RegisterViewModel RegisterViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RegisterViewModel>();
+            }
+        }
+
+        public FindPwdViewModel FindPwdViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<FindPwdViewModel>();
             }
         }
 

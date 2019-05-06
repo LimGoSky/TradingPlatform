@@ -63,12 +63,10 @@
       <HintPath>..\packages\CommonServiceLocation.1.0.0\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
-    <Reference Include="NPlot, Version=0.9.10.0, Culture=neutral, PublicKeyToken=4eda430eb4395eb1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPlot.0.9.10.0\lib\net20\NPlot.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -98,16 +96,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Login\FindPwdViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Login\RegisterViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Quotation\GuidConvert .cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Chart\ChartView.xaml.cs">
-      <DependentUpon>ChartView.xaml</DependentUpon>
+    <Compile Include="View\Login\FindPwdView.xaml.cs">
+      <DependentUpon>FindPwdView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\LoginMainView.xaml.cs">
+      <DependentUpon>LoginMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\LoginViewBack.xaml.cs">
+      <DependentUpon>LoginViewBack.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\QuickLoginView.xaml.cs">
+      <DependentUpon>QuickLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\SmsLoginView.xaml.cs">
+      <DependentUpon>SmsLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindowControl\TabItemWithClose.xaml.cs">
+      <DependentUpon>TabItemWithClose.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,11 +151,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Chart\ChartView.xaml">
+    <Page Include="View\Login\FindPwdView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\LoginMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\LoginViewBack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\QuickLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\SmsLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindowControl\TabItemWithClose.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
