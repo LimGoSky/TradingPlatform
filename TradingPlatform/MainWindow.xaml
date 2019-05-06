@@ -32,8 +32,10 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" VerticalContentAlignment="Center" Height="30" Width="220" FontSize="13" Text="输入期货代码/名称/拼音" Foreground="Gray" Background="#FF252222" TextDecorations="{x:Null}" IsUndoEnabled="True" TextWrapping="Wrap" BorderThickness="1,1,1,0" SnapsToDevicePixels="True" ClipToBounds="True" AllowDrop="True"/>
-                            <Image Grid.Column="0" Width="20" Height="20" Margin="190,2,2,1" Source="/Styles/imgaes/search.png"/>
+                            <Border CornerRadius="15" Height="42" Margin="50,0,0,0" Width="386" BorderThickness="1" BorderBrush="#FF737070" Background="#1e1e1e">
+                                <TextBox BorderThickness="0" Margin="0,10,0,0" FontFamily="pingfang hk" Height="42" Width="320" FontSize="16" Text="输入期货代码/名称/拼音" Foreground="#3b3b3b" Background="#1e1e1e"/>
+                            </Border>
+                            
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -42,51 +44,61 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="86"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Column="0" Grid.Row="0" Height="45" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
-           
-            <Ellipse Height="35" Margin="20,5,0,0" Stroke="#FFE9F313" Width="35">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
-                </Ellipse.Fill>
-            </Ellipse>
-            <TextBlock Height="20" TextWrapping="Wrap" Margin="10,0,0,0" Text="157****3362" FontSize="16" Foreground="#FF8B8787"/>
-            <Viewbox Height="45"  Margin="20,0,0,0">
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="交易" FontSize="8" Foreground="#FF8B8787"/>
-            </Viewbox>
-            <Viewbox Height="45"  Margin="10,0,0,0">
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="资讯" FontSize="8" Foreground="#FF8B8787"/>
-            </Viewbox>
-            <Viewbox Height="45"  Margin="10,0,0,0">
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="消息" FontSize="8" Foreground="#FF8B8787"/>
-            </Viewbox>
-            <Viewbox Height="45"  Margin="10,0,0,0">
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="20" Margin="10,5,0,0" TextWrapping="Wrap" Text="设置" FontSize="8" Foreground="#FF8B8787"/>
-            </Viewbox>
-            <TextBox Style="{StaticResource TextBoxSearch}" Margin="50,5,0,0">
+        <WrapPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
+            <WrapPanel Width="215" Height="48" HorizontalAlignment="Left" Margin="0,23,0,23">
+                <Ellipse Height="40" Margin="56,0,0,0" Stroke="#FFE9F313" Width="45">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="34,0,0,0" Text="我的账户" FontSize="18" Foreground="#707070"/>
+            </WrapPanel>
+            <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="18,0,0,0" Text="157****3362" FontSize="14" Foreground="#ffffff"/>
+            <WrapPanel Height="45" Margin="20,0,0,0">
+                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="交易" FontSize="14" Foreground="#707070"/>
+            </WrapPanel>
+            <WrapPanel Height="45"  Margin="20,0,0,0">
+                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="资讯" FontSize="14" Foreground="#707070"/>
+            </WrapPanel>
+            <WrapPanel Height="45"  Margin="20,0,0,0">
+                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="消息" FontSize="14" Foreground="#707070"/>
+            </WrapPanel>
+            <WrapPanel Height="45"  Margin="20,0,0,0">
+                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="设置" FontSize="14" Foreground="#707070"/>
+            </WrapPanel>
+            <TextBox Style="{StaticResource TextBoxSearch}" Margin="0,0,0,0">
             </TextBox>
         </WrapPanel>
 
         <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_min_Click" />
-            <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_max_Click" />
-            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,15,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
-            <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,15,0" MouseLeftButtonDown="btn_close_Click"  />
+            <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_min_Click" />
+            <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_max_Click" />
+            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,36,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
+            <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,32,0" MouseLeftButtonDown="btn_close_Click"  />
         </StackPanel>
 
         <DockPanel x:Name="Tab_Dock" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
 
-            <TabControl x:Name="Tab_Page" Background="#FF383535" BorderThickness="0" Tag="175">
+            <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="175">
                 <TabItem Header="行情" FontSize="14" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
                     <Grid Background="#FF383535" Margin="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>

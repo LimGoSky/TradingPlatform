@@ -106,9 +106,10 @@
 
     <!--标题栏背景样式-->
     <LinearGradientBrush x:Key="TitleBackGround" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF383535" Offset="1"/>
+        <!--<GradientStop Color="#FF383535" Offset="1"/>
         <GradientStop Color="#FF595353"/>
-        <GradientStop Color="#FF302C2C" Offset="0.509"/>
+        <GradientStop Color="#FF302C2C" Offset="0.509"/>-->
+        <GradientStop Color="#2a2a2a"/>
     </LinearGradientBrush>
     <!--列表背景样式-->
     <LinearGradientBrush x:Key="DataListBackGround" EndPoint="0.5,1" StartPoint="0.5,0">
@@ -145,7 +146,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
-                        <Border Name="Border" Background="LightBlue" BorderThickness="0,0.5,0,0" Width="175" Height="35">
+                        <Border Name="Border" Background="LightBlue" BorderThickness="0,0.5,0,0" Width="175" Height="50">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="0,2,12,2"/>
                         </Border>
                     </Grid>
