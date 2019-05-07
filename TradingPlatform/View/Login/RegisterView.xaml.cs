@@ -28,7 +28,7 @@ namespace TradingPlatform.View.Login
         {
             InitializeComponent();
             //密码框将文本改为黑点
-            Pwd.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
+            PassWord.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
                 new TextDecoration() {
                      Location= TextDecorationLocation.Strikethrough,
                       Pen= new Pen(Brushes.White, 10f) {
@@ -84,13 +84,30 @@ namespace TradingPlatform.View.Login
 
         private void Sure(string msg)
         {
-            if(msg == "OK")
+            if(msg == "userNameError")
+            {
+                MessageBox.Show("手机号码格式不正确！");
+                return;
+            }
+            else if(msg == "checkCodeError")
+            {
+                MessageBox.Show("验证码不能为空！");
+                return;
+            }
+            else if(msg == "passWordError")
+            {
+                MessageBox.Show("密码不能为空！");
+                return;
+            }
+            else if(msg == "OK")
             {
                 MessageBox.Show("注册成功！");
+                return;
             }
             else if(msg == "timeout" || msg == "error")
             {
                 MessageBox.Show("注册失败！");
+                return;
             }
         }
 

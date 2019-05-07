@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Trading.Common;
+using Trading.Common.Common;
 using Trading.Logic;
 using TradingPlatform.SysModule;
 
@@ -84,27 +85,40 @@ namespace TradingPlatform.ViewModel.Login
         {
             try
             {
-                if(!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(CheckCode))
+                if (!PhoneHelper.ValidateMobile(UserName))
                 {
-                    var registerTask = new LoginLogic().Register1(CheckCode, UserName, NickName, Password, "", "");
-                    var timeouttask = Task.Delay(3000);
-                    var completedTask = await Task.WhenAny(registerTask, timeouttask);
-                    if (completedTask == timeouttask)
+                    SendMsg("register", "userNameError");
+                    return;
+                }
+                if(CheckCode == "")
+                {
+                    SendMsg("register", "checkCodeError");
+                    return;
+                }
+                if(Password == "")
+                {
+                    SendMsg("register", "passWordError");
+                    return;
+                }
+
+                var registerTask = new LoginLogic().Register1(CheckCode, UserName, NickName, Password, "", "");
+                var timeouttask = Task.Delay(3000);
+                var completedTask = await Task.WhenAny(registerTask, timeouttask);
+                if (completedTask == timeouttask)
+                {
+                    SendMsg("register", "timeout");
+                    Log4Helper.Info(this.GetType(), $"账号：{UserName}注册超时！时间：{DateTime.Now.ToString()}");
+                }
+                else
+                {
+                    var task = await registerTask;
+                    if (task.code == 200)
                     {
-                        SendMsg("register", "timeout");
-                        Log4Helper.Info(this.GetType(), $"账号：{UserName}注册超时！时间：{DateTime.Now.ToString()}");
-                    }
-                    else
-                    {
-                        var task = await registerTask;
-                        if (task.code == 200)
-                        {
-                            //登陆成功发送消息
-                            SendMsg("register", "OK");
-                        }
+                        //登陆成功发送消息
+                        SendMsg("register", "OK");
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {

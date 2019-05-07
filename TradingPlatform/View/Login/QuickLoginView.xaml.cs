@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Trading.Common.Common;
 
 namespace TradingPlatform.View.Login
 {
@@ -52,7 +53,13 @@ namespace TradingPlatform.View.Login
         /// <param name="e"></param>
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            SmsLoginView v = new SmsLoginView();
+            string strPhone = PhoneNO.Text;
+            if(!PhoneHelper.ValidateMobile(strPhone))
+            {
+                MessageBox.Show("手机号码格式不正确！");
+                return;
+            }
+            SmsLoginView v = new SmsLoginView(strPhone);
             NavigationService.Navigate(v);
         }
 
