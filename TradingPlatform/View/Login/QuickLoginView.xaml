@@ -19,14 +19,14 @@
         </Canvas>
         <Canvas Grid.Row="0" Grid.Column="1" Background="#2a2a2a">
             <Label x:Name="label2" Content="快捷登陆" Canvas.Left="31" Canvas.Top="33" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
-            <TextBox x:Name="UserTextBox" Text="{Binding UserName}" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" Foreground="White" FontSize="14" CaretBrush="White" Canvas.Left="70" Canvas.Top="76" Width="124" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
+            <TextBox x:Name="PhoneNO" Text="{Binding UserName}" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" Foreground="White" FontSize="14" CaretBrush="White" Canvas.Left="70" Canvas.Top="76" Width="124" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
             </TextBox>
             <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="17" Text="请输入手机号" VerticalAlignment="Center" Width="128" FontFamily="Microsoft YaHei" Canvas.Left="73" Canvas.Top="84" FontSize="14" Panel.ZIndex="5">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=UserTextBox}" Value="">
+                            <DataTrigger Binding="{Binding Text, ElementName=PhoneNO}" Value="">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>

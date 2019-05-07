@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Trading.Common;
 using Trading.Common.Common;
 using Trading.Logic;
+using TradingPlatform.Common;
 using TradingPlatform.SysModule;
 
 namespace TradingPlatform.ViewModel.Login
@@ -136,6 +137,10 @@ namespace TradingPlatform.ViewModel.Login
                             #region 加载用户资料
 
                             this.Report = "加载用户资料 . . .";
+                            Loginer.LoginerUser.UserId = "15620938880";
+                            Loginer.LoginerUser.NickName = "石利民";
+                            Loginer.LoginerUser.ProFilePhoto = "123";
+                            Loginer.LoginerUser.CreateTime = DateTime.Now.ToString();
 
                             #endregion
 

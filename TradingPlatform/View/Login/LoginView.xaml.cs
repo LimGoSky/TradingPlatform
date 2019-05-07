@@ -161,7 +161,7 @@ namespace TradingPlatform.View.Login
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnQuick_Click(object sender, RoutedEventArgs e)
+        private void LabQuick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             QuickLoginView v = new QuickLoginView();
             NavigationService.Navigate(v);

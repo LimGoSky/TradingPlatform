@@ -25,11 +25,12 @@ namespace TradingPlatform.View.Login
     {
         Timer timer;
         int secondCount = 60;//减秒
-
-        public SmsLoginView()
+        
+        public SmsLoginView(string phoneNo)
         {
-            
             InitializeComponent();
+            
+            labPhoneNo.Content = phoneNo.Substring(phoneNo.Length - 4, 4);
 
             InitTimer();
             this.timer.Start();
@@ -95,6 +96,13 @@ namespace TradingPlatform.View.Login
         /// <param name="e"></param>
         private void BtnSure_Click(object sender, RoutedEventArgs e)
         {
+            string txtSms = SmsText.Text;
+            if(txtSms == "")
+            {
+                MessageBox.Show("验证码不正确！");
+                return;
+            }
+            
             var windowCollection = Application.Current.Windows;
             foreach (var item in windowCollection)
             {
