@@ -201,6 +201,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Styles\imgaes\home_nav_trade.png" />
     <Resource Include="Styles\imgaes\zixun.png" />
     <Resource Include="Styles\imgaes\huanyuan.png" />
     <Resource Include="document\pc定稿\Web 1920 – 2.png" />
