@@ -42,7 +42,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Stretch" >
         <Grid.RowDefinitions>
             <RowDefinition Height="86"/>
             <RowDefinition Height="*"/>
@@ -51,98 +51,119 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
-            <WrapPanel Width="215" Height="48" HorizontalAlignment="Left" Margin="0,23,0,23">
-                <Ellipse Height="40" Margin="56,0,0,0" Stroke="#FFE9F313" Width="45">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="34,0,0,0" Text="我的账户" FontSize="18" Foreground="#707070"/>
+        <Viewbox Stretch=" fill">
+            <WrapPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,0"  MouseLeftButtonDown="TitleBar_MouseDown" Background="{StaticResource TitleBackGround}">
+                <WrapPanel Width="215" Height="48" HorizontalAlignment="Left" Margin="0,23,0,23">
+                    <Ellipse Height="40" Margin="56,0,0,0" Stroke="#FFE9F313" Width="45">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/DSC05128.JPG" TileMode="Tile"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="34,0,0,0" Text="我的账户" FontSize="18" Foreground="#707070"/>
+                </WrapPanel>
+                <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="18,0,0,0" Text="157****3362" FontSize="14" Foreground="#ffffff"/>
+                <WrapPanel Height="45" Margin="20,0,0,0">
+                    <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                    <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="交易" FontSize="14" Foreground="#707070"/>
+                </WrapPanel>
+                <WrapPanel Height="45"  Margin="20,0,0,0">
+                    <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                    <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="资讯" FontSize="14" Foreground="#707070"/>
+                </WrapPanel>
+                <WrapPanel Height="45"  Margin="20,0,0,0">
+                    <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                    <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="消息" FontSize="14" Foreground="#707070"/>
+                </WrapPanel>
+                <WrapPanel Height="45"  Margin="20,0,0,0">
+                    <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
+                    <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
+                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="设置" FontSize="14" Foreground="#707070"/>
+                </WrapPanel>
+                <Viewbox>
+                    <TextBox Style="{StaticResource TextBoxSearch}" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+                    </TextBox>
+                </Viewbox>
+                <Viewbox>
+                    <StackPanel Margin="30,0,0,0" WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_min_Click" />
+                        <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_max_Click" />
+                        <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,36,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
+                        <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,32,0" MouseLeftButtonDown="btn_close_Click"  />
+                    </StackPanel>
+                </Viewbox>
             </WrapPanel>
-            <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="18,0,0,0" Text="157****3362" FontSize="14" Foreground="#ffffff"/>
-            <WrapPanel Height="45" Margin="20,0,0,0">
-                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
-                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="交易" FontSize="14" Foreground="#707070"/>
-            </WrapPanel>
-            <WrapPanel Height="45"  Margin="20,0,0,0">
-                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
-                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="资讯" FontSize="14" Foreground="#707070"/>
-            </WrapPanel>
-            <WrapPanel Height="45"  Margin="20,0,0,0">
-                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
-                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="消息" FontSize="14" Foreground="#707070"/>
-            </WrapPanel>
-            <WrapPanel Height="45"  Margin="20,0,0,0">
-                <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
-                <Image Source="/Styles/imgaes/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
-                <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="设置" FontSize="14" Foreground="#707070"/>
-            </WrapPanel>
-            <TextBox Style="{StaticResource TextBoxSearch}" Margin="0,0,0,0">
-            </TextBox>
-        </WrapPanel>
+        </Viewbox>
 
-        <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Image Source="/Styles/imgaes/suoxiao.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_min_Click" />
-            <Image x:Name="btn_fangda" Source="/Styles/imgaes/fangda.png" Height="15" Width="15" Margin="0,0,36,0" MouseLeftButtonDown="btn_max_Click" />
-            <Image x:Name="btn_huanyuan" Visibility="Collapsed" Source="/Styles/imgaes/huanyuan.png" Margin="0,0,36,0" Height="15" Width="15" MouseLeftButtonDown="btn_normal_Click" />
-            <Image Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Margin="0,0,32,0" MouseLeftButtonDown="btn_close_Click"  />
-        </StackPanel>
 
         <DockPanel x:Name="Tab_Dock" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
 
-            <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="175">
-                <TabItem Header="行情" FontSize="14" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
+            <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="215">
+                <TabItem Header="行情" FontSize="16" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
                     <Grid Background="#FF383535" Margin="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
-                            <ListBox Background="#FF383535" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                        <StackPanel Grid.Row="0" Background="#2a2a2a" Orientation="Horizontal" Margin="0,0,0,0">
+                            <ListBox FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal" />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
-                                <TextBlock>自选</TextBlock>
-                                <TextBlock>主连合约</TextBlock>
+                                <ListBoxItem>自选</ListBoxItem>
+                                <ListBoxItem>主连合约</ListBoxItem>
                             </ListBox>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#FF383531">
-                            <TextBlock Height="100"></TextBlock>
+                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#191919">
+                            <ListBox FontSize="14" FontFamily="pingfang hk" Background="#191919" Foreground="#808080" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBoxItem>白银(5)</ListBoxItem>
+                                <ListBoxItem>黄金(7)</ListBoxItem>
+                            </ListBox>
                         </StackPanel>
-                        <WrapPanel Grid.Row="2" Margin="0,0,0,0" Background="#FF373737">
-                            <DataGrid Name="grid_saffer" RowHeaderWidth="0"
+                        <WrapPanel Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <DataGrid Name="grid_saffer" RowHeaderWidth="0" Background="#FF373737"
                                   AlternationCount="4"  BorderThickness="0,0,0,1"
-                                  AutoGenerateColumns="False" MouseDoubleClick="datagrid_MouseDoubleClick"  >
+                                  AutoGenerateColumns="False" MouseDoubleClick="datagrid_MouseDoubleClick" 
+                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"  
+                                      >
                                 <DataGrid.RowStyle>
                                     <Style TargetType="DataGridRow">
-                                        <Setter Property="Background" Value="#FF373733" />
+                                        <Setter Property="Background" Value="#1e1e1e" />
                                         <Setter Property="Height" Value="25"/>
                                         <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Foreground" Value="Gray"/>
+                                        <Setter Property="Foreground" Value="#b1b1b1"/>
                                     </Style>
                                 </DataGrid.RowStyle>
                                 <DataGrid.CellStyle>
                                     <Style TargetType="DataGridCell">
                                         <Setter Property="BorderThickness" Value="0,0.5,0.5,0"/>
-                                        <Setter Property="BorderBrush" Value="Gray"/>
+                                        <Setter Property="BorderBrush" Value="#1e1e1e"/>
                                     </Style>
                                 </DataGrid.CellStyle>
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="合约编号"
-                                                    Width="1*" HeaderStyle="{StaticResource GridList_Title_Left}" 
-                                                         Binding="{Binding data.contractCode}"/>
-
-                                    <DataGridTemplateColumn Header="买价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                    <DataGridTemplateColumn Header="自选" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <TextBlock  Text="{Binding data.contractCode}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="序号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
@@ -151,7 +172,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="买量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                    <DataGridTemplateColumn Header="代码" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -160,11 +181,48 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="卖价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                    <DataGridTemplateColumn Header="合约名称" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                     <TextBlock Text="{Binding data.bid}" Foreground="{Binding Path=data.bid,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="最新" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="现手" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="买价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="卖价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -178,6 +236,115 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="买量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="成交量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="涨跌额" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="涨跌幅" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="持仓量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="开盘" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="最高价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="最低价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="昨收" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="昨结" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="涨停" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="涨跌" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
                                 </DataGrid.Columns>
                             </DataGrid>
                         </WrapPanel>

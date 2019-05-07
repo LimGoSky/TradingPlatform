@@ -22,8 +22,8 @@
         <Setter Property="SnapsToDevicePixels"   Value="True" />
         <Setter Property="MinWidth"   Value="0" />
         <Setter Property="MinHeight"   Value="28" />
-        <Setter Property="Foreground"    Value="#FF8B8787" />
-        <Setter Property="FontSize"   Value="14" />
+        <Setter Property="Foreground"    Value="#b1b1b1" />
+        <Setter Property="FontSize"   Value="16" />
         <Setter Property="Cursor"     Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -51,16 +51,17 @@
 
     <!--列表文字右对齐-->
     <Style x:Key="GridList_Title_Right" TargetType="DataGridColumnHeader">
-        <Setter Property="SnapsToDevicePixels"   Value="True" />
-        <Setter Property="MinWidth"   Value="0" />
-        <Setter Property="MinHeight"   Value="28" />
-        <Setter Property="Foreground"    Value="#FF8B8787" />
-        <Setter Property="FontSize"   Value="14" />
-        <Setter Property="Cursor"     Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="Foreground" Value="#808080" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="pingfang hk" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridColumnHeader">
-                    <Border x:Name="BackgroundBorder_Right"  Background="#FF373737"  BorderThickness="0"   Width="Auto">
+                    <Border x:Name="BackgroundBorder_Right"  Background="#191919"  BorderThickness="0"   Width="Auto">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"  />
