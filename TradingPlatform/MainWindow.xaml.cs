@@ -220,9 +220,16 @@ namespace TradingPlatform
                     item.Height = 35;
                     item.Name = "New" + (new Random().Next(0, 5).ToString());
                     Label lbl = new Label() { Content = string.Format("Label{0}", Tab_Page.Items.Count) };
-                    StackPanel sPanel = new StackPanel();
-                    sPanel.Children.Add(lbl);
-                    item.Content = sPanel;
+
+
+                    //StackPanel sPanel = new StackPanel();
+                    //sPanel.Children.Add(lbl);
+                    //item.Content = sPanel;
+                    //Tab_Page.Items.Add(item);
+                    //this.Tab_Page.SelectedItem = item;
+
+                    Chart.Candlestick candlestick = new Chart.Candlestick();
+                    item.Content = candlestick;
                     Tab_Page.Items.Add(item);
                     this.Tab_Page.SelectedItem = item;
                 }

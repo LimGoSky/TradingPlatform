@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AmCharts.Windows.Stock">
+      <HintPath>..\文档\StockAnalyse\StockAnalyse\bin\Debug\AmCharts.Windows.Stock.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -88,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chart\Candlestick.xaml.cs">
+      <DependentUpon>Candlestick.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\CoreLib\BaseOperation.cs" />
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
@@ -128,6 +134,10 @@
     <Compile Include="View\MainWindowControl\TabItemWithClose.xaml.cs">
       <DependentUpon>TabItemWithClose.xaml</DependentUpon>
     </Compile>
+    <Page Include="Chart\Candlestick.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
