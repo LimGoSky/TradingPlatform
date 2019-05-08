@@ -44,8 +44,8 @@ namespace TradingPlatform
             //var dic = new Dictionary<string, string>();
             //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
 
-            //InitTimer();
-            //this.timer.Start();
+            InitTimer();
+            this.timer.Start();
         }
 
         private void InitTimer()
@@ -65,13 +65,25 @@ namespace TradingPlatform
         {
             Random random = new Random();
             List<Quotation> objList = new List<Quotation>();
-            Quotation quotation = new Quotation();
-            quotation.topic = "topic";
-            quotation.data = new data();
-            quotation.data.contractCode = "合约编号";
-            quotation.data.contractName = "合约名";
-            quotation.data.ask = random.Next(-10,100).ToString();
-            objList.Add(quotation);
+            for (int i = 0; i < 20; i++)
+            {
+                Quotation quotation = new Quotation();
+                quotation.topic = "topic";
+                quotation.data = new data();
+                quotation.data.contractCode = "合约编号" + i;
+                quotation.data.contractName = "合约名" + i;
+                quotation.data.ask = random.Next(-10, 100).ToString();
+                quotation.data.bid = random.Next(-10, 100).ToString();
+                quotation.data.openPrice = random.Next(-10, 100).ToString();
+                quotation.data.volume = random.Next(-10, 100).ToString();
+                quotation.data.lowestPrice = random.Next(-10, 100).ToString();
+                quotation.data.latestPrice = random.Next(-10, 100).ToString();
+                quotation.data.highestPrice = random.Next(-10, 100).ToString();
+                quotation.data.bidVol = random.Next(-10, 100).ToString();
+                quotation.data.askVol = random.Next(-10, 100).ToString();
+                
+                objList.Add(quotation);
+            }
             this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
         }
 

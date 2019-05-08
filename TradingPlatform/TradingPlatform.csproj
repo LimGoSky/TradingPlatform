@@ -91,6 +91,7 @@
     <Compile Include="Common\CoreLib\BaseOperation.cs" />
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
+    <Compile Include="Common\Loginer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +202,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Styles\imgaes\home_nav_trade.png" />
+    <Resource Include="Styles\images\log_bg.png" />
     <Resource Include="Styles\imgaes\zixun.png" />
     <Resource Include="Styles\imgaes\huanyuan.png" />
     <Resource Include="document\pc定稿\Web 1920 – 2.png" />
@@ -219,6 +222,8 @@
     <Resource Include="document\pc定稿\行情详情页 - 副本.jpg" />
     <Resource Include="document\pc定稿\行情详情页.jpg" />
     <Content Include="document\UI规范.html" />
+    <None Include="Resources\1.bmp" />
+    <Content Include="HTMLPage1.html" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

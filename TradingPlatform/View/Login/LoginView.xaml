@@ -14,7 +14,10 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
-        <Canvas Background="#1e1e1e" Grid.Row="0" Grid.Column="0">
+        <Canvas Grid.Row="0" Grid.Column="0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/TradingPlatform;component/Styles/images/log_bg.png"/>
+            </Canvas.Background>
             <Label x:Name="label" Content="Hello!" Canvas.Left="24" Canvas.Top="76" Foreground="White" FontSize="20"/>
             <Label x:Name="label1" Content="输入您的手机号，立即注册体验" Canvas.Left="24" Canvas.Top="147" Foreground="#FF858080"/>
             <Button x:Name="BtnRegister" Content="注册" Canvas.Left="59" Canvas.Top="238" Width="100" Height="29" Background="Red" Foreground="White" FontSize="14" Click="BtnRegister_Click"/>
@@ -63,8 +66,8 @@
             <Button x:Name="BtnLogin" Content="确认" IsEnabled="{Binding IsCancel}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="62" Canvas.Top="236"  Command="{Binding SignCommand}"/>
             <Label x:Name="label3" Content="" Background="#FF1E1E1E" Canvas.Left="28" Canvas.Top="70" Width="166" Height="49"/>
             <Label x:Name="label4" Content="" Background="#FF1E1E1E" Canvas.Left="28" Canvas.Top="134" Width="166" Height="49"/>
-            <Button x:Name="btnQuick" Content="快捷登陆" Canvas.Left="62" Canvas.Top="285" Width="100" Height="27" Click="BtnQuick_Click"/>
             <Label x:Name="label5" Content="{Binding Report}" Canvas.Left="62" Canvas.Top="329" Width="100" Height="21" Foreground="Red"/>
+            <Label x:Name="labQuick" Content="使用「快捷登录」" Foreground="#FF858080" Canvas.Left="104" Canvas.Top="10" FontSize="10" Cursor="Hand" MouseLeftButtonDown="LabQuick_MouseLeftButtonDown" />
         </Canvas>
 
 

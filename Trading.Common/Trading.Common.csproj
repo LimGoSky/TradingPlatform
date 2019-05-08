@@ -57,6 +57,7 @@
     <Compile Include="Common\HttpUtility.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\Log4Helper.cs" />
+    <Compile Include="Common\PhoneHelper.cs" />
     <Compile Include="Common\WebSocketUtility.cs" />
     <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Module\Authority.cs" />

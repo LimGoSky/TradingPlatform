@@ -51,7 +51,7 @@
             <Label x:Name="label6" Content="已发送验证码至一下手机" Canvas.Left="73" Canvas.Top="75" Width="122" Foreground="#FF858080" FontSize="10" />
             <Label x:Name="label7" Content="+86 ▪▪▪ ▪▪▪▪" Canvas.Left="73" Canvas.Top="95" Foreground="White" FontSize="10"/>
             <Label x:Name="Second" Content="59s" Canvas.Left="130" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
-            <Label x:Name="label8" Content="9412" Grid.Column="1" HorizontalAlignment="Left" Margin="129,96,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10"/>
+            <Label x:Name="labPhoneNo" Content="9412" Grid.Column="1" HorizontalAlignment="Left" Margin="129,96,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10"/>
             <Label x:Name="BtnBack" Content="&lt; 返回" Foreground="#FF858080" Canvas.Left="10" Canvas.Top="10" Width="47" FontSize="10" Height="23" Cursor="Hand" MouseLeftButtonDown="BtnBack_MouseLeftButtonDown"/>
             <Label x:Name="PwdLogin" Content="使用「密码登录」" Foreground="#FF858080" Canvas.Left="105" Canvas.Top="10" FontSize="10" MouseLeftButtonDown="PwdLogin_MouseLeftButtonDown" Cursor="Hand" />
         </Canvas>

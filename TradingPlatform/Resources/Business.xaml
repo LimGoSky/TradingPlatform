@@ -106,9 +106,10 @@
 
     <!--标题栏背景样式-->
     <LinearGradientBrush x:Key="TitleBackGround" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF383535" Offset="1"/>
+        <!--<GradientStop Color="#FF383535" Offset="1"/>
         <GradientStop Color="#FF595353"/>
-        <GradientStop Color="#FF302C2C" Offset="0.509"/>
+        <GradientStop Color="#FF302C2C" Offset="0.509"/>-->
+        <GradientStop Color="#2a2a2a"/>
     </LinearGradientBrush>
     <!--列表背景样式-->
     <LinearGradientBrush x:Key="DataListBackGround" EndPoint="0.5,1" StartPoint="0.5,0">
@@ -119,33 +120,34 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="border" CornerRadius="1" Padding="0,0,0,0" Margin="30,0,0,0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Border x:Name="border" CornerRadius="2" Padding="10,0,10,0" Margin="30,0,0,0" Height="25">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="border" Property="Background">
                                 <Setter.Value>
                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                        <GradientStop Color="#FF6B6B6B" Offset="0.5"/>
-                                        <GradientStop Color="#FF535353" Offset="0.5"/>
-                                        <GradientStop Color="#FF535353" Offset="0.022"/>
-                                        <GradientStop Color="#FF555555" Offset="0.991"/>
+                                        <GradientStop Color="#1e1e1e" Offset="0.5"/>
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
+                            <Setter Property="BorderBrush" Value="#313131"></Setter>
+                            <Setter Property="BorderThickness" Value="1"></Setter>
+                            <Setter Property="Foreground" Value="Blue"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="Tab_Page" TargetType="{x:Type TabItem}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
-                        <Border Name="Border" Background="LightBlue" BorderThickness="0,0.5,0,0" Width="175" Height="35">
+                        <Border Name="Border" Background="LightBlue" BorderThickness="0,0.5,0,0" Width="215" Height="50">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="0,2,12,2"/>
                         </Border>
                     </Grid>
@@ -159,7 +161,7 @@
                         <Trigger Property="IsSelected" Value="False">
                             <Setter TargetName="Border" Property="Background" Value="#FF252222" />
                             <Setter TargetName="Border" Property="BorderThickness" Value="0,0.5,0,2" />
-                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Foreground" Value="#ffffff" />
                         </Trigger>
                         
                     </ControlTemplate.Triggers>
