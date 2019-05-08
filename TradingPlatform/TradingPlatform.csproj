@@ -201,9 +201,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Styles\imgaes\home_nav_trade.png" />
-    <Resource Include="Styles\imgaes\zixun.png" />
-    <Resource Include="Styles\imgaes\huanyuan.png" />
+    <Resource Include="Styles\images\home_nav_forum.png" />
+    <Resource Include="Styles\images\home_filtrate_next.png" />
+    <Resource Include="Styles\images\home_filtrate_refresh.png" />
+    <Resource Include="Styles\images\home_filtrate_scale.png" />
+    <Resource Include="Styles\images\home_nav_calendar.png" />
+    <Resource Include="Styles\images\home_nav_groove.png" />
+    <Resource Include="Styles\images\home_nav_info.png" />
+    <Resource Include="Styles\images\home_nav_profile_default.png" />
+    <Resource Include="Styles\images\home_nav_pronunce.png" />
+    <Resource Include="Styles\images\home_side_like.png" />
+    <Resource Include="Styles\images\home_side_warning.png" />
+    <Resource Include="Styles\images\nav_close.png" />
+    <Resource Include="Styles\images\price_like.png" />
+    <Resource Include="Styles\images\pull_down_big.png" />
+    <Resource Include="Styles\images\pull_down_small.png" />
+    <Resource Include="Styles\images\quick_login_vfcode.png" />
+    <Resource Include="Styles\images\system_close.png" />
+    <Resource Include="Styles\images\system_max.png" />
+    <Resource Include="Styles\images\system_min.png" />
+    <Resource Include="Styles\images\system_Settings.png" />
+    <Resource Include="Styles\images\home_nav_trade.png" />
+    <Resource Include="Styles\images\zixun.png" />
+    <Resource Include="Styles\images\huanyuan.png" />
     <Resource Include="document\pc定稿\Web 1920 – 2.png" />
     <Resource Include="document\pc定稿\交易窗口.png" />
     <Resource Include="document\pc定稿\交易账号登录.jpg" />
@@ -225,10 +245,10 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="document\PC需求文档2019-04-26.docx" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
-    <Resource Include="Styles\imgaes\search.png" />
-    <Resource Include="Styles\imgaes\fangda.png" />
-    <Resource Include="Styles\imgaes\guanbi.png" />
-    <Resource Include="Styles\imgaes\suoxiao.png" />
+    <Resource Include="Styles\images\search.png" />
+    <Resource Include="Styles\images\fangda.png" />
+    <Resource Include="Styles\images\guanbi.png" />
+    <Resource Include="Styles\images\suoxiao.png" />
     <None Include="Resources\DSC05128.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
