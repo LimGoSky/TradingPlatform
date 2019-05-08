@@ -131,6 +131,9 @@
     <Compile Include="View\Login\SmsLoginView.xaml.cs">
       <DependentUpon>SmsLoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Login\TradeLoginView.xaml.cs">
+      <DependentUpon>TradeLoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindowControl\TabItemWithClose.xaml.cs">
       <DependentUpon>TabItemWithClose.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Login\TradeLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindowControl\TabItemWithClose.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,6 +245,7 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="document\PC需求文档2019-04-26.docx" />
+    <Resource Include="Resources\PingFangHK-Regular.ttf" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <Resource Include="Styles\imgaes\search.png" />
     <Resource Include="Styles\imgaes\fangda.png" />
