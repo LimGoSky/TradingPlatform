@@ -20,9 +20,9 @@ namespace TradingPlatform.Chart
     /// <summary>
     /// Candlestick.xaml 的交互逻辑
     /// </summary>
-    public partial class Candlestick : Page
+    public partial class CandlestickGrid : Grid
     {
-        public Candlestick()
+        public CandlestickGrid()
         {
             InitializeComponent();
         }
@@ -83,8 +83,8 @@ namespace TradingPlatform.Chart
         {
 
             Data = LoadStockInfo(path);
-            stockChart.Charts[0].Graphs[0].Title = stockName;
-            stockChart.Charts[1].Graphs[0].Title = stockName;
+            //stockChart.Charts[0].Graphs[0].Title = stockName;
+            //stockChart.Charts[1].Graphs[0].Title = stockName;
         }
     }
 }

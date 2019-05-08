@@ -228,7 +228,7 @@ namespace TradingPlatform
                     //Tab_Page.Items.Add(item);
                     //this.Tab_Page.SelectedItem = item;
 
-                    Chart.Candlestick candlestick = new Chart.Candlestick();
+                    Chart.CandlestickGrid candlestick = new Chart.CandlestickGrid();
                     item.Content = candlestick;
                     Tab_Page.Items.Add(item);
                     this.Tab_Page.SelectedItem = item;
