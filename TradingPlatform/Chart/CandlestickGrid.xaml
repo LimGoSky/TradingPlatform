@@ -7,9 +7,11 @@
       xmlns:ams="http://schemas.amcharts.com/stock/wpf/2009/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Name="Grid"
       Loaded="Window_Loaded">
 
-    <Grid Margin="10,0,10,0">
+    <Grid Margin="10,0,10,0" MouseMove="Grid_MouseMove">
+
         <ams:StockChart Name="stockChart" Grid.Row="1">
             <ams:StockChart.DataSets>
                 <ams:DataSet Name="stockSet1" Brush="#7f8da9"
@@ -88,4 +90,7 @@
             </ams:StockChart.PeriodSelector>
         </ams:StockChart>
     </Grid>
+
+    <Line Name="xLine" X1="0" Y1="0" X2="0" Y2="0" StrokeDashArray="2" Stroke="RosyBrown"  StrokeThickness="1"></Line>
+    <Line Name="yLine" X1="0" Y1="0" X2="0" Y2="0" StrokeDashArray="2" Stroke="RosyBrown"  StrokeThickness="1"></Line>
 </Grid>

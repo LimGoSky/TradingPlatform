@@ -86,5 +86,27 @@ namespace TradingPlatform.Chart
             //stockChart.Charts[0].Graphs[0].Title = stockName;
             //stockChart.Charts[1].Graphs[0].Title = stockName;
         }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            var obj = e.GetPosition((IInputElement)sender);
+
+            var x1 = 0;
+            var x2 = this.Grid.ActualWidth;
+
+            var y1 = obj.Y;
+            var y2 = obj.Y;
+
+            this.xLine.X1 = 0;
+            this.xLine.X2 = x2;
+            this.xLine.Y1 = y1;
+            this.xLine.Y2 = y2;
+
+            this.yLine.X1 = obj.X;
+            this.yLine.Y1 = 0;
+
+            this.yLine.X2 = obj.X;
+            this.yLine.Y2 = this.Grid.ActualHeight;
+        }
     }
 }
