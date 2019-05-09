@@ -101,13 +101,13 @@ namespace TradingPlatform.ViewModel.Login
                     return;
                 }
 
-                var registerTask = new LoginLogic().Register1(CheckCode, UserName, NickName, Password, "", "");
-                var timeouttask = Task.Delay(3000);
+                var registerTask = new LoginLogic().RegisterAccount(CheckCode, UserName, NickName, Password, "", "");
+                var timeouttask = Task.Delay(5000);
                 var completedTask = await Task.WhenAny(registerTask, timeouttask);
                 if (completedTask == timeouttask)
                 {
                     SendMsg("register", "timeout");
-                    Log4Helper.Info(this.GetType(), $"账号：{UserName}注册超时！时间：{DateTime.Now.ToString()}");
+                    Log4Helper.Info(this.GetType(), $"手机号：{UserName},注册超时！时间：{DateTime.Now.ToString()}");
                 }
                 else
                 {
@@ -116,6 +116,15 @@ namespace TradingPlatform.ViewModel.Login
                     {
                         //登陆成功发送消息
                         SendMsg("register", "OK");
+                    }
+                    else if(task.code == 301)
+                    {
+                        //登陆成功发送消息
+                        SendMsg("register", "codeError");
+                    }
+                    else
+                    {
+                        SendMsg("register", "error");
                     }
                 }
 

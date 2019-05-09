@@ -14,6 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Trading.Common;
+using Trading.Logic;
+using Trading.Model.Common;
 
 namespace TradingPlatform.View.Login
 {
@@ -99,6 +102,11 @@ namespace TradingPlatform.View.Login
                 MessageBox.Show("密码不能为空！");
                 return;
             }
+            else if(msg== "codeError")
+            {
+                MessageBox.Show("验证码错误！");
+                return;
+            }
             else if(msg == "OK")
             {
                 MessageBox.Show("注册成功！");
@@ -107,6 +115,11 @@ namespace TradingPlatform.View.Login
             else if(msg == "timeout" || msg == "error")
             {
                 MessageBox.Show("注册失败！");
+                return;
+            }
+            else if (msg == "secondError")
+            {
+                MessageBox.Show("验证码超时，请重新发送！");
                 return;
             }
         }
@@ -130,15 +143,24 @@ namespace TradingPlatform.View.Login
         }
 
         /// <summary>
-        /// 重发
+        /// 发送短信
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtnRepeat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            secondCount = 60;
+            secondCount = 59;
             BtnRepeat.Content = "重发";
             this.timer.Start();
+            //发短信
+            LoginLogic logic = new LoginLogic();
+            ResultModel model = logic.SendMessage(PhoneNo.Text, CheckCodeTypeEnum.REGISTER.ToString());
+            if (model.code != 200)
+            {
+                string result = ((MessageStateEnum)model.code).ToString();
+                MessageBox.Show(result);
+                Log4Helper.Error(this.GetType(), $"手机号：{PhoneNo.Text}发送注册短信失败！原因：{result},时间：{DateTime.Now.ToString()}");
+            }
         }
     }
 }

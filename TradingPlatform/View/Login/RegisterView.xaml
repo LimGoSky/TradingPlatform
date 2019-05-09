@@ -14,7 +14,7 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Row="0" Grid.Column="0" Background="#2a2a2a">
-            <TextBox x:Name="PhoneNo" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="82" Width="145" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11" >
+            <TextBox x:Name="PhoneNo" Text="{Binding UserName}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="82" Width="145" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="15" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

@@ -166,13 +166,23 @@ namespace Trading.Logic
         /// <param name="profilePhoto">头像</param>
         /// <param name="qq">qq</param>
         /// <returns></returns>
-        public async Task<ResultModel> Register1(string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
+        public async Task<ResultModel> RegisterAccount(string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
         {
             try
             {
+                ResultModel<Token> model = new ResultModel<Token>();
                 var task = await Task.Run(() =>
                 {
-                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
+                    model = Register(checkCode, mobile, nickname, password, profilePhoto, qq);
+                    if (model.code == 200)
+                    {
+                        return model;
+                    }
+                    else
+                    {
+                        Log4Helper.Error(this.GetType(), $"手机号：{mobile},发送注册短信失败！原因：{((MessageStateEnum)model.code).ToString()},时间：{DateTime.Now.ToString()}" );
+                        return null;
+                    }
                 });
                 bool result = task != null ? true : false;
                 if (result)
