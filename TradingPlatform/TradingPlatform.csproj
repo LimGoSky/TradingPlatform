@@ -1,4 +1,4 @@
-ï»¿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AmCharts.Windows.Stock">
-      <HintPath>..\æ–‡æ¡£\StockAnalyse\StockAnalyse\bin\Debug\AmCharts.Windows.Stock.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -91,13 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Chart\CandlestickGrid.xaml.cs">
-      <DependentUpon>CandlestickGrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Common\CoreLib\BaseOperation.cs" />
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
-    <Compile Include="Common\Loginer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,16 +124,9 @@
     <Compile Include="View\Login\SmsLoginView.xaml.cs">
       <DependentUpon>SmsLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Login\TradeLoginView.xaml.cs">
-      <DependentUpon>TradeLoginView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindowControl\TabItemWithClose.xaml.cs">
       <DependentUpon>TabItemWithClose.xaml</DependentUpon>
     </Compile>
-    <Page Include="Chart\CandlestickGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -193,10 +179,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Login\TradeLoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainWindowControl\TabItemWithClose.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,38 +201,54 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Styles\imgaes\home_nav_trade.png" />
-    <Resource Include="Styles\images\log_bg.png" />
-    <Resource Include="Styles\imgaes\zixun.png" />
-    <Resource Include="Styles\imgaes\huanyuan.png" />
-    <Resource Include="document\pcå®šç¨¿\Web 1920 â€“ 2.png" />
-    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“çª—å£.png" />
-    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“è´¦å·ç™»å½•.jpg" />
-    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“è´¦å·ç™»å½•å¼€æˆ·.jpg" />
-    <Resource Include="document\pcå®šç¨¿\å¯†ç ç™»å½•.jpg" />
-    <Resource Include="document\pcå®šç¨¿\å¿«æ·ç™»å½•.jpg" />
-    <Resource Include="document\pcå®šç¨¿\æ‰¾å›žå¯†ç .jpg" />
-    <Resource Include="document\pcå®šç¨¿\æœªç™»å½•çŠ¶æ€.jpg" />
-    <Resource Include="document\pcå®šç¨¿\æ¡ä»¶å•çª—å£.jpg" />
-    <Resource Include="document\pcå®šç¨¿\æ­¢ç›ˆæ­¢æŸçª—å£.jpg" />
-    <Resource Include="document\pcå®šç¨¿\æ³¨å†Œ.jpg" />
-    <Resource Include="document\pcå®šç¨¿\çŸ­ä¿¡ç™»å½•.png" />
-    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…åˆ—è¡¨.jpg" />
-    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…è¯¦æƒ…é¡µ - å‰¯æœ¬.jpg" />
-    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…è¯¦æƒ…é¡µ.jpg" />
-    <Content Include="document\UIè§„èŒƒ.html" />
-    <None Include="Resources\1.bmp" />
-    <Content Include="HTMLPage1.html" />
+    <Resource Include="Styles\images\home_nav_forum.png" />
+    <Resource Include="Styles\images\home_filtrate_next.png" />
+    <Resource Include="Styles\images\home_filtrate_refresh.png" />
+    <Resource Include="Styles\images\home_filtrate_scale.png" />
+    <Resource Include="Styles\images\home_nav_calendar.png" />
+    <Resource Include="Styles\images\home_nav_groove.png" />
+    <Resource Include="Styles\images\home_nav_info.png" />
+    <Resource Include="Styles\images\home_nav_profile_default.png" />
+    <Resource Include="Styles\images\home_nav_pronunce.png" />
+    <Resource Include="Styles\images\home_side_like.png" />
+    <Resource Include="Styles\images\home_side_warning.png" />
+    <Resource Include="Styles\images\nav_close.png" />
+    <Resource Include="Styles\images\price_like.png" />
+    <Resource Include="Styles\images\pull_down_big.png" />
+    <Resource Include="Styles\images\pull_down_small.png" />
+    <Resource Include="Styles\images\quick_login_vfcode.png" />
+    <Resource Include="Styles\images\system_close.png" />
+    <Resource Include="Styles\images\system_max.png" />
+    <Resource Include="Styles\images\system_min.png" />
+    <Resource Include="Styles\images\system_Settings.png" />
+    <Resource Include="Styles\images\home_nav_trade.png" />
+    <Resource Include="Styles\images\zixun.png" />
+    <Resource Include="Styles\images\huanyuan.png" />
+    <Resource Include="document\pc¶¨¸å\Web 1920 ¨C 2.png" />
+    <Resource Include="document\pc¶¨¸å\½»Ò×´°¿Ú.png" />
+    <Resource Include="document\pc¶¨¸å\½»Ò×ÕËºÅµÇÂ¼.jpg" />
+    <Resource Include="document\pc¶¨¸å\½»Ò×ÕËºÅµÇÂ¼¿ª»§.jpg" />
+    <Resource Include="document\pc¶¨¸å\ÃÜÂëµÇÂ¼.jpg" />
+    <Resource Include="document\pc¶¨¸å\¿ì½ÝµÇÂ¼.jpg" />
+    <Resource Include="document\pc¶¨¸å\ÕÒ»ØÃÜÂë.jpg" />
+    <Resource Include="document\pc¶¨¸å\Î´µÇÂ¼×´Ì¬.jpg" />
+    <Resource Include="document\pc¶¨¸å\Ìõ¼þµ¥´°¿Ú.jpg" />
+    <Resource Include="document\pc¶¨¸å\Ö¹Ó¯Ö¹Ëð´°¿Ú.jpg" />
+    <Resource Include="document\pc¶¨¸å\×¢²á.jpg" />
+    <Resource Include="document\pc¶¨¸å\¶ÌÐÅµÇÂ¼.png" />
+    <Resource Include="document\pc¶¨¸å\ÐÐÇéÁÐ±í.jpg" />
+    <Resource Include="document\pc¶¨¸å\ÐÐÇéÏêÇéÒ³ - ¸±±¾.jpg" />
+    <Resource Include="document\pc¶¨¸å\ÐÐÇéÏêÇéÒ³.jpg" />
+    <Content Include="document\UI¹æ·¶.html" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <None Include="document\PCéœ€æ±‚æ–‡æ¡£2019-04-26.docx" />
-    <Resource Include="Resources\PingFangHK-Regular.ttf" />
+    <None Include="document\PCÐèÇóÎÄµµ2019-04-26.docx" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
-    <Resource Include="Styles\imgaes\search.png" />
-    <Resource Include="Styles\imgaes\fangda.png" />
-    <Resource Include="Styles\imgaes\guanbi.png" />
-    <Resource Include="Styles\imgaes\suoxiao.png" />
+    <Resource Include="Styles\images\search.png" />
+    <Resource Include="Styles\images\fangda.png" />
+    <Resource Include="Styles\images\guanbi.png" />
+    <Resource Include="Styles\images\suoxiao.png" />
     <None Include="Resources\DSC05128.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -267,8 +265,8 @@
     <Content Include="Config\log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="document\PCéœ€æ±‚æ–‡æ¡£2019-04-20.docx" />
-    <None Include="document\éœ€æ±‚.docx" />
+    <None Include="document\PCÐèÇóÎÄµµ2019-04-20.docx" />
+    <None Include="document\ÐèÇó.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

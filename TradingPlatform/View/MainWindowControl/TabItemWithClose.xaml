@@ -10,13 +10,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Ellipse Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}"></Ellipse>
-                            <TextBlock x:Name="text" FontSize="10" Text="X" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <Ellipse Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" ></Ellipse>
+                            <!--<TextBlock x:Name="text" FontSize="10" Text="X" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>-->
+                            <Image x:Name="text" Width="5" Height="5" Source="/Styles/images/nav_close.png"></Image>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" Value="#FF1F5581"></Setter>
-                                <Setter TargetName="text" Property="Foreground" Value="White"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

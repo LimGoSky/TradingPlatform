@@ -43,7 +43,7 @@ namespace TradingPlatform
 
             //var dic = new Dictionary<string, string>();
             //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
-
+            BindList();
             InitTimer();
             this.timer.Start();
         }
@@ -60,17 +60,18 @@ namespace TradingPlatform
             //绑定Elapsed事件
             timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
         }
-
-        private void TimerUp(object sender, ElapsedEventArgs e)
+        public List<Quotation> objList = new List<Quotation>();
+        public void BindList()
         {
             Random random = new Random();
-            List<Quotation> objList = new List<Quotation>();
             for (int i = 0; i < 20; i++)
             {
                 Quotation quotation = new Quotation();
                 quotation.topic = "topic";
                 quotation.data = new data();
-                quotation.data.contractCode = "合约编号" + i;
+
+                quotation.data.SerialNumber = i + 1;
+                quotation.data.contractCode = "SK" + i;
                 quotation.data.contractName = "合约名" + i;
                 quotation.data.ask = random.Next(-10, 100).ToString();
                 quotation.data.bid = random.Next(-10, 100).ToString();
@@ -81,10 +82,32 @@ namespace TradingPlatform
                 quotation.data.highestPrice = random.Next(-10, 100).ToString();
                 quotation.data.bidVol = random.Next(-10, 100).ToString();
                 quotation.data.askVol = random.Next(-10, 100).ToString();
-                
+
                 objList.Add(quotation);
             }
             this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
+        }
+        private void TimerUp(object sender, ElapsedEventArgs e)
+        {
+            Random random = new Random();
+            int tmp = random.Next(0, 20);
+            objList.FindAll(x => x.data.SerialNumber == tmp).ForEach(x =>
+              {
+                  x.data.ask = random.Next(-10, 100).ToString();
+                  x.data.bid = random.Next(-10, 100).ToString();
+                  x.data.openPrice = random.Next(-10, 100).ToString();
+                  x.data.volume = random.Next(-10, 100).ToString();
+                  x.data.lowestPrice = random.Next(-10, 100).ToString();
+                  x.data.latestPrice = random.Next(-10, 100).ToString();
+                  x.data.highestPrice = random.Next(-10, 100).ToString();
+                  x.data.bidVol = random.Next(-10, 100).ToString();
+                  x.data.askVol = random.Next(-10, 100).ToString();
+              });
+            this.grid_saffer.Dispatcher.Invoke(new Action(() =>
+            {
+                this.grid_saffer.ItemsSource = objList;
+                this.grid_saffer.Items.Refresh();
+            }));
         }
 
         #region 标题栏事件
@@ -143,7 +166,7 @@ namespace TradingPlatform
             Rect rc = SystemParameters.WorkArea;//获取工作区大小
             this.Width = rc.Width;
             this.Height = rc.Height;
-            this.btn_fangda.Visibility =Visibility.Collapsed;
+            this.btn_fangda.Visibility = Visibility.Collapsed;
             this.btn_huanyuan.Visibility = Visibility.Visible;
 
         }
@@ -152,7 +175,7 @@ namespace TradingPlatform
         /// </summary>
         private void btn_normal_Click(object sender, RoutedEventArgs e)
         {
-            this.btn_fangda.Visibility =Visibility.Visible;
+            this.btn_fangda.Visibility = Visibility.Visible;
             this.btn_huanyuan.Visibility = Visibility.Collapsed;
             this.Left = rcnormal.Left;
             this.Top = rcnormal.Top;
@@ -192,12 +215,13 @@ namespace TradingPlatform
             if (rowSelected != null)
             {
                 string contractCode = rowSelected.data.contractCode;
+                string contractName = rowSelected.data.contractName;
 
 
                 bool isExists = false;
                 for (int i = 0; i < this.Tab_Page.Items.Count; i++)
                 {
-                    if ((this.Tab_Page.Items[i] as TabItem).Name == "New" + (new Random().Next(0, 5).ToString()))
+                    if ((this.Tab_Page.Items[i] as TabItem).Name == contractCode + (new Random().Next(0, 5).ToString()))
                     {
                         this.Tab_Page.SelectedIndex = i;
                         isExists = true;
@@ -214,22 +238,14 @@ namespace TradingPlatform
                     //this.Tab_Page.SelectedItem = tab_new;
 
                     TabItemWithClose item = new TabItemWithClose();
-                    item.Header = string.Format("Header{0}", Tab_Page.Items.Count);
-                    item.ToolTip = string.Format("Header{0}", Tab_Page.Items.Count);
+                    item.Header = contractName;
                     item.Margin = new Thickness(1, 0, 1, 0);
-                    item.Height = 35;
-                    item.Name = "New" + (new Random().Next(0, 5).ToString());
-                    Label lbl = new Label() { Content = string.Format("Label{0}", Tab_Page.Items.Count) };
-
-
-                    //StackPanel sPanel = new StackPanel();
-                    //sPanel.Children.Add(lbl);
-                    //item.Content = sPanel;
-                    //Tab_Page.Items.Add(item);
-                    //this.Tab_Page.SelectedItem = item;
-
-                    Chart.CandlestickGrid candlestick = new Chart.CandlestickGrid();
-                    item.Content = candlestick;
+                    item.Height = 50;
+                    item.Name = contractCode;
+                    Label lbl = new Label() { Content = string.Format("{0}", Tab_Page.Items.Count) };
+                    StackPanel sPanel = new StackPanel();
+                    sPanel.Children.Add(lbl);
+                    item.Content = sPanel;
                     Tab_Page.Items.Add(item);
                     this.Tab_Page.SelectedItem = item;
                 }
