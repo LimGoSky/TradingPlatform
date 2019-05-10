@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+ï»¿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -91,6 +91,7 @@
     <Compile Include="Common\CoreLib\BaseOperation.cs" />
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
+	<Compile Include="Common\Loginer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,26 +225,26 @@
     <Resource Include="Styles\images\home_nav_trade.png" />
     <Resource Include="Styles\images\zixun.png" />
     <Resource Include="Styles\images\huanyuan.png" />
-    <Resource Include="document\pc¶¨¸å\Web 1920 ¨C 2.png" />
-    <Resource Include="document\pc¶¨¸å\½»Ò×´°¿Ú.png" />
-    <Resource Include="document\pc¶¨¸å\½»Ò×ÕËºÅµÇÂ¼.jpg" />
-    <Resource Include="document\pc¶¨¸å\½»Ò×ÕËºÅµÇÂ¼¿ª»§.jpg" />
-    <Resource Include="document\pc¶¨¸å\ÃÜÂëµÇÂ¼.jpg" />
-    <Resource Include="document\pc¶¨¸å\¿ì½ÝµÇÂ¼.jpg" />
-    <Resource Include="document\pc¶¨¸å\ÕÒ»ØÃÜÂë.jpg" />
-    <Resource Include="document\pc¶¨¸å\Î´µÇÂ¼×´Ì¬.jpg" />
-    <Resource Include="document\pc¶¨¸å\Ìõ¼þµ¥´°¿Ú.jpg" />
-    <Resource Include="document\pc¶¨¸å\Ö¹Ó¯Ö¹Ëð´°¿Ú.jpg" />
-    <Resource Include="document\pc¶¨¸å\×¢²á.jpg" />
-    <Resource Include="document\pc¶¨¸å\¶ÌÐÅµÇÂ¼.png" />
-    <Resource Include="document\pc¶¨¸å\ÐÐÇéÁÐ±í.jpg" />
-    <Resource Include="document\pc¶¨¸å\ÐÐÇéÏêÇéÒ³ - ¸±±¾.jpg" />
-    <Resource Include="document\pc¶¨¸å\ÐÐÇéÏêÇéÒ³.jpg" />
-    <Content Include="document\UI¹æ·¶.html" />
+    <Resource Include="document\pcå®šç¨¿\Web 1920 â€“ 2.png" />
+    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“çª—å£.png" />
+    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“è´¦å·ç™»å½•.jpg" />
+    <Resource Include="document\pcå®šç¨¿\äº¤æ˜“è´¦å·ç™»å½•å¼€æˆ·.jpg" />
+    <Resource Include="document\pcå®šç¨¿\å¯†ç ç™»å½•.jpg" />
+    <Resource Include="document\pcå®šç¨¿\å¿«æ·ç™»å½•.jpg" />
+    <Resource Include="document\pcå®šç¨¿\æ‰¾å›žå¯†ç .jpg" />
+    <Resource Include="document\pcå®šç¨¿\æœªç™»å½•çŠ¶æ€.jpg" />
+    <Resource Include="document\pcå®šç¨¿\æ¡ä»¶å•çª—å£.jpg" />
+    <Resource Include="document\pcå®šç¨¿\æ­¢ç›ˆæ­¢æŸçª—å£.jpg" />
+    <Resource Include="document\pcå®šç¨¿\æ³¨å†Œ.jpg" />
+    <Resource Include="document\pcå®šç¨¿\çŸ­ä¿¡ç™»å½•.png" />
+    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…åˆ—è¡¨.jpg" />
+    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…è¯¦æƒ…é¡µ - å‰¯æœ¬.jpg" />
+    <Resource Include="document\pcå®šç¨¿\è¡Œæƒ…è¯¦æƒ…é¡µ.jpg" />
+    <Content Include="document\UIè§„èŒƒ.html" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <None Include="document\PCÐèÇóÎÄµµ2019-04-26.docx" />
+    <None Include="document\PCéœ€æ±‚æ–‡æ¡£2019-04-26.docx" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <Resource Include="Styles\images\search.png" />
     <Resource Include="Styles\images\fangda.png" />
@@ -265,8 +266,8 @@
     <Content Include="Config\log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="document\PCÐèÇóÎÄµµ2019-04-20.docx" />
-    <None Include="document\ÐèÇó.docx" />
+    <None Include="document\PCéœ€æ±‚æ–‡æ¡£2019-04-20.docx" />
+    <None Include="document\éœ€æ±‚.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
