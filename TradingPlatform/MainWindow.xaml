@@ -105,7 +105,7 @@
 
         <DockPanel x:Name="Tab_Dock" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="{StaticResource DataListBackGround}">
 
-            <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="215">
+            <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="215" >
                 <TabItem Header="行情" FontSize="16" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
                     <Grid Background="#FF383535" Margin="0">
                         <Grid.RowDefinitions>
@@ -141,7 +141,7 @@
                         <WrapPanel Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <DataGrid Name="grid_saffer" RowHeaderWidth="0" Background="#FF373737"
                                   AlternationCount="4"  BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="False" MouseDoubleClick="datagrid_MouseDoubleClick" 
+                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                                 <DataGrid.RowStyle>
                                     <Style TargetType="DataGridRow">

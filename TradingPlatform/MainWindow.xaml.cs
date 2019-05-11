@@ -7,6 +7,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Trading.Common;
 using Trading.Model.Common;
 using TradingPlatform.View.MainWindowControl;
@@ -200,16 +201,25 @@ namespace TradingPlatform
         }
         #endregion 标题栏事件
 
+        #region 行双击事件
         /// <summary>
         /// 行双击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Grid_MainTitle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-
-
+            if (e.ClickCount == 2 && e.ChangedButton == MouseButton.Left)
+            {
+                datagrid_DoubleClick(sender);
+            }
+        }
+        /// <summary>
+        /// 行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        private void datagrid_DoubleClick(object sender)
+        {
             DataGrid dg = (DataGrid)sender;
             Quotation rowSelected = dg.SelectedItem as Quotation;
             if (rowSelected != null)
@@ -221,22 +231,16 @@ namespace TradingPlatform
                 bool isExists = false;
                 for (int i = 0; i < this.Tab_Page.Items.Count; i++)
                 {
-                    if ((this.Tab_Page.Items[i] as TabItem).Name == contractCode + (new Random().Next(0, 5).ToString()))
+                    TabItem tab = this.Tab_Page.Items[i] as TabItem;
+                    if (tab.Name == contractCode)
                     {
-                        this.Tab_Page.SelectedIndex = i;
+                        Dispatcher.InvokeAsync(() => Tab_Page.SelectedItem = tab);
                         isExists = true;
                         break;
                     }
                 }
                 if (!isExists)
                 {
-                    //TabItem tab_new = new TabItem() { Header = "New", Margin = new Thickness(2, 0, 0, 0) };
-                    //Style tabstyle = (Style)this.FindResource("Tab_Page");
-                    //tab_new.Style = tabstyle; ;
-                    //tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
-                    //this.Tab_Page.Items.Add(tab_new);
-                    //this.Tab_Page.SelectedItem = tab_new;
-
                     TabItemWithClose item = new TabItemWithClose();
                     item.Header = contractName;
                     item.Margin = new Thickness(1, 0, 1, 0);
@@ -247,9 +251,11 @@ namespace TradingPlatform
                     sPanel.Children.Add(lbl);
                     item.Content = sPanel;
                     Tab_Page.Items.Add(item);
-                    this.Tab_Page.SelectedItem = item;
+                    Dispatcher.InvokeAsync(() => Tab_Page.SelectedItem = item);
+
                 }
             }
         }
+        #endregion
     }
 }
