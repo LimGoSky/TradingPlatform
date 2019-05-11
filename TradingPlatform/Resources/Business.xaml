@@ -7,7 +7,7 @@
     <SolidColorBrush x:Key="FadeBrush" Color="Red"/>
     <Style x:Key="LabelFontStyle" TargetType="{x:Type Label}">
         <!--字体样式-->
-        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Foreground" Value="#707070"/>
     </Style>
     <!--标签页-->
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">

@@ -12,6 +12,8 @@ using Trading.Common;
 using Trading.Model.Common;
 using TradingPlatform.View.MainWindowControl;
 using TradingPlatform.ViewModel.Quotation;
+using System.Windows.Navigation;
+using TradingPlatform.Business;
 
 namespace TradingPlatform
 {
@@ -62,6 +64,9 @@ namespace TradingPlatform
             timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
         }
         public List<Quotation> objList = new List<Quotation>();
+        /// <summary>
+        /// 绑定列表
+        /// </summary>
         public void BindList()
         {
             Random random = new Random();
@@ -111,7 +116,7 @@ namespace TradingPlatform
             }));
         }
 
-        #region 标题栏事件
+        #region 标题栏窗口事件
 
         Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
         /// <summary>
@@ -200,6 +205,20 @@ namespace TradingPlatform
             }
         }
         #endregion 标题栏事件
+
+        #region 标题栏事件
+        /// <summary>
+        /// 交易
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TitleBar_TransAction(object sender, MouseEventArgs e)
+        {
+            MainPage mainPage = new MainPage();
+            mainPage.ShowDialog();
+
+        }
+        #endregion
 
         #region 行双击事件
         /// <summary>

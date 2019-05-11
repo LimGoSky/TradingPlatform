@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TradingPlatform.ViewModel.Quotation"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None"
-        SizeChanged="Window_SizeChanged">
+        SizeChanged="Window_SizeChanged" WindowStartupLocation="CenterScreen">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
@@ -65,7 +65,7 @@
                 <WrapPanel Height="45" Margin="20,0,0,0">
                     <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
                     <Image Source="/Styles/images/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>
-                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="交易" FontSize="14" Foreground="#707070"/>
+                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="True" FontFamily="pingfang hk" Height="14" Width="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="交易" FontSize="14" Foreground="#707070" MouseDown="TitleBar_TransAction"/>
                 </WrapPanel>
                 <WrapPanel Height="45"  Margin="20,0,0,0">
                     <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
