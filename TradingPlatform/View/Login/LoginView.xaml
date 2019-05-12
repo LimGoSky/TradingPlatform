@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Canvas Grid.Row="0" Grid.Column="0">
             <Canvas.Background>
-                <ImageBrush ImageSource="/TradingPlatform;component/Styles/images/log_bg.png"/>
+                <ImageBrush ImageSource="/Styles/images/log_bg.png"/>
             </Canvas.Background>
             <Label x:Name="label" Content="Hello!" Canvas.Left="24" Canvas.Top="76" Foreground="White" FontSize="20"/>
             <Label x:Name="label1" Content="输入您的手机号，立即注册体验" Canvas.Left="24" Canvas.Top="147" Foreground="#FF858080"/>

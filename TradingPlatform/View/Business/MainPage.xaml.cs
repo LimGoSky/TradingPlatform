@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Trading.Model.Model_Business;
+using TradingPlatform.Common;
 
 namespace TradingPlatform.Business
 {
@@ -22,6 +23,7 @@ namespace TradingPlatform.Business
     {
         public MainPage()
         {
+            MessageBox.Show(BussinesLoginer.bussinesLoginer.sessionId);
             InitializeComponent();
         }
         #region 标题栏事件

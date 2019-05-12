@@ -14,6 +14,8 @@ using TradingPlatform.View.MainWindowControl;
 using TradingPlatform.ViewModel.Quotation;
 using System.Windows.Navigation;
 using TradingPlatform.Business;
+using TradingPlatform.Common;
+using TradingPlatform.View.BusinessLogin;
 
 namespace TradingPlatform
 {
@@ -214,9 +216,15 @@ namespace TradingPlatform
         /// <param name="e"></param>
         private void TitleBar_TransAction(object sender, MouseEventArgs e)
         {
-            MainPage mainPage = new MainPage();
-            mainPage.ShowDialog();
-
+            if (string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
+            {
+                BussinesLogin bussinesLogin = new BussinesLogin();
+                bussinesLogin.ShowDialog();
+            }
+            else {
+                MainPage mainPage = new MainPage();
+                mainPage.ShowDialog();
+            }
         }
         #endregion
 

@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradingPlatform.ViewModel.Login;
+using Trading.Model.Common;
+using System.Management;
 
 namespace TradingPlatform.View.Login
 {
@@ -25,6 +27,7 @@ namespace TradingPlatform.View.Login
     {
         public LoginView()
         {
+            GetSoftInfomation();
             InitializeComponent();
 
             //密码框将文本改为黑点
@@ -51,7 +54,8 @@ namespace TradingPlatform.View.Login
         /// </summary>
         /// <param name="msg"></param>
 
-        private void LoginOK(string msg) {
+        private void LoginOK(string msg)
+        {
             if (msg == "LoginOK")
             {
                 var windowCollection = Application.Current.Windows;
@@ -76,7 +80,7 @@ namespace TradingPlatform.View.Login
             LoginViewModel view = new LoginViewModel();
             view.ReadConfigInfo(); //读写配置参数
             this.DataContext = view;
-            
+
             if (view.Password == "")
             {
                 BrushConverter conv = new BrushConverter();
@@ -166,5 +170,30 @@ namespace TradingPlatform.View.Login
             QuickLoginView v = new QuickLoginView();
             NavigationService.Navigate(v);
         }
+        /// <summary>
+        /// by 胡冰冰 20190512 获取软件和电脑信息
+        /// </summary>
+        public void GetSoftInfomation()
+        {
+            ManagementClass mc = new ManagementClass("Win32_Processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+                SoftwareInformation.deviceId = mo.Properties["ProcessorId"].Value.ToString();
+                break;
+            }
+            SoftwareInformation.apiVersion = "1.0.0 ";
+            SoftwareInformation.appVersion = "1.0.0 ";
+            SoftwareInformation.origin = "PC ";
+            SoftwareInformation.os = "WINDOWS";
+            SoftwareInformation.osVersion = System.Environment.OSVersion.VersionString;
+            SoftwareInformation.channel = "self";
+            SoftwareInformation.appChannel = "self";
+            SoftwareInformation.appType = "TTCJ ";
+            SoftwareInformation.manufacturer = "Lenovo";//设备制造商获取不到
+            SoftwareInformation.model = "Lenovo xxxx ";//设备型号获取不到
+
+        }
+
     }
 }
