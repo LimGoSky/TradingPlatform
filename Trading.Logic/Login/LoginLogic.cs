@@ -20,12 +20,15 @@ namespace Trading.Logic
         /// <param name="checkCodeType"></param>
         public ResultModel SendMessage(string mobile, string checkCodeType)
         {
+            Log4Helper.Info(this.GetType(), $"手机号；{mobile}发送短信一次！");
             string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCodeType", checkCodeType);
             param.Add("mobile", mobile);
             string a = ApiHelper.SendPost(strUrl, param, "post");
             return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            //return new ResultModel();
         }
 
         /// <summary>

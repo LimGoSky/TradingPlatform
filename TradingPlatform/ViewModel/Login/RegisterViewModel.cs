@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Trading.Common;
 using Trading.Common.Common;
 using Trading.Logic;
+using Trading.Model.Common;
 using TradingPlatform.SysModule;
 
 namespace TradingPlatform.ViewModel.Login
@@ -81,7 +82,42 @@ namespace TradingPlatform.ViewModel.Login
         /// <summary>
         /// 确定
         /// </summary>
-        public async void Sure()
+        public void Sure()
+        {
+            try
+            {
+                if (!PhoneHelper.ValidateMobile(UserName))
+                {
+                    SendMsg("register", "userNameError");
+                    return;
+                }
+                if (CheckCode == "")
+                {
+                    SendMsg("register", "checkCodeError");
+                    return;
+                }
+                if (Password == "")
+                {
+                    SendMsg("register", "passWordError");
+                    return;
+                }
+
+                LoginLogic loginLogic = new LoginLogic();
+                ResultModel<Token> result = loginLogic.Register(CheckCode, UserName, NickName, Password, "", "");
+                SendMsg("register", result.code.ToString());
+            }
+            catch (Exception ex)
+            {
+                SendMsg("register", "Error");
+                Log4Helper.Error(this.GetType(), ex);
+            }
+        }
+
+
+        /// <summary>
+        /// 确定
+        /// </summary>
+        public async void Sure1()
         {
             try
             {
