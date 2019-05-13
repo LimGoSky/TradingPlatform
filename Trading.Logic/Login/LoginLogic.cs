@@ -25,6 +25,7 @@ namespace Trading.Logic
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCodeType", checkCodeType);
             param.Add("mobile", mobile);
+            param.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
             string a = ApiHelper.SendPost(strUrl, param, "post");
             return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
 
@@ -37,6 +38,7 @@ namespace Trading.Logic
         /// <param name="checkCode">验证码</param>
         /// <param name="checkCodeType"></param>
         /// <param name="mobile">手机号</param>
+        [Obsolete]
         public ResultModel CheckMessageCode(string checkCode, string checkCodeType, string mobile)
         {
             string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/verify";
@@ -73,6 +75,7 @@ namespace Trading.Logic
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("checkCode", checkCode);
+            param.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
             return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 

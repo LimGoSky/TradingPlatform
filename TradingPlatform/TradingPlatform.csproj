@@ -275,6 +275,7 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="document\PC需求文档2019-04-26.docx" />
+    <Resource Include="Resources\PingFangHK-Regular.ttf" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <Resource Include="Styles\images\search.png" />
     <Resource Include="Styles\images\fangda.png" />

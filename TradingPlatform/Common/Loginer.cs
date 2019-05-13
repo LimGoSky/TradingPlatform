@@ -13,7 +13,7 @@ namespace TradingPlatform.Common
     public class Loginer: ViewModelBase
     {
         private Loginer() { }
-        private static Loginer _Loginer = new Loginer(); //饿汉式单???这是啥注释
+        private static Loginer _Loginer = new Loginer(); //饿汉式单例
 
         /// <summary>
         /// 当前用户

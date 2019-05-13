@@ -152,18 +152,20 @@ namespace TradingPlatform.View.Login
             }
             else
             {
-                secondCount = 59;
-                BtnRepeat.Content = "重发";
-                this.timer.Start();
-                
                 //发短信
                 LoginLogic logic = new LoginLogic();
                 ResultModel model = logic.SendMessage(PhoneNo.Text, CheckCodeTypeEnum.REGISTER.ToString());
-                if (model.code != 200)
+                if (model.code == 200)
+                {
+                    secondCount = 59;
+                    BtnRepeat.Content = "重发";
+                    this.timer.Start();
+                }
+                else
                 {
                     string result = ((MessageStateEnum)model.code).ToString();
                     MessageBox.Show(result);
-                    Log4Helper.Error(this.GetType(), $"手机号：{PhoneNo.Text}发送注册短信失败！原因：{result},时间：{DateTime.Now.ToString()}");
+                    Log4Helper.Error(this.GetType(), $"手机号：{PhoneNo.Text}发送注册短信失败！原因：{result}");
                 }
             }
         }
