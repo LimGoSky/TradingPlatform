@@ -44,6 +44,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Common\EnumModel.cs" />
     <Compile Include="Common\ResultModel.cs" />
+    <Compile Include="Common\SoftwareInformation.cs" />
     <Compile Include="Model_Business\PriceStruct.cs" />
     <Compile Include="Model_Business\StockInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

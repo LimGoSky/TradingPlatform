@@ -7,10 +7,15 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Trading.Common;
 using Trading.Model.Common;
 using TradingPlatform.View.MainWindowControl;
 using TradingPlatform.ViewModel.Quotation;
+using System.Windows.Navigation;
+using TradingPlatform.Business;
+using TradingPlatform.Common;
+using TradingPlatform.View.BusinessLogin;
 
 namespace TradingPlatform
 {
@@ -43,7 +48,7 @@ namespace TradingPlatform
 
             //var dic = new Dictionary<string, string>();
             //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
-
+            BindList();
             InitTimer();
             this.timer.Start();
         }
@@ -60,17 +65,21 @@ namespace TradingPlatform
             //绑定Elapsed事件
             timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
         }
-
-        private void TimerUp(object sender, ElapsedEventArgs e)
+        public List<Quotation> objList = new List<Quotation>();
+        /// <summary>
+        /// 绑定列表
+        /// </summary>
+        public void BindList()
         {
             Random random = new Random();
-            List<Quotation> objList = new List<Quotation>();
             for (int i = 0; i < 20; i++)
             {
                 Quotation quotation = new Quotation();
                 quotation.topic = "topic";
                 quotation.data = new data();
-                quotation.data.contractCode = "合约编号" + i;
+
+                quotation.data.SerialNumber = i + 1;
+                quotation.data.contractCode = "SK" + i;
                 quotation.data.contractName = "合约名" + i;
                 quotation.data.ask = random.Next(-10, 100).ToString();
                 quotation.data.bid = random.Next(-10, 100).ToString();
@@ -81,13 +90,35 @@ namespace TradingPlatform
                 quotation.data.highestPrice = random.Next(-10, 100).ToString();
                 quotation.data.bidVol = random.Next(-10, 100).ToString();
                 quotation.data.askVol = random.Next(-10, 100).ToString();
-                
+
                 objList.Add(quotation);
             }
             this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
         }
+        private void TimerUp(object sender, ElapsedEventArgs e)
+        {
+            Random random = new Random();
+            int tmp = random.Next(0, 20);
+            objList.FindAll(x => x.data.SerialNumber == tmp).ForEach(x =>
+              {
+                  x.data.ask = random.Next(-10, 100).ToString();
+                  x.data.bid = random.Next(-10, 100).ToString();
+                  x.data.openPrice = random.Next(-10, 100).ToString();
+                  x.data.volume = random.Next(-10, 100).ToString();
+                  x.data.lowestPrice = random.Next(-10, 100).ToString();
+                  x.data.latestPrice = random.Next(-10, 100).ToString();
+                  x.data.highestPrice = random.Next(-10, 100).ToString();
+                  x.data.bidVol = random.Next(-10, 100).ToString();
+                  x.data.askVol = random.Next(-10, 100).ToString();
+              });
+            this.grid_saffer.Dispatcher.Invoke(new Action(() =>
+            {
+                this.grid_saffer.ItemsSource = objList;
+                this.grid_saffer.Items.Refresh();
+            }));
+        }
 
-        #region 标题栏事件
+        #region 标题栏窗口事件
 
         Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
         /// <summary>
@@ -143,7 +174,7 @@ namespace TradingPlatform
             Rect rc = SystemParameters.WorkArea;//获取工作区大小
             this.Width = rc.Width;
             this.Height = rc.Height;
-            this.btn_fangda.Visibility =Visibility.Collapsed;
+            this.btn_fangda.Visibility = Visibility.Collapsed;
             this.btn_huanyuan.Visibility = Visibility.Visible;
 
         }
@@ -152,7 +183,7 @@ namespace TradingPlatform
         /// </summary>
         private void btn_normal_Click(object sender, RoutedEventArgs e)
         {
-            this.btn_fangda.Visibility =Visibility.Visible;
+            this.btn_fangda.Visibility = Visibility.Visible;
             this.btn_huanyuan.Visibility = Visibility.Collapsed;
             this.Left = rcnormal.Left;
             this.Top = rcnormal.Top;
@@ -177,63 +208,81 @@ namespace TradingPlatform
         }
         #endregion 标题栏事件
 
+        #region 标题栏事件
+        /// <summary>
+        /// 交易
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TitleBar_TransAction(object sender, MouseEventArgs e)
+        {
+            if (string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
+            {
+                BussinesLogin bussinesLogin = new BussinesLogin();
+                bussinesLogin.ShowDialog();
+            }
+            else {
+                MainPage mainPage = new MainPage();
+                mainPage.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region 行双击事件
         /// <summary>
         /// 行双击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Grid_MainTitle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-
-
+            if (e.ClickCount == 2 && e.ChangedButton == MouseButton.Left)
+            {
+                datagrid_DoubleClick(sender);
+            }
+        }
+        /// <summary>
+        /// 行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        private void datagrid_DoubleClick(object sender)
+        {
             DataGrid dg = (DataGrid)sender;
             Quotation rowSelected = dg.SelectedItem as Quotation;
             if (rowSelected != null)
             {
                 string contractCode = rowSelected.data.contractCode;
+                string contractName = rowSelected.data.contractName;
 
 
                 bool isExists = false;
                 for (int i = 0; i < this.Tab_Page.Items.Count; i++)
                 {
-                    if ((this.Tab_Page.Items[i] as TabItem).Name == "New" + (new Random().Next(0, 5).ToString()))
+                    TabItem tab = this.Tab_Page.Items[i] as TabItem;
+                    if (tab.Name == contractCode)
                     {
-                        this.Tab_Page.SelectedIndex = i;
+                        Dispatcher.InvokeAsync(() => Tab_Page.SelectedItem = tab);
                         isExists = true;
                         break;
                     }
                 }
                 if (!isExists)
                 {
-                    //TabItem tab_new = new TabItem() { Header = "New", Margin = new Thickness(2, 0, 0, 0) };
-                    //Style tabstyle = (Style)this.FindResource("Tab_Page");
-                    //tab_new.Style = tabstyle; ;
-                    //tab_new.Name = "New" + (new Random().Next(0, 5).ToString());
-                    //this.Tab_Page.Items.Add(tab_new);
-                    //this.Tab_Page.SelectedItem = tab_new;
-
                     TabItemWithClose item = new TabItemWithClose();
-                    item.Header = string.Format("Header{0}", Tab_Page.Items.Count);
-                    item.ToolTip = string.Format("Header{0}", Tab_Page.Items.Count);
+                    item.Header = contractName;
                     item.Margin = new Thickness(1, 0, 1, 0);
-                    item.Height = 35;
-                    item.Name = "New" + (new Random().Next(0, 5).ToString());
-                    Label lbl = new Label() { Content = string.Format("Label{0}", Tab_Page.Items.Count) };
-
-
-                    //StackPanel sPanel = new StackPanel();
-                    //sPanel.Children.Add(lbl);
-                    //item.Content = sPanel;
-                    //Tab_Page.Items.Add(item);
-                    //this.Tab_Page.SelectedItem = item;
-
-                    Chart.CandlestickGrid candlestick = new Chart.CandlestickGrid();
-                    item.Content = candlestick;
+                    item.Height = 50;
+                    item.Name = contractCode;
+                    Label lbl = new Label() { Content = string.Format("{0}", Tab_Page.Items.Count) };
+                    StackPanel sPanel = new StackPanel();
+                    sPanel.Children.Add(lbl);
+                    item.Content = sPanel;
                     Tab_Page.Items.Add(item);
-                    this.Tab_Page.SelectedItem = item;
+                    Dispatcher.InvokeAsync(() => Tab_Page.SelectedItem = item);
+
                 }
             }
         }
+        #endregion
     }
 }

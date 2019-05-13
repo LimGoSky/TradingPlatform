@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AmCharts.Windows.Stock">
-      <HintPath>..\文档\StockAnalyse\StockAnalyse\bin\Debug\AmCharts.Windows.Stock.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -72,6 +69,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -94,9 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Chart\CandlestickGrid.xaml.cs">
-      <DependentUpon>CandlestickGrid.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Common\BussinesLoginer.cs" />
     <Compile Include="Common\CoreLib\BaseOperation.cs" />
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
@@ -113,6 +109,12 @@
     <Compile Include="ViewModel\Quotation\GuidConvert .cs" />
     <Compile Include="ViewModel\Quotation\Quotation .cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\BusinessLogin\BussinesLogin.xaml.cs">
+      <DependentUpon>BussinesLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chart\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Login\FindPwdView.xaml.cs">
       <DependentUpon>FindPwdView.xaml</DependentUpon>
     </Compile>
@@ -140,10 +142,6 @@
     <Compile Include="View\MainWindowControl\TabItemWithClose.xaml.cs">
       <DependentUpon>TabItemWithClose.xaml</DependentUpon>
     </Compile>
-    <Page Include="Chart\CandlestickGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\BusinessLogin\BussinesLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Business\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,6 +169,10 @@
     <Page Include="Resources\Business.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Chart\ChartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Login\FindPwdView.xaml">
       <SubType>Designer</SubType>
@@ -197,8 +203,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login\TradeLoginView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindowControl\TabItemWithClose.xaml">
       <SubType>Designer</SubType>
@@ -222,10 +228,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Styles\imgaes\home_nav_trade.png" />
     <Resource Include="Styles\images\log_bg.png" />
-    <Resource Include="Styles\imgaes\zixun.png" />
-    <Resource Include="Styles\imgaes\huanyuan.png" />
+    <Resource Include="Styles\images\home_nav_forum.png" />
+    <Resource Include="Styles\images\home_filtrate_next.png" />
+    <Resource Include="Styles\images\home_filtrate_refresh.png" />
+    <Resource Include="Styles\images\home_filtrate_scale.png" />
+    <Resource Include="Styles\images\home_nav_calendar.png" />
+    <Resource Include="Styles\images\home_nav_groove.png" />
+    <Resource Include="Styles\images\home_nav_info.png" />
+    <Resource Include="Styles\images\home_nav_profile_default.png" />
+    <Resource Include="Styles\images\home_nav_pronunce.png" />
+    <Resource Include="Styles\images\home_side_like.png" />
+    <Resource Include="Styles\images\home_side_warning.png" />
+    <Resource Include="Styles\images\nav_close.png" />
+    <Resource Include="Styles\images\price_like.png" />
+    <Resource Include="Styles\images\pull_down_big.png" />
+    <Resource Include="Styles\images\pull_down_small.png" />
+    <Resource Include="Styles\images\quick_login_vfcode.png" />
+    <Resource Include="Styles\images\system_close.png" />
+    <Resource Include="Styles\images\system_max.png" />
+    <Resource Include="Styles\images\system_min.png" />
+    <Resource Include="Styles\images\system_Settings.png" />
+    <Resource Include="Styles\images\home_nav_trade.png" />
+    <Resource Include="Styles\images\zixun.png" />
+    <Resource Include="Styles\images\huanyuan.png" />
     <Resource Include="document\pc定稿\Web 1920 – 2.png" />
     <Resource Include="document\pc定稿\交易窗口.png" />
     <Resource Include="document\pc定稿\交易账号登录.jpg" />
@@ -249,12 +275,11 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="document\PC需求文档2019-04-26.docx" />
-    <Resource Include="Resources\PingFangHK-Regular.ttf" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
-    <Resource Include="Styles\imgaes\search.png" />
-    <Resource Include="Styles\imgaes\fangda.png" />
-    <Resource Include="Styles\imgaes\guanbi.png" />
-    <Resource Include="Styles\imgaes\suoxiao.png" />
+    <Resource Include="Styles\images\search.png" />
+    <Resource Include="Styles\images\fangda.png" />
+    <Resource Include="Styles\images\guanbi.png" />
+    <Resource Include="Styles\images\suoxiao.png" />
     <None Include="Resources\DSC05128.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
