@@ -1,56 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Trading.Model.Common
 {
-    public static class SoftwareInformation
+    public class SoftwareInformation
     {
+        public static SoftwareInformation _instance { get; set; }
+        public static SoftwareInformation Instance()
+        {
+            if (_instance == null)
+                _instance = new SoftwareInformation();
+            return _instance;
+        }
+        public SoftwareInformation()
+        {
+            deviceId = Guid.NewGuid().ToString();
+            apiVersion = "1.0.0 ";
+            appVersion = "1.0.0 ";
+            origin = "PC ";
+            os = "WINDOWS";
+            osVersion = System.Environment.OSVersion.VersionString;
+            channel = "self";
+            appChannel = "self";
+            appType = "TTCJ ";
+            manufacturer = "Lenovo";//设备制造商获取不到
+            model = "Lenovo xxxx ";//设备型号获取不到
+        }
+
         /// <summary>
         /// api版本:1.0.0 
         /// </summary>
-        public static string apiVersion { get; set; }
+        public string apiVersion { get; set; }
         /// <summary>
         /// app版本:1.0.0
         /// </summary>
-        public static string appVersion { get; set; }
+        public string appVersion { get; set; }
         /// <summary>
         /// 来源:PC
         /// </summary>
-        public static string origin { get; set; }
+        public string origin { get; set; }
         /// <summary>
         /// 系统:WINDOWS
         /// </summary>
-        public static string os { get; set; }
+        public string os { get; set; }
         /// <summary>
         /// 系统版本:从系统获取
         /// </summary>
-        public static string osVersion { get; set; }
+        public string osVersion { get; set; }
         /// <summary>
         /// 设备号:全局唯一,用于唯一区分一台设备
         /// </summary>
-        public static string deviceId { get; set; }
+        public string deviceId { get; set; }
         /// <summary>
         /// 推广渠道: 默认填写self
         /// </summary>
-        public static string channel { get; set; }
+        public string channel { get; set; }
         /// <summary>
         /// app市场渠道:默认填写self
         /// </summary>
-        public static string appChannel { get; set; }
+        public string appChannel { get; set; }
         /// <summary>
         /// 软件包名:默认填写TTCJ
         /// </summary>
-        public static string appType { get; set; }
+        public string appType { get; set; }
         /// <summary>
         /// 设备制造商:从系统获取
         /// </summary>
-        public static string manufacturer { get; set; }
+        public string manufacturer { get; set; }
         /// <summary>
         /// 设备型号:从系统获取
         /// </summary>
-        public static string model { get; set; }
+        public string model { get; set; }
+
+        /// <summary> 
+        /// PC类型 
+        /// </summary> 
+        /// <returns></returns> 
+        private string GetSystemType()
+        {
+            try
+            {
+                string st = "";
+                ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+
+                    st = mo["SystemType"].ToString();
+
+                }
+                moc = null;
+                mc = null;
+                return st;
+            }
+            catch
+            {
+                return "unknow";
+            }
+            finally
+            {
+            }
+
+        }
+        private string GetDeviceID() {
+            try
+            {
+                ManagementClass mc = new ManagementClass("Win32_Processor");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    deviceId = mo.Properties["ProcessorId"].Value.ToString();
+                    break;
+                }
+                return deviceId;
+            }
+            catch 
+            {
+
+                return Guid.NewGuid().ToString();
+            }
+        }
     }
 }

@@ -14,6 +14,9 @@ using System.Windows.Shapes;
 using Trading.Common;
 using TradingPlatform.Business;
 using TradingPlatform.Common;
+using Trading.Model.Common;
+using System.Net;
+using System.IO;
 
 namespace TradingPlatform.View.BusinessLogin
 {
@@ -27,24 +30,28 @@ namespace TradingPlatform.View.BusinessLogin
             InitializeComponent();
         }
 
+        #region 标题栏窗口事件
+        /// <summary>
+        /// 窗口关闭
+        /// </summary>
+        private void btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        #endregion 标题栏事件
         private void BussinesLogin_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("user", "1297005");
+            dic.Add("password", "1297005");
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
 
-            dic.Add("apiVersion", "1.0");
-            dic.Add("appVersion", "1.0");
-            dic.Add("origin", "PC");
-            dic.Add("os", "WINDOWS");
-            dic.Add("osVersion", "8.0.0");
-            dic.Add("deviceId", "1dbbf52f_8d73_4653_a61a_3cd7dea9f4ba");
-            dic.Add("channel", "self");
-            dic.Add("appChannel", "self");
-            dic.Add("appType", "TTCJ");
-            dic.Add("manufacturer", "Lenovo");
-            dic.Add("model", "Lenovo xxxx");
+            string result = ApiHelper.SendPostByHeader("http://trade.xgj.alibaba.com/user/login", dic, header, "post");
 
-            string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
-            BussinesLoginer.bussinesLoginer.sessionId = Guid.NewGuid().ToString();
+            ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
+            BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;
             MainPage mainPage = new MainPage();
             mainPage.Show();
             this.Close();

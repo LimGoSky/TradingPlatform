@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Trading.Model.Model_Business;
 using TradingPlatform.Common;
+using Trading.Common;
+using Trading.Model.Common;
 
 namespace TradingPlatform.Business
 {
@@ -23,7 +25,26 @@ namespace TradingPlatform.Business
     {
         public MainPage()
         {
-            MessageBox.Show(BussinesLoginer.bussinesLoginer.sessionId);
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+            
+            string result = ApiHelper.SendPostByHeader("http://trade.xgj.alibaba.com/common/mqttInfo", dic, header, "post");
+
+            ResultModel loginsession = JsonHelper.JsonToObj<ResultModel>(result);
+            //{{
+//            "groupId": "GID_TEST_XGJ",
+//  "host": "post-cn-v0h0yk7lr05.mqtt.aliyuncs.com",
+//  "password": "Y8Z8O2OocANR041Ta0GtqGLOVV4=",
+//  "topic": "TEST_XGJ_MQTT",
+//  "userName": "Signature|LTAIbquQWc5Z6ni4|post-cn-v0h0yk7lr05"
+//}
+//    }
+
+
+    MessageBox.Show(BussinesLoginer.bussinesLoginer.sessionId);
             InitializeComponent();
         }
         #region 标题栏事件
@@ -58,5 +79,10 @@ namespace TradingPlatform.Business
         }
 
         #endregion 标题栏事件
+
+        public void fuun(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

@@ -46,5 +46,8 @@
                 <TextBlock FontSize="20" Foreground="#fff" HorizontalAlignment="Right" VerticalAlignment="Bottom">我要开户</TextBlock>
             </DockPanel>
         </Grid>
+        <StackPanel Margin="30,0,0,0" WindowChrome.IsHitTestVisibleInChrome="True" Canvas.Right="0">
+            <Image Source="/Styles/images/guanbi.png" Height="15" Width="15" Margin="0,0,5,0" MouseLeftButtonDown="btn_close_Click"  />
+        </StackPanel>
     </Canvas>
 </Window>
