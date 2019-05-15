@@ -75,5 +75,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trading.Model\Trading.Model.csproj">
+      <Project>{f686f42b-dabd-4c29-a40d-c39a59679681}</Project>
+      <Name>Trading.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

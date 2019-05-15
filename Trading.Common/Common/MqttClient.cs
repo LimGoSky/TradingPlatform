@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using Trading.Model.Common;
 
 namespace Trading.Common
 {
@@ -15,17 +16,27 @@ namespace Trading.Common
         ///  实例化订阅客户端        
         ///   </summary>        
         public Action<Object, MqttMsgPublishEventArgs> ClientPublishReceivedAction { get; set; }
-        public SubscribeClient(string clientId)
+        public SubscribeClient(MqttEntity model)
         {
-            MqttClient client = new MqttClient("trade.xgj.alibaba.com");
+            string topic = model.topic;
+            string host =model.host;
+            // 实例化Mqtt客户端 
+            MqttClient client = new MqttClient(host);
+
+            // 注册接收消息事件 
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+
+            string clientId = Guid.NewGuid().ToString();
             client.Connect(clientId);
-            client.Subscribe(new string[] { "/common/mqttInfo" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
+            // 订阅主题 "/home/temperature"， 订阅质量 QoS 2 
+            client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+       
         }
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             // handle message received         
-            ClientPublishReceivedAction.Invoke(sender, e);
+            string str = string.Format("subscriber,topic:{0},content:{1}", e.Topic, Encoding.UTF8.GetString(e.Message));
         }
     }
 
