@@ -19,14 +19,14 @@ namespace Trading.Model.Common
         public SoftwareInformation()
         {
             deviceId = Guid.NewGuid().ToString();
-            apiVersion = "1.0.0 ";
-            appVersion = "1.0.0 ";
-            origin = "PC ";
+            apiVersion = "1.0.0";
+            appVersion = "1.0.0";
+            origin = "PC";
             os = "WINDOWS";
             osVersion = System.Environment.OSVersion.VersionString;
             channel = "self";
             appChannel = "self";
-            appType = "TTCJ ";
+            appType = "TTCJ";
             manufacturer = "";//设备制造商获取不到
             model = "";//设备型号获取不到
         }

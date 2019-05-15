@@ -36,7 +36,7 @@ namespace TradingPlatform
             //Task task = Task.Factory.StartNew(() => {
             //    var dic = new Dictionary<string, string>();
             //    dic.Add("contractCode", "FDAX1906");
-            //    WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+                //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
             //    ws.Connect(delegate (string data)
             //    {
             //        Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
@@ -51,6 +51,10 @@ namespace TradingPlatform
             BindList();
             InitTimer();
             this.timer.Start();
+
+           
+
+
         }
 
         private void InitTimer()
