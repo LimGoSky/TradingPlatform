@@ -54,6 +54,7 @@
     <Compile Include="Model_Business\HoldModel.cs" />
     <Compile Include="Model_Business\PriceStruct.cs" />
     <Compile Include="Model_Business\StockInfo.cs" />
+    <Compile Include="Model_Main\ExchangeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

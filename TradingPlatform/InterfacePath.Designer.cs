@@ -34,5 +34,77 @@ namespace TradingPlatform {
                 this["maimai"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/trading/position/list")]
+        public string chicang {
+            get {
+                return ((string)(this["chicang"]));
+            }
+            set {
+                this["chicang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/trading/order/list")]
+        public string weituo {
+            get {
+                return ((string)(this["weituo"]));
+            }
+            set {
+                this["weituo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/trading/trade/list")]
+        public string chengjiaojilu {
+            get {
+                return ((string)(this["chengjiaojilu"]));
+            }
+            set {
+                this["chengjiaojilu"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/common/mqttInfo")]
+        public string mqttinfo {
+            get {
+                return ((string)(this["mqttinfo"]));
+            }
+            set {
+                this["mqttinfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/user/login")]
+        public string bussinelogin {
+            get {
+                return ((string)(this["bussinelogin"]));
+            }
+            set {
+                this["bussinelogin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com/exchange/list")]
+        public string jiaoyisuo {
+            get {
+                return ((string)(this["jiaoyisuo"]));
+            }
+            set {
+                this["jiaoyisuo"] = value;
+            }
+        }
     }
 }

@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800"
+        Title="" Height="700" Width="900"
         Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="WindowStyle" Value="ToolWindow" />
-            <Setter Property="ResizeMode" Value="CanResize" />
+            <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="WindowChrome.WindowChrome" >
                 <Setter.Value>
@@ -20,51 +20,109 @@
             </Setter>
         </Style>
     </Window.Style>
-    <Grid>
+    <Grid Width="900">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="600"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="650"/>
+            <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <Border Margin="0,0,0,0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
-            <WrapPanel Height="50" Grid.Row="0" Grid.Column="0" Background="#2a2a2a">
-                <Label Content="KM028372" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
-            </WrapPanel>
+        <Border Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
+            <Canvas Height="50" Background="#2a2a2a" VerticalAlignment="Center">
+                <Label Content="KM028372" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
+
+                <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Canvas.Right="0" MouseLeftButtonDown="btn_close_Click">
+                    <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,10,10,0" />
+                </StackPanel>
+            </Canvas>
         </Border>
-        <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" MouseLeftButtonDown="btn_close_Click">
-            <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,0,10,0" />
-        </StackPanel>
-        <WrapPanel Grid.Row="1" Grid.Column="0">
-            <Grid Margin="10,0,0,0">
+        <Canvas Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Height="600">
+            <Grid Margin="0" Width="250">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="110"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="250"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">合约代码</Label>
-                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">手数</Label>
-                <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">价格</Label>
-                <TextBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="25" Width="120"></TextBox>
-                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelFontStyle}">当前合约</Label>
-                <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="25" Width="40"></TextBox>
-                <ComboBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="100" ItemTemplate="{StaticResource key1}"  SelectedIndex="0" >
-
-                    <ComboBoxItem Content="对手价"></ComboBoxItem>
-                    <ComboBoxItem Content="当前价"></ComboBoxItem>
-                </ComboBox>
-
-                <WrapPanel Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" VerticalAlignment="Center">
-
-                    <Button Height="35" Width="80" Foreground="White" Margin="50,0,0,0" Click="Purchase_Click">
+                <Canvas Grid.Row="0" Margin="25,0,0,25">
+                    <Border CornerRadius="5" Background="#1e1e1e" Width="200">
+                        <TextBox Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="Gray"></Setter>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                </Canvas>
+                <Canvas Grid.Row="1">
+                    <StackPanel Canvas.Left="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">交易手数</Label>
+                    </StackPanel>
+                    <StackPanel Canvas.Right="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">单位(手)</Label>
+                    </StackPanel>
+                    <StackPanel Margin="0,15,0,15">
+                        <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
+                            <StackPanel VerticalAlignment="Center">
+                                <Label HorizontalAlignment="Center" Height="40">2</Label>
+                                <StackPanel Orientation="Horizontal" Height="30">
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Text="-" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Text="+" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Canvas>
+                <Canvas Grid.Row="2" Margin="0,25,0,25">
+                    <StackPanel Canvas.Left="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">交易单价</Label>
+                    </StackPanel>
+                    <StackPanel Canvas.Right="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">单位(W)</Label>
+                    </StackPanel>
+                    <StackPanel Margin="0,15,0,15">
+                        <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
+                            <StackPanel VerticalAlignment="Center">
+                                <Label HorizontalAlignment="Center" Height="40">20</Label>
+                                <StackPanel Orientation="Horizontal" Height="30">
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Text="-" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Text="+" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Canvas>
+                <Canvas Grid.Row="3" Margin="0,25,0,25">
+                    <Border Width="200" Margin="25">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30">
+                            <Border BorderThickness="0,0,1,0" BorderBrush="#2a2a2a" Width="100">
+                                <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" GroupName="type_cang">开仓</RadioButton>
+                            </Border>
+                            <Border BorderThickness="0" BorderBrush="#2a2a2a" Width="100">
+                                <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="type_cang">平仓</RadioButton>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Canvas>
+                <Canvas Grid.Row="4">
+                    <Button Height="55" Width="200" Foreground="White" Margin="25" Click="Purchase_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
@@ -78,7 +136,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button  Height="35" Width="80" Foreground="White" Margin="50,0,0,0" Click="SellOut_Click">
+                </Canvas>
+                <Canvas Grid.Row="5">
+                    <Button  Height="55" Width="200" Foreground="White" Margin="25" Click="SellOut_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
@@ -92,14 +152,47 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                </WrapPanel>
+
+                </Canvas>
             </Grid>
-        </WrapPanel>
-        <TabControl x:Name="tab_bussines" Grid.Row="2" Background="{StaticResource BackGround}" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="持仓">
-                <DataGrid Name="grid_hold" AutoGenerateColumns="False">
+        </Canvas>
+        <TabControl x:Name="tab_bussines" Grid.Row="1" Grid.Column="0" Background="#333333" Margin="0" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl.Template>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Name="ColumnDefinition0" Width="*"/>
+                            <ColumnDefinition Name="ColumnDefinition2" Width="0"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Name="RowDefinition0" Height="Auto"/>
+                            <RowDefinition Name="RowDefinition1" Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Name="HeaderPanel" Grid.Column="0" Grid.Row="0" Margin="2,2,2,0" Panel.ZIndex="1" IsItemsHost="True" KeyboardNavigation.TabIndex="1"/>
+                        <Border Name="ContentPanel" Grid.Column="0" Grid.Row="1" Background="{TemplateBinding Panel.Background}" BorderBrush="{TemplateBinding Border.BorderBrush}" BorderThickness="{TemplateBinding Border.BorderThickness}" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                            <ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Control.Padding}" Content="{TemplateBinding TabControl.SelectedContent}" ContentSource="SelectedContent" ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}" ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </TabControl.Template>
+            <TabItem Header="持仓" Style="{StaticResource Tab_Page_Bussines}">
+                <DataGrid Name="grid_hold" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFE4DDB3" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#FFF2F2F2" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -108,7 +201,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="开仓均价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="开仓均价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -117,7 +210,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="持仓手数" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="持仓手数" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -129,10 +222,11 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="委托">
+            <TabItem Header="平仓" Style="{StaticResource Tab_Page_Bussines}"></TabItem>
+            <TabItem Header="待成交" Style="{StaticResource Tab_Page_Bussines}">
                 <DataGrid Name="grid_entrust" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -141,7 +235,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="价格" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="价格" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -150,7 +244,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="委托时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="委托时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -159,15 +253,15 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
 
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="记录">
+            <TabItem Header="交易记录" Style="{StaticResource Tab_Page_Bussines}">
                 <DataGrid Name="grid_record" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -176,7 +270,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="direction" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="direction" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -185,7 +279,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="价格" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="价格" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -194,7 +288,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="成交时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="成交时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -203,7 +297,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="数量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
+                        <DataGridTemplateColumn Header="数量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -215,7 +309,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
+            <TabItem Header="账户资金" Style="{StaticResource Tab_Page_Bussines}" DockPanel.Dock="Right" HorizontalAlignment="Right"></TabItem>
         </TabControl>
-        
+
     </Grid>
 </Window>

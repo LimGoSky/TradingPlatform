@@ -47,7 +47,7 @@ namespace TradingPlatform.View.BusinessLogin
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);
-            string result = ApiHelper.SendPostByHeader("http://trade.xgj.alibaba.com/user/login", dic, header, "post");
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussinelogin, dic, header, "post");
 
             ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
             BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;

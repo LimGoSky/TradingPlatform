@@ -116,11 +116,11 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Background="#2a2a2a" Orientation="Horizontal" Margin="0,0,0,0">
-                            <ListBox FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                        <StackPanel x:Name="box_exchangeparent" Grid.Row="0" Background="#2a2a2a" Orientation="Horizontal" Margin="0,0,0,0">
+                            <ListBox x:Name="box_exchange" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
+                                        <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                                 <ListBoxItem>自选</ListBoxItem>
