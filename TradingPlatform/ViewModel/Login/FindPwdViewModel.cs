@@ -7,6 +7,7 @@ using TradingPlatform.SysModule;
 using GalaSoft.MvvmLight.Command;
 using Trading.Logic;
 using Trading.Common;
+using Trading.Common.Common;
 
 namespace TradingPlatform.ViewModel.Login
 {
@@ -64,31 +65,29 @@ namespace TradingPlatform.ViewModel.Login
 
         #endregion
 
-        public async void Sure()
+        public void Sure()
         {
             try
             {
-                if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(CheckCode))
+                if (!PhoneHelper.ValidateMobile(UserName))
                 {
-                    var registerTask = new LoginLogic().ResetPassWord1(CheckCode, UserName, Password);
-                    var timeouttask = Task.Delay(3000);
-                    var completedTask = await Task.WhenAny(registerTask, timeouttask);
-                    if (completedTask == timeouttask)
-                    {
-                        SendMsg("resetPassWord", "timeout");
-                        Log4Helper.Info(this.GetType(), $"账号：{UserName}找回密码超时！时间：{DateTime.Now.ToString()}");
-                    }
-                    else
-                    {
-                        var task = await registerTask;
-                        if (task.code == 200)
-                        {
-                            //登陆成功发送消息
-                            SendMsg("resetPassWord", "OK");
-                        }
-                    }
+                    SendMsg("resetPassWord", "userNameError");
+                    return;
+                }
+                if (CheckCode == "")
+                {
+                    SendMsg("resetPassWord", "checkCodeError");
+                    return;
+                }
+                if (Password == "")
+                {
+                    SendMsg("resetPassWord", "passWordError");
+                    return;
                 }
 
+                var result = new LoginLogic().ResetPassWord(CheckCode, UserName, Password);
+                SendMsg("resetPassWord", result.code.ToString());
+                Log4Helper.Info(this.GetType(), $"手机号:{UserName},找回密码：{result.msg}");
             }
             catch (Exception ex)
             {

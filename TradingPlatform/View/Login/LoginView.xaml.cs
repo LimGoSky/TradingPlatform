@@ -43,7 +43,7 @@ namespace TradingPlatform.View.Login
             });
 
             //监听ViewModel发来的异步消息
-            Messenger.Default.Register<string>(this, "LoginOK", new Action<string>(LoginOK));
+            Messenger.Default.Register<string>(this, "Login", new Action<string>(LoginOK));
 
             InitRemeber();
         }
@@ -55,7 +55,7 @@ namespace TradingPlatform.View.Login
 
         private void LoginOK(string msg)
         {
-            if (msg == "LoginOK")
+            if (msg == "200")
             {
                 var windowCollection = Application.Current.Windows;
                 foreach (var item in windowCollection)
@@ -68,6 +68,15 @@ namespace TradingPlatform.View.Login
                         w.Close();
                     }
                 }
+            }
+            else if(msg == "Error")
+            {
+                MessageBox.Show("登录失败！");
+                return;
+            }
+            else
+            {
+                MessageBox.Show(((MessageStateEnum)(Convert.ToInt32(msg))).ToString());
             }
         }
 

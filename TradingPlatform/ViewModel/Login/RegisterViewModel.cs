@@ -105,65 +105,7 @@ namespace TradingPlatform.ViewModel.Login
                 LoginLogic loginLogic = new LoginLogic();
                 ResultModel<Token> result = loginLogic.Register(CheckCode, UserName, NickName, Password, "", "");
                 SendMsg("register", result.code.ToString());
-            }
-            catch (Exception ex)
-            {
-                SendMsg("register", "Error");
-                Log4Helper.Error(this.GetType(), ex);
-            }
-        }
-
-
-        /// <summary>
-        /// 确定
-        /// </summary>
-        public async void Sure1()
-        {
-            try
-            {
-                if (!PhoneHelper.ValidateMobile(UserName))
-                {
-                    SendMsg("register", "userNameError");
-                    return;
-                }
-                if(CheckCode == "")
-                {
-                    SendMsg("register", "checkCodeError");
-                    return;
-                }
-                if(Password == "")
-                {
-                    SendMsg("register", "passWordError");
-                    return;
-                }
-
-                var registerTask = new LoginLogic().RegisterAccount(CheckCode, UserName, NickName, Password, "", "");
-                var timeouttask = Task.Delay(5000);
-                var completedTask = await Task.WhenAny(registerTask, timeouttask);
-                if (completedTask == timeouttask)
-                {
-                    SendMsg("register", "timeout");
-                    Log4Helper.Info(this.GetType(), $"手机号：{UserName},注册超时！时间：{DateTime.Now.ToString()}");
-                }
-                else
-                {
-                    var task = await registerTask;
-                    if (task.code == 200)
-                    {
-                        //登陆成功发送消息
-                        SendMsg("register", "OK");
-                    }
-                    else if(task.code == 301)
-                    {
-                        //登陆成功发送消息
-                        SendMsg("register", "codeError");
-                    }
-                    else
-                    {
-                        SendMsg("register", "error");
-                    }
-                }
-
+                Log4Helper.Info(this.GetType(), $"手机号:{UserName},注册：{result.msg}");
             }
             catch (Exception ex)
             {

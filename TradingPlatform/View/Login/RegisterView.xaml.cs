@@ -164,8 +164,8 @@ namespace TradingPlatform.View.Login
                 else
                 {
                     string result = ((MessageStateEnum)model.code).ToString();
-                    MessageBox.Show(result);
                     Log4Helper.Error(this.GetType(), $"手机号：{PhoneNo.Text}发送注册短信失败！原因：{result}");
+                    MessageBox.Show(result);
                 }
             }
         }

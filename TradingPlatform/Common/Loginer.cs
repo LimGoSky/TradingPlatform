@@ -27,6 +27,7 @@ namespace TradingPlatform.Common
         private string _NickName = string.Empty;
         private string _ProFilePhoto = string.Empty;
         private string _CreateTime = string.Empty;
+        private string _Token = string.Empty;
 
         /// <summary>
         /// 登录名
@@ -65,6 +66,15 @@ namespace TradingPlatform.Common
         {
             get { return _CreateTime; }
             set { _CreateTime = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// Token
+        /// </summary>
+        public string Token
+        {
+            get { return _Token; }
+            set { _Token = value; RaisePropertyChanged(); }
         }
     }
 }
