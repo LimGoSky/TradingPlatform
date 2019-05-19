@@ -16,6 +16,7 @@ using TradingPlatform.Common;
 using Trading.Common;
 using Trading.Model.Common;
 using TradingPlatform.View.BusinessLogin;
+using TradingPlatform.View.Login;
 
 namespace TradingPlatform.Business
 {
@@ -96,7 +97,10 @@ namespace TradingPlatform.Business
                 {
                     ReloadLogin();
                 }
-                this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
+                if (resultmodel.data != null)
+                {
+                    this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
+                }
             }
             if (selectindex == 1)//委托
             {
@@ -110,7 +114,7 @@ namespace TradingPlatform.Business
             }
             if (selectindex == 2)//成交记录
             {
-                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.weituo, dic, header, "post");
+                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chengjiaojilu, dic, header, "post");
                 ResultModel<RecordModel> resultmodel = JsonHelper.JsonToObj<ResultModel<RecordModel>>(result);
                 if (resultmodel.code == 402)
                 {
@@ -136,7 +140,8 @@ namespace TradingPlatform.Business
             {
                 dic.Add("offsetFlag", "OPEN");//开仓
             }
-            else {
+            else
+            {
                 dic.Add("offsetFlag", "CLOSE");//平仓
             }
             dic.Add("priceType", "LIMIT_PRICE");
@@ -148,7 +153,7 @@ namespace TradingPlatform.Business
             header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
             string result = ApiHelper.SendPostByHeader(InterfacePath.Default.maimai, dic, header, "post");
             ResultModel resultmodel = JsonHelper.JsonToObj<ResultModel>(result);
-            if (resultmodel.code== 200)
+            if (resultmodel.code == 200)
             {
                 MessageBox.Show("提交成功！");
             }
@@ -195,7 +200,11 @@ namespace TradingPlatform.Business
                 ReloadLogin();
             }
         }
-
+        /// <summary>
+        /// 撤单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheDan_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -212,15 +221,19 @@ namespace TradingPlatform.Business
             {
                 MessageBox.Show("提交成功！");
             }
-            else if (resultmodel.code==402)
+            else if (resultmodel.code == 402)
             {
                 ReloadLogin();
             }
         }
-        public void ReloadLogin() {
+        /// <summary>
+        /// 重新登录
+        /// </summary>
+        public void ReloadLogin()
+        {
             MessageBox.Show("请重新登录！");
             this.Close();
-            BussinesLogin bussinesLogin = new BussinesLogin();
+            TradeLoginView bussinesLogin = new TradeLoginView();
             bussinesLogin.ShowDialog();
 
 
@@ -247,6 +260,34 @@ namespace TradingPlatform.Business
             {
                 this.limitPrice.Text = (Convert.ToInt32(this.limitPrice.Text) - 0.01).ToString();
             }
+        }
+
+        public void TiaoJianDanList()
+        {
+            int selectindex = this.tab_bussines.SelectedIndex;
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("condition", "true");
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.weituo, dic, header, "post");
+            ResultModel<EntrustModel> resultmodel = JsonHelper.JsonToObj<ResultModel<EntrustModel>>(result);
+            if (resultmodel.code == 402)
+            {
+                ReloadLogin();
+            }
+            this.grid_condition.Dispatcher.Invoke(new Action(() => { this.grid_condition.ItemsSource = resultmodel.data.list; }));
+        }
+        /// <summary>
+        /// 弹出条件单编辑框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowTiaoJianDan_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

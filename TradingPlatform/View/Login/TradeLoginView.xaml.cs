@@ -12,6 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Trading.Common;
+using Trading.Model.Common;
+using TradingPlatform.Business;
+using TradingPlatform.Common;
 
 namespace TradingPlatform.View.Login
 {
@@ -58,6 +62,22 @@ namespace TradingPlatform.View.Login
         /// <param name="e"></param>
         private void BtnClose_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            this.Close();
+        }
+        private void BussinesLogin_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("user", "1297005");
+            dic.Add("password", "1297005");
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussinelogin, dic, header, "post");
+
+            ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
+            BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;
+            MainPage mainPage = new MainPage();
+            mainPage.Show();
             this.Close();
         }
     }

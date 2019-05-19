@@ -17,6 +17,7 @@ using TradingPlatform.Business;
 using TradingPlatform.Common;
 using TradingPlatform.View.BusinessLogin;
 using Trading.Model.Model_Main;
+using TradingPlatform.View.Login;
 
 namespace TradingPlatform
 {
@@ -224,7 +225,7 @@ namespace TradingPlatform
         {
             if (string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
             {
-                BussinesLogin bussinesLogin = new BussinesLogin();
+                TradeLoginView bussinesLogin = new TradeLoginView();
                 bussinesLogin.ShowDialog();
             }
             else
@@ -309,10 +310,7 @@ namespace TradingPlatform
                 {
                     if (!this.box_exchange.Items.Contains(item.name))
                     {
-                        if ((this.Width - 5) - (this.box_exchange.ActualWidth) > 250)
-                        {
-                            this.box_exchange.Items.Add(item.name);
-                        }
+                        this.box_exchange.Items.Add(item.name);
                     }
                 }
             }));
@@ -321,5 +319,35 @@ namespace TradingPlatform
 
         }
         #endregion
+
+        private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if ((this.box_exchange.ActualWidth) - (this.Width - 80) > 10)
+            {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = this.box_exchange.Items[this.box_exchange.Items.Count - 1].ToString();
+                if (this.box_exchangeparent.Children.Contains(menuItem))
+                {
+                    Menu menuchildren = new Menu();
+                    menuchildren.Items.Add(menuItem);
+                    Menu menu = (this.box_exchangeparent.FindName("MenuTitle") as Menu);
+                    menu.HorizontalAlignment = HorizontalAlignment.Left;
+                    menu.VerticalAlignment = VerticalAlignment.Top;
+                    menu.Width = 200;
+                    menu.Items.Add(menuchildren);
+                }
+                else
+                {
+                    Menu menu = new Menu();
+                    menu.Name = "MenuTitle";
+                    menu.HorizontalAlignment = HorizontalAlignment.Left;
+                    menu.VerticalAlignment = VerticalAlignment.Top;
+                    menu.Width = 200;
+                    menu.Items.Add(menuItem);
+                    this.box_exchangeparent.Children.Add(menu);
+                }
+                this.box_exchange.Items.RemoveAt(this.box_exchange.Items.Count - 1);
+            }
+        }
     }
 }

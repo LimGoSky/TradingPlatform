@@ -118,5 +118,17 @@ namespace TradingPlatform {
                 this["chedan"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/trading/order/list")]
+        public string tiaojiandan {
+            get {
+                return ((string)(this["tiaojiandan"]));
+            }
+            set {
+                this["tiaojiandan"] = value;
+            }
+        }
     }
 }
