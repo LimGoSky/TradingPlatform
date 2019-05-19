@@ -26,5 +26,8 @@
     <Setting Name="chedan" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/cancel</Value>
     </Setting>
+    <Setting Name="tiaojiandan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/list</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

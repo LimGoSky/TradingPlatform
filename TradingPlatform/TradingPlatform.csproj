@@ -119,6 +119,9 @@
     <Compile Include="View\BusinessLogin\BussinesLogin.xaml.cs">
       <DependentUpon>BussinesLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Business\ConditionPage.xaml.cs">
+      <DependentUpon>ConditionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Chart\ChartView.xaml.cs">
       <DependentUpon>ChartView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\BusinessLogin\BussinesLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Business\ConditionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
