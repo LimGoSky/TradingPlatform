@@ -15,6 +15,7 @@ using Trading.Model.Model_Business;
 using TradingPlatform.Common;
 using Trading.Common;
 using Trading.Model.Common;
+using TradingPlatform.View.BusinessLogin;
 
 namespace TradingPlatform.Business
 {
@@ -90,22 +91,31 @@ namespace TradingPlatform.Business
             if (selectindex == 0)//持仓
             {
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chicang, dic, header, "post");
-                //ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
-
-                //this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
+                ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
+                if (resultmodel.code == 402)
+                {
+                    ReloadLogin();
+                }
+                this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
             }
             if (selectindex == 1)//委托
             {
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.weituo, dic, header, "post");
                 ResultModel<EntrustModel> resultmodel = JsonHelper.JsonToObj<ResultModel<EntrustModel>>(result);
-
+                if (resultmodel.code == 402)
+                {
+                    ReloadLogin();
+                }
                 this.grid_entrust.Dispatcher.Invoke(new Action(() => { this.grid_entrust.ItemsSource = resultmodel.data.list; }));
             }
             if (selectindex == 2)//成交记录
             {
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.weituo, dic, header, "post");
                 ResultModel<RecordModel> resultmodel = JsonHelper.JsonToObj<ResultModel<RecordModel>>(result);
-
+                if (resultmodel.code == 402)
+                {
+                    ReloadLogin();
+                }
                 this.grid_record.Dispatcher.Invoke(new Action(() => { this.grid_record.ItemsSource = resultmodel.data.list; }));
             }
 
@@ -119,13 +129,19 @@ namespace TradingPlatform.Business
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("contingentCondition", "IMMEDIATELY");
-            dic.Add("direction", "BUY");
+            dic.Add("direction", "BUY");//BUY,SELL
             dic.Add("instrumentId", "");
-            dic.Add("limitPrice", "100");
-            dic.Add("offsetFlag", "OPEN");
-            dic.Add("priceType", "MARKET_PRICE");
+            dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
+            if (this.rdo_kaicang.IsChecked == true)
+            {
+                dic.Add("offsetFlag", "OPEN");//开仓
+            }
+            else {
+                dic.Add("offsetFlag", "CLOSE");//平仓
+            }
+            dic.Add("priceType", "LIMIT_PRICE");
             dic.Add("stopPrice", "100");
-            dic.Add("volume", "1");
+            dic.Add("volume", this.volume.Text);
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);
@@ -136,6 +152,10 @@ namespace TradingPlatform.Business
             {
                 MessageBox.Show("提交成功！");
             }
+            else if (resultmodel.code == 402)
+            {
+                ReloadLogin();
+            }
         }
         /// <summary>
         /// 卖出
@@ -144,7 +164,89 @@ namespace TradingPlatform.Business
         /// <param name="e"></param>
         private void SellOut_Click(object sender, RoutedEventArgs e)
         {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("contingentCondition", "IMMEDIATELY");
+            dic.Add("direction", "SELL");//BUY,SELL
+            dic.Add("instrumentId", "");
+            dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
+            if (this.rdo_kaicang.IsChecked == true)
+            {
+                dic.Add("offsetFlag", "OPEN");//开仓
+            }
+            else
+            {
+                dic.Add("offsetFlag", "CLOSE");//平仓
+            }
+            dic.Add("priceType", "LIMIT_PRICE");
+            dic.Add("stopPrice", "100");
+            dic.Add("volume", this.volume.Text);
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.maimai, dic, header, "post");
+            ResultModel resultmodel = JsonHelper.JsonToObj<ResultModel>(result);
+            if (resultmodel.code == 200)
+            {
+                MessageBox.Show("提交成功！");
+            }
+            else if (resultmodel.code == 402)
+            {
+                ReloadLogin();
+            }
+        }
 
+        private void CheDan_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("exchangeId", "");
+            dic.Add("instrumentId", "");
+            dic.Add("orderSysId", "");
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chedan, dic, header, "post");
+            ResultModel resultmodel = JsonHelper.JsonToObj<ResultModel>(result);
+            if (resultmodel.code == 200)
+            {
+                MessageBox.Show("提交成功！");
+            }
+            else if (resultmodel.code==402)
+            {
+                ReloadLogin();
+            }
+        }
+        public void ReloadLogin() {
+            MessageBox.Show("请重新登录！");
+            this.Close();
+            BussinesLogin bussinesLogin = new BussinesLogin();
+            bussinesLogin.ShowDialog();
+
+
+        }
+        private void JiaoYiShouShuAdd_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.volume.Text = (Convert.ToInt32(this.volume.Text) + 1).ToString();
+        }
+        private void JiaoYiShouShuReduce_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Convert.ToInt32(this.volume.Text) > 0)
+            {
+                this.volume.Text = (Convert.ToInt32(this.volume.Text) - 1).ToString();
+            }
+        }
+
+        private void JiaoYiDanJiaAdd_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.limitPrice.Text = (Convert.ToInt32(this.limitPrice.Text) + 0.01).ToString();
+        }
+        private void JiaoYiDanJiaReduce_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Convert.ToInt32(this.limitPrice.Text) > 0)
+            {
+                this.limitPrice.Text = (Convert.ToInt32(this.limitPrice.Text) - 0.01).ToString();
+            }
         }
     }
 }

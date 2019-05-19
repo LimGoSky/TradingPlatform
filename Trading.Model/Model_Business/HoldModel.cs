@@ -20,7 +20,7 @@ namespace Trading.Model.Model_Business
         public int available { get; set; }
 
         /// <summary>
-        /// 买卖方向
+        /// 买卖方向 BUY/SELL  对应 多/空
         /// </summary>
         public string direction { get; set; }
         /// <summary>

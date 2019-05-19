@@ -106,5 +106,17 @@ namespace TradingPlatform {
                 this["jiaoyisuo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/trading/order/cancel")]
+        public string chedan {
+            get {
+                return ((string)(this["chedan"]));
+            }
+            set {
+                this["chedan"] = value;
+            }
+        }
     }
 }

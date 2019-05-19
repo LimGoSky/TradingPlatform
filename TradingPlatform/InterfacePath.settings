@@ -23,5 +23,8 @@
     <Setting Name="jiaoyisuo" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://market.future.alibaba.com/exchange/list</Value>
     </Setting>
+    <Setting Name="chedan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/cancel</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
