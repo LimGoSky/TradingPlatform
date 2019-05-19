@@ -99,6 +99,11 @@
     <Compile Include="Common\CoreLib\ContextMenuModel.cs" />
     <Compile Include="Common\CoreLib\ToolBarDefault.cs" />
     <Compile Include="Common\Loginer.cs" />
+    <Compile Include="InterfacePath.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>InterfacePath.settings</DependentUpon>
+    </Compile>
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +118,9 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BusinessLogin\BussinesLogin.xaml.cs">
       <DependentUpon>BussinesLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Business\ConditionPage.xaml.cs">
+      <DependentUpon>ConditionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Chart\ChartView.xaml.cs">
       <DependentUpon>ChartView.xaml</DependentUpon>
@@ -161,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\BusinessLogin\BussinesLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Business\ConditionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,6 +242,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Styles\images\maichu.png" />
+    <Resource Include="Styles\images\mairu.png" />
     <Resource Include="Styles\images\log_bg.png" />
     <Resource Include="Styles\images\home_nav_forum.png" />
     <Resource Include="Styles\images\home_filtrate_next.png" />
@@ -273,11 +287,16 @@
     <Content Include="document\UI规范.html" />
     <Fakes Include="Fakes\AmCharts.Windows.Stock.fakes" />
     <None Include="Resources\1.bmp" />
+    <Resource Include="maichu.png" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="document\PC需求文档2019-04-26.docx" />
     <Resource Include="Resources\PingFangHK-Regular.ttf" />
+    <None Include="InterfacePath.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>InterfacePath.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <Resource Include="Styles\images\search.png" />
     <Resource Include="Styles\images\fangda.png" />

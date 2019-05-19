@@ -145,5 +145,34 @@ namespace Trading.Common
             }
             return postData.ToString();
         }
+
+        /// <summary>
+        /// 根据header请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="parameters">请求参数</param>
+        /// <param name="header">请求头</param>
+        /// <param name="method">post/get</param>
+        /// <param name="contenttype">默认application/json</param>
+        /// <returns></returns>
+        public static string SendPostByHeader(string url, IDictionary<string, string> parameters, IDictionary<string, string> header, string method,string contenttype= "application/json") {
+
+            //创建请求
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + "?" + BuildQuery(parameters, "utf8"));
+
+            //GET请求
+            request.Method = method;
+            request.ReadWriteTimeout = 5000;
+            request.ContentType = contenttype;
+            foreach (var item in header)
+            {
+                request.Headers.Add(item.Key, item.Value);
+            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream myResponseStream = response.GetResponseStream();
+            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            //返回内容
+            return myStreamReader.ReadToEnd();
+        }
     }
 }

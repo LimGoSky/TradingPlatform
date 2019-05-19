@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using TradingPlatform.ViewModel.Login;
 using Trading.Model.Common;
 using System.Management;
+using Trading.Common;
 
 namespace TradingPlatform.View.Login
 {

@@ -35,6 +35,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -58,6 +61,7 @@
     <Compile Include="Common\HttpUtility.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\Log4Helper.cs" />
+    <Compile Include="Common\MqttClient.cs" />
     <Compile Include="Common\PhoneHelper.cs" />
     <Compile Include="Common\WebSocketUtility.cs" />
     <Compile Include="Enums\DisplayType.cs" />

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TradingPlatform.View.Login"
         xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         mc:Ignorable="d"
-        Title="TradeLoginView" Height="332" Width="241" WindowStyle="None" ResizeMode="NoResize">
+        Title="TradeLoginView" Height="332" Width="241" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!--窗体正宗无边框-->
         <WindowChrome x:Key="WindowChromeKey">
@@ -21,7 +21,7 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <Canvas Grid.Row="0" Grid.Column="0" Background="White">
-            <Image x:Name="BtnClose" Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Panel.ZIndex="2" RenderTransformOrigin="9.467,-7.667" MouseLeftButtonDown="BtnClose_MouseLeftButtonDown" Cursor="Hand" Canvas.Left="222" Canvas.Top="3"  />
+            <Image x:Name="BtnClose" Source="/Styles/images/guanbi.png" Height="15" Width="15" Panel.ZIndex="2" RenderTransformOrigin="9.467,-7.667" MouseLeftButtonDown="BtnClose_MouseLeftButtonDown" Cursor="Hand" Canvas.Left="222" Canvas.Top="3"  />
             <Label x:Name="label" Content="登录交易" Canvas.Left="99" FontSize="10" Foreground="#FF707070" RenderTransformOrigin="0.739,0.378" Canvas.Top="0" FontFamily="PingFang HK"/>
         </Canvas>
         <Canvas Grid.Row="1" Grid.Column="0">
@@ -68,6 +68,12 @@
             </CheckBox>
             <Label x:Name="ForgetPwd" Content="忘记密码" Canvas.Left="142" Canvas.Top="182" Foreground="Silver" Background="Transparent" Cursor="Hand" FontSize="10" FontFamily="{StaticResource PingFang}" />
             <Label x:Name="label4" Content="" Canvas.Left="14.5" Canvas.Top="276" Width="211" Height="36" BorderBrush="#666666" BorderThickness="1" />
+
+            <Border Margin="50,220,20,0" BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Background="#2a2a2a" Height="40" Width="140" MouseDown="BussinesLogin_MouseDown">
+                <TextBlock FontSize="16" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">登录</TextBlock>
+            </Border>
+
+
             <Label x:Name="label5" Content="官方网站" Foreground="#424242" FontSize="10px" Canvas.Left="20" Canvas.Top="283"/>
             <Label x:Name="label6" Content="@http://www.abc.go.com/" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontFamily="{StaticResource PingFang}" Foreground="#ffffff" Canvas.Left="68" Canvas.Top="282" />
         </Canvas>

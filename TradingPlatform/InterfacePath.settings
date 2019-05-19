@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TradingPlatform" GeneratedClassName="InterfacePath">
+  <Profiles />
+  <Settings>
+    <Setting Name="maimai" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/add</Value>
+    </Setting>
+    <Setting Name="chicang" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/position/list</Value>
+    </Setting>
+    <Setting Name="weituo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/list</Value>
+    </Setting>
+    <Setting Name="chengjiaojilu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/trade/list</Value>
+    </Setting>
+    <Setting Name="mqttinfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/common/mqttInfo</Value>
+    </Setting>
+    <Setting Name="bussinelogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/user/login</Value>
+    </Setting>
+    <Setting Name="jiaoyisuo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://market.future.alibaba.com/exchange/list</Value>
+    </Setting>
+    <Setting Name="chedan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/cancel</Value>
+    </Setting>
+    <Setting Name="tiaojiandan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/list</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

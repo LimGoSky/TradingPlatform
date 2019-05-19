@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800"
+        Title="" Height="900" Width="900"
         Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="WindowStyle" Value="ToolWindow" />
-            <Setter Property="ResizeMode" Value="CanResize" />
+            <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="WindowChrome.WindowChrome" >
                 <Setter.Value>
@@ -20,121 +20,526 @@
             </Setter>
         </Style>
     </Window.Style>
-    <Grid>
+    <Grid Width="900">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="600"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="650"/>
+            <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <Border Margin="0,0,0,0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
-            <WrapPanel Height="50" Grid.Row="0" Grid.Column="0" Background="#2a2a2a">
-                <Label Content="KM028372" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
-            </WrapPanel>
+        <Border Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
+            <Canvas Height="50" Background="#2a2a2a" VerticalAlignment="Center">
+                <Label Content="合约编号" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
+
+                <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Canvas.Right="0" MouseLeftButtonDown="btn_close_Click">
+                    <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,10,10,0" />
+                </StackPanel>
+            </Canvas>
         </Border>
-        <StackPanel  WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" MouseLeftButtonDown="btn_close_Click">
-            <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,0,10,0" />
-        </StackPanel>
-        <WrapPanel Grid.Row="1" Grid.Column="0">
-            <Grid Margin="10,0,0,0">
+        <Canvas Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Height="600">
+            <Grid Margin="0" Width="250">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="110"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="250"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">合约代码</Label>
-                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">手数</Label>
-                <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}">价格</Label>
-                <TextBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="25" Width="120"></TextBox>
-                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelFontStyle}">当前合约</Label>
-                <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="25" Width="40"></TextBox>
-                <ComboBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="100" ItemTemplate="{StaticResource key1}"  SelectedIndex="0" >
-
-                    <ComboBoxItem Content="对手价"></ComboBoxItem>
-                    <ComboBoxItem Content="当前价"></ComboBoxItem>
-                </ComboBox>
-
-                <WrapPanel Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" VerticalAlignment="Center">
-
-                    <Button Height="35" Width="80" Foreground="White" Margin="50,0,0,0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                            <GradientStop Color="Blue" Offset="0.1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <ContentPresenter Content="买入" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button  Height="35" Width="80" Foreground="White" Margin="50,0,0,0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5" Name="PART_Background">
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                            <GradientStop Color="Blue" Offset="0.1" />
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <ContentPresenter Content="卖出" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </WrapPanel>
+                <Canvas Grid.Row="0" Margin="25,0,0,25">
+                    <Border CornerRadius="5" Background="#1e1e1e" Width="200">
+                        <TextBox Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="Gray"></Setter>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                </Canvas>
+                <Canvas Grid.Row="1">
+                    <StackPanel Canvas.Left="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">交易手数</Label>
+                    </StackPanel>
+                    <StackPanel Canvas.Right="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">单位(手)</Label>
+                    </StackPanel>
+                    <StackPanel Margin="0,15,0,15">
+                        <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="White" HorizontalAlignment="Center" Height="40" x:Name="volume">2</TextBlock>
+                                <StackPanel Orientation="Horizontal" Height="30">
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiShouShuReduce_MouseDown"></TextBlock>
+                                    </Border>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiShouShuAdd_MouseDown">+</TextBlock>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Canvas>
+                <Canvas Grid.Row="2" Margin="0,25,0,25">
+                    <StackPanel Canvas.Left="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">交易单价</Label>
+                    </StackPanel>
+                    <StackPanel Canvas.Right="25" Margin="0,5,0,5">
+                        <Label Foreground="Gray">单位(W)</Label>
+                    </StackPanel>
+                    <StackPanel Margin="0,15,0,15">
+                        <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Foreground="White">20</TextBlock>
+                                <StackPanel Orientation="Horizontal" Height="30">
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaAdd_MouseDown"></TextBlock>
+                                    </Border>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
+                                        <TextBlock Foreground="White" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaReduce_MouseDown"></TextBlock>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Canvas>
+                <Canvas Grid.Row="3" Margin="0,25,0,25">
+                    <Border Width="200" Margin="25">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30">
+                            <Border BorderThickness="0,0,1,0" BorderBrush="#2a2a2a" Width="100">
+                                <RadioButton Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" Content="开仓" GroupName="rdo_cang" x:Name="rdo_kaicang"></RadioButton>
+                            </Border>
+                            <Border BorderThickness="0" BorderBrush="#2a2a2a" Width="100">
+                                <RadioButton Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Content="平仓" GroupName="rdo_cang"></RadioButton>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Canvas>
+                <Canvas Grid.Row="4">
+                    <Image Source="/Styles/images/mairu.png" Height="100" Margin="25,0,25,25" Width="200"></Image>
+                </Canvas>
+                <Canvas Grid.Row="5">
+                    <Image Source="/Styles/images/maichu.png" Height="100" Margin="25,0,25,25" Width="200"></Image>
+                </Canvas>
             </Grid>
-        </WrapPanel>
-        <Border Grid.Row="2" Grid.Column="0" BorderThickness="0,1,0,1" BorderBrush="{StaticResource Line}">
-            <Grid Margin="0" Background="{StaticResource BackGround}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Viewbox Grid.Column="0">
-                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="持仓" FontSize="12" Foreground="#FF8B8787" />
-                </Viewbox>
-                <Viewbox Grid.Column="1">
-                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="待成交" FontSize="12" Foreground="#FF8B8787" />
-                </Viewbox>
-                <Viewbox Grid.Column="2">
-                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="平仓" FontSize="12" Foreground="#FF8B8787" />
-                </Viewbox>
-                <Viewbox Grid.Column="3">
-                    <TextBlock Height="23" Margin="0,5,0,0" TextWrapping="Wrap" Text="记录" FontSize="12" Foreground="#FF8B8787" />
-                </Viewbox>
-                <Viewbox Grid.Column="4" HorizontalAlignment="Right">
-                    <TextBlock Height="23" Margin="0,5,20,0" TextWrapping="Wrap" Text="账户资金" FontSize="12" Foreground="#FF8B8787" />
-                </Viewbox>
-            </Grid>
-        </Border>
-        <Grid Grid.Row="3" Background="{StaticResource BackGround}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition Height="202*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        
+        </Canvas>
+        <TabControl x:Name="tab_bussines" Grid.Row="1" Grid.Column="0" Background="#333333" Margin="0" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl.Template>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Name="ColumnDefinition0" Width="*"/>
+                            <ColumnDefinition Name="ColumnDefinition2" Width="0"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Name="RowDefinition0" Height="Auto"/>
+                            <RowDefinition Name="RowDefinition1" Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Name="HeaderPanel" Grid.Column="0" Grid.Row="0" Margin="2,2,2,0" Panel.ZIndex="1" IsItemsHost="True" KeyboardNavigation.TabIndex="1"/>
+                        <Border Name="ContentPanel" Grid.Column="0" Grid.Row="1" Background="{TemplateBinding Panel.Background}" BorderBrush="{TemplateBinding Border.BorderBrush}" BorderThickness="{TemplateBinding Border.BorderThickness}" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                            <ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Control.Padding}" Content="{TemplateBinding TabControl.SelectedContent}" ContentSource="SelectedContent" ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}" ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </TabControl.Template>
+            <TabItem Header="持仓" Style="{StaticResource Tab_Page_Bussines}">
+                <DataGrid Name="grid_hold" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                                  AutoGenerateColumns="False"  
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFE4DDB3" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#FFF2F2F2" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="品种" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="合约名称" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="多空" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <!--BUY/SELL  对应 多/空-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="可用" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="总仓" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="开仓价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding openPrice}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="当前价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding position}" Margin="5,0,0,0" />
+                                        <!--通过行情websocket获取并实时刷新-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="逐笔浮盈" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <!-- (当前价 - 开仓价) * 合约规模 * 手数 ,其中合约规模从合约接口获取-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="止损价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="设置" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button>编辑</Button>
+                                        <!--可以作为平仓和添加止盈止损的入口，具体交互后续待优化-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="平仓" Style="{StaticResource Tab_Page_Bussines}"></TabItem>
+            <TabItem Header="待成交" Style="{StaticResource Tab_Page_Bussines}">
+                <DataGrid Name="grid_entrust" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                                  AutoGenerateColumns="False" 
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="方向" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <!--BUY/SELL -> 买/卖-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="开平" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <!--OPEN/CLOSE -> 开/平-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="价格" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding orderPriceType}" Margin="5,0,0,0" />
+                                        <!--如果 orderPriceType为MARKET_PRICE,展示汉字 "市价" ,否则展示limitPrice字段-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="总数量" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="已成交" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="交易日" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="委托时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding orderTime}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="设置" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Click="CheDan_Click">撤单</Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="交易记录" Style="{StaticResource Tab_Page_Bussines}">
+                <DataGrid Name="grid_record" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                                  AutoGenerateColumns="False" 
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="买卖" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <!-- BUY/SELL 买/卖-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="开平" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <!-- OPEN/CLOSE 开/平-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="成交价" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding price}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="手数" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding volume}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="成交时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding tradeTime}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="交易日" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding tradingDay}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="账户资金" Style="{StaticResource Tab_Page_Bussines}" DockPanel.Dock="Right" HorizontalAlignment="Right"></TabItem>
+        </TabControl>
+        <Canvas Grid.Row="2" Grid.ColumnSpan="2">
+            <Canvas Margin="25">
+                <TextBlock Foreground="Blue" FontSize="16" Text="条件单"></TextBlock>
+                <DataGrid Name="grid_condition" Background="#1e1e1e" AlternationCount="2" 
+                                  AutoGenerateColumns="False" Margin="0,25,0,0" BorderThickness="1" Height="100" Width="850"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFE4DDB3" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#FFF2F2F2" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="状态" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding orderStatus}" Margin="5,0,0,0" />
+                                        <!--TOUCHED(已触发),NOT_TOUCHED(未触发)-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="品种" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="触发条件" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding contingentCondition}" Margin="5,0,0,0" />
+                                        <!--根据contingentCondition和stopPrice字段拼凑生成，这两个参数的意义可参考条件单页面-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="开/平" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <!--OPEN/CLOSE,对应 开仓/平仓-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="方向" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <!--BUY/SELL，对应 买/卖-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="手数" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding volume}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="创建时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding orderTime}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="触发时间" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding touchTime}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="删除" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="删除" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Canvas>
+            <TextBlock Canvas.Bottom="20" Canvas.Left="400" Foreground="White" Text="+ 添加条件单" MouseDown="ShowTiaoJianDan_MouseDown"></TextBlock>
+        </Canvas>
     </Grid>
 </Window>

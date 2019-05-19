@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using TradingPlatform.Business;
 using TradingPlatform.Common;
 using TradingPlatform.View.BusinessLogin;
+using Trading.Model.Model_Main;
+using TradingPlatform.View.Login;
 
 namespace TradingPlatform
 {
@@ -36,7 +38,7 @@ namespace TradingPlatform
             //Task task = Task.Factory.StartNew(() => {
             //    var dic = new Dictionary<string, string>();
             //    dic.Add("contractCode", "FDAX1906");
-            //    WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
+            //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
             //    ws.Connect(delegate (string data)
             //    {
             //        Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
@@ -48,9 +50,14 @@ namespace TradingPlatform
 
             //var dic = new Dictionary<string, string>();
             //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
+            GetExchange();
             BindList();
             InitTimer();
             this.timer.Start();
+
+
+
+
         }
 
         private void InitTimer()
@@ -218,10 +225,11 @@ namespace TradingPlatform
         {
             if (string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
             {
-                BussinesLogin bussinesLogin = new BussinesLogin();
+                TradeLoginView bussinesLogin = new TradeLoginView();
                 bussinesLogin.ShowDialog();
             }
-            else {
+            else
+            {
                 MainPage mainPage = new MainPage();
                 mainPage.ShowDialog();
             }
@@ -284,5 +292,62 @@ namespace TradingPlatform
             }
         }
         #endregion
+
+        #region 接口
+        /// <summary>
+        /// 获取交易所
+        /// </summary>
+        public void GetExchange()
+        {
+
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.jiaoyisuo, dic, header, "post");
+            ResultModel<List<ExchangeModel>> resultModel = JsonHelper.JsonToObj<ResultModel<List<ExchangeModel>>>(result);
+            Dispatcher.Invoke(new Action(() =>
+            {
+                foreach (ExchangeModel item in resultModel.data)
+                {
+                    if (!this.box_exchange.Items.Contains(item.name))
+                    {
+                        this.box_exchange.Items.Add(item.name);
+                    }
+                }
+            }));
+            
+
+
+        }
+        #endregion
+
+        private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if ((this.box_exchange.ActualWidth) - (this.Width - 80) > 10)
+            {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = this.box_exchange.Items[this.box_exchange.Items.Count - 1].ToString();
+                if (this.box_exchangeparent.Children.Contains(menuItem))
+                {
+                    Menu menuchildren = new Menu();
+                    menuchildren.Items.Add(menuItem);
+                    Menu menu = (this.box_exchangeparent.FindName("MenuTitle") as Menu);
+                    menu.HorizontalAlignment = HorizontalAlignment.Left;
+                    menu.VerticalAlignment = VerticalAlignment.Top;
+                    menu.Width = 200;
+                    menu.Items.Add(menuchildren);
+                }
+                else
+                {
+                    Menu menu = new Menu();
+                    menu.Name = "MenuTitle";
+                    menu.HorizontalAlignment = HorizontalAlignment.Left;
+                    menu.VerticalAlignment = VerticalAlignment.Top;
+                    menu.Width = 200;
+                    menu.Items.Add(menuItem);
+                    this.box_exchangeparent.Children.Add(menu);
+                }
+                this.box_exchange.Items.RemoveAt(this.box_exchange.Items.Count - 1);
+            }
+        }
     }
 }
