@@ -150,7 +150,7 @@
             </TabControl.Template>
             <TabItem Header="持仓" Style="{StaticResource Tab_Page_Bussines}">
                 <DataGrid Name="grid_hold" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
+                                  AutoGenerateColumns="False"  
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}">
@@ -265,7 +265,7 @@
             <TabItem Header="平仓" Style="{StaticResource Tab_Page_Bussines}"></TabItem>
             <TabItem Header="待成交" Style="{StaticResource Tab_Page_Bussines}">
                 <DataGrid Name="grid_entrust" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
+                                  AutoGenerateColumns="False" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
@@ -359,7 +359,7 @@
             </TabItem>
             <TabItem Header="交易记录" Style="{StaticResource Tab_Page_Bussines}">
                 <DataGrid Name="grid_record" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
+                                  AutoGenerateColumns="False" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
