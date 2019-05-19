@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Trading.Model.Common;
 
 namespace Trading.Common
 {
@@ -20,7 +21,7 @@ namespace Trading.Common
         /// <param name="parameters">请求参数</param>
         /// <param name="method">请求方法</param>
         /// <returns>响应内容</returns>
-        public static string SendPost(string url, IDictionary<string, string> parameters, string method)
+        public static string SendPost(string url, IDictionary<string, string> parameters, string method,string token = "")
         {
             if (method.ToLower() == "post")
             {
@@ -31,12 +32,18 @@ namespace Trading.Common
                 {
                     req = (HttpWebRequest)WebRequest.Create(url);
                     req.Method = method;
+                    req.Headers.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+                    if(token != "")
+                    {
+                        req.Headers.Add("Authorization", "Bearer " + token);
+                    }
                     req.KeepAlive = false;
                     req.ProtocolVersion = HttpVersion.Version10;
                     req.Timeout = 5000;
                     req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
-                    string information = BuildQuery(parameters, "");
+                    string information = BuildQuery(parameters, "utf8");
                     byte[] postData = Encoding.UTF8.GetBytes(information);
+                    req.ContentLength = postData.Length;
                     reqStream = req.GetRequestStream();
                     reqStream.Write(postData, 0, postData.Length);
                     rsp = (HttpWebResponse)req.GetResponse();

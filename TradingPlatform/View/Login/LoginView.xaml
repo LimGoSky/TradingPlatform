@@ -68,7 +68,6 @@
                 <Label x:Name="label6" Content="Label"/>
             </Label>
             <Label x:Name="label4" Content="" Background="#FF1E1E1E" Canvas.Left="28" Canvas.Top="134" Width="166" Height="49"/>
-            <Label x:Name="label5" Content="{Binding Report}" Canvas.Left="62" Canvas.Top="329" Width="100" Height="21" Foreground="Red"/>
             <Label x:Name="labQuick" Content="使用「快捷登录」" Foreground="#FF858080" Canvas.Left="104" Canvas.Top="10" FontSize="10" Cursor="Hand" MouseLeftButtonDown="LabQuick_MouseLeftButtonDown" />
         </Canvas>
 

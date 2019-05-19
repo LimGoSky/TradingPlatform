@@ -25,11 +25,7 @@ namespace Trading.Logic
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCodeType", checkCodeType);
             param.Add("mobile", mobile);
-            param.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
-            string a = ApiHelper.SendPost(strUrl, param, "post");
             return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
-
-            //return new ResultModel();
         }
 
         /// <summary>
@@ -54,13 +50,13 @@ namespace Trading.Logic
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <param name="password">密码</param>
-        public ResultModel Login(string mobile, string password)
+        public ResultModel<Token> Login(string mobile, string password)
         {
             string strUrl = "http://front.future.alibaba.com/user/auth/login/pass";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("password", password);
-            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 
         /// <summary>
@@ -69,14 +65,13 @@ namespace Trading.Logic
         /// <param name="mobile">手机号</param>
         /// <param name="checkCode">验证码</param>
         /// <returns></returns>
-        public ResultModel LoginOrRegisterByCode(string mobile, string checkCode)
+        public ResultModel<Token> LoginOrRegisterByCode(string mobile, string checkCode)
         {
             string strUrl = "http://front.future.alibaba.com/user/auth/login/sms";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("checkCode", checkCode);
-            param.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
-            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 
         /// <summary>
@@ -108,6 +103,7 @@ namespace Trading.Logic
             param.Add("nickname", nickname);
             param.Add("password", password);
             param.Add("profilePhoto", profilePhoto);
+            param.Add("qq", qq);
             return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 
@@ -129,108 +125,5 @@ namespace Trading.Logic
             return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
         }
 
-        public static bool Login()
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// 登录系统
-        /// </summary>
-        /// <param name="Account">账号</param>
-        /// <param name="Password">密码</param>
-        /// <returns>信息</returns>
-        public async Task<ResultModel> Login1(string Account, string Password)
-        {
-            try
-            {
-                var task = await Task.Run(() =>
-                {
-                    return new ResultModel() { code = 200, data = null, msg = "登录成功！" };
-                });
-                bool result = task != null ? true : false;
-                if (result)
-                    return new ResultModel() { code = 200, data = null, msg = "登录成功！" };
-                else
-                    return new ResultModel() { code = 500, data = null, msg = "账号或密码错误,请确认!" };
-
-            }
-            catch (Exception ex)
-            {
-                Log4Helper.Error(this.GetType(), ex);
-                return new ResultModel() { code = 500,data=null, msg="登录失败！" };
-            }
-        }
-
-        /// <summary>
-        /// 账户注册
-        /// </summary>
-        /// <param name="checkCode">验证码</param>
-        /// <param name="mobile">手机号</param>
-        /// <param name="nickname">昵称</param>
-        /// <param name="password">密码</param>
-        /// <param name="profilePhoto">头像</param>
-        /// <param name="qq">qq</param>
-        /// <returns></returns>
-        public async Task<ResultModel> RegisterAccount(string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
-        {
-            try
-            {
-                ResultModel<Token> model = new ResultModel<Token>();
-                var task = await Task.Run(() =>
-                {
-                    model = Register(checkCode, mobile, nickname, password, profilePhoto, qq);
-                    if (model.code == 200)
-                    {
-                        return model;
-                    }
-                    else
-                    {
-                        Log4Helper.Error(this.GetType(), $"手机号：{mobile},发送注册短信失败！原因：{((MessageStateEnum)model.code).ToString()},时间：{DateTime.Now.ToString()}" );
-                        return null;
-                    }
-                });
-                bool result = task != null ? true : false;
-                if (result)
-                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
-                else
-                    return new ResultModel() { code = 500, data = null, msg = "失败,请确认!" };
-
-            }
-            catch (Exception ex)
-            {
-                Log4Helper.Error(this.GetType(), ex);
-                return new ResultModel() { code = 500, data = null, msg = "失败！" };
-            }
-        }
-
-        /// <summary>
-        /// 重置密码
-        /// </summary>
-        /// <param name="checkCode">验证码</param>
-        /// <param name="mobile">手机号</param>
-        /// <param name="password">密码</param>
-        /// <returns></returns>
-        public async Task<ResultModel> ResetPassWord1(string checkCode, string mobile, string password)
-        {
-            try
-            {
-                var task = await Task.Run(() =>
-                {
-                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
-                });
-                bool result = task != null ? true : false;
-                if (result)
-                    return new ResultModel() { code = 200, data = null, msg = "成功！" };
-                else
-                    return new ResultModel() { code = 500, data = null, msg = "失败,请确认!" };
-
-            }
-            catch (Exception ex)
-            {
-                Log4Helper.Error(this.GetType(), ex);
-                return new ResultModel() { code = 500, data = null, msg = "失败！" };
-            }
-        }
     }
 }

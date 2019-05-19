@@ -15,7 +15,7 @@
         </WindowChrome>
     </Window.Resources>
     <Grid MouseDown="Grid_MouseDown" RenderTransformOrigin="0.94,0.068" >
-        <Image x:Name="BtnClose" Source="/Styles/imgaes/guanbi.png" Height="15" Width="15" Panel.ZIndex="2" RenderTransformOrigin="9.467,-7.667" Margin="425,3,3,375" MouseLeftButtonDown="BtnClose_MouseLeftButtonDown" Cursor="Hand"  />
+        <Image x:Name="BtnClose" Source="/TradingPlatform;component/Styles/images/guanbi.png" Height="15" Width="15" Panel.ZIndex="2" RenderTransformOrigin="9.467,-7.667" Margin="425,3,3,375" MouseLeftButtonDown="BtnClose_MouseLeftButtonDown" Cursor="Hand"  />
         <Frame Grid.Row="1" Source="LoginView.xaml" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

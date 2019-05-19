@@ -14,6 +14,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Trading.Common;
+using Trading.Common.Common;
+using Trading.Logic;
+using Trading.Model.Common;
 
 namespace TradingPlatform.View.Login
 {
@@ -84,13 +88,29 @@ namespace TradingPlatform.View.Login
 
         public void Sure(string msg)
         {
-            if (msg == "OK")
+            if (msg == "userNameError")
             {
-                MessageBox.Show("重置成功！");
+                MessageBox.Show("手机号码格式不正确！");
+                return;
             }
-            else if (msg == "timeout" || msg == "error")
+            else if (msg == "checkCodeError")
             {
-                MessageBox.Show("重置失败！");
+                MessageBox.Show("验证码不能为空！");
+                return;
+            }
+            else if (msg == "passWordError")
+            {
+                MessageBox.Show("密码不能为空！");
+                return;
+            }
+            else if (msg == "200")
+            {
+                MessageBox.Show("找回成功！");
+            }
+            else
+            {
+                MessageBox.Show("注册失败，请联系管理员！");
+                return;
             }
         }
 
@@ -121,9 +141,29 @@ namespace TradingPlatform.View.Login
         /// <param name="e"></param>
         private void BtnRepeat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            secondCount = 60;
-            BtnRepeat.Content = "重发";
-            this.timer.Start();
+            if (!PhoneHelper.ValidateMobile(PhoneNo.Text))
+            {
+                MessageBox.Show("手机号格式不正确！");
+                return;
+            }
+            else
+            {
+                //发短信
+                LoginLogic logic = new LoginLogic();
+                ResultModel model = logic.SendMessage(PhoneNo.Text, CheckCodeTypeEnum.RESET_PASSWORD.ToString());
+                if (model.code == 200)
+                {
+                    secondCount = 59;
+                    BtnRepeat.Content = "重发";
+                    this.timer.Start();
+                }
+                else
+                {
+                    string result = ((MessageStateEnum)model.code).ToString();
+                    Log4Helper.Error(this.GetType(), $"手机号：{PhoneNo.Text}发送重置密码短信失败！原因：{result}");
+                    MessageBox.Show(result);
+                }
+            }
         }
     }
 }

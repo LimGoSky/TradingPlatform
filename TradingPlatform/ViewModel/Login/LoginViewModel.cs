@@ -10,8 +10,12 @@ using System.Threading.Tasks;
 using Trading.Common;
 using Trading.Common.Common;
 using Trading.Logic;
+using Trading.Logic.Login;
+using Trading.Model.Common;
+using Trading.Model.Login;
 using TradingPlatform.Common;
 using TradingPlatform.SysModule;
+using System.Web;
 
 namespace TradingPlatform.ViewModel.Login
 {
@@ -106,65 +110,46 @@ namespace TradingPlatform.ViewModel.Login
 
         #region Login/Exit
 
-        /// <summary>
-        /// 登陆系统
-        /// </summary>
-        public async void Login()
+        public void Login()
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
                 {
                     this.IsCancel = false;
-                    this.Report = "正在验证登录 . . .";
-
-                    var LoginTask = new LoginLogic().Login1(UserName, Password);
-
-                    var timeouttask = Task.Delay(3000);
-                    var completedTask = await Task.WhenAny(LoginTask, timeouttask);
-                    if (completedTask == timeouttask)
+                    var result = new LoginLogic().Login(UserName, Password);
+                    if (result.code == 200)//登录成功
                     {
-                        this.Report = "系统连接超时,请联系管理员!";
+                        //保存登录信息
+                        SaveLoginInfo();
+
+                        #region 加载用户资料
+
+                        UserLogic logic = new UserLogic();
+                        ResultModel<UserInfoModel> userModel = logic.GetUserInfo(result.data.token);
+
+                        Loginer.LoginerUser.UserId = userModel.data.userId;
+                        Loginer.LoginerUser.NickName = userModel.data.nickname;
+                        Loginer.LoginerUser.ProFilePhoto = userModel.data.profilePhoto;
+                        Loginer.LoginerUser.CreateTime = userModel.data.createTime;
+                        Loginer.LoginerUser.Token = result.data.token;
+
+                        #endregion
+
                     }
-                    else
-                    {
-                        var task = await LoginTask;
-                        if (task.code == 200)
-                        {
-                            SaveLoginInfo();
 
+                    //发送登录消息
+                    SendMsg("Login", result.code.ToString());
 
-                            #region 加载用户资料
-
-                            this.Report = "加载用户资料 . . .";
-                            Loginer.LoginerUser.UserId = "15620938880";
-                            Loginer.LoginerUser.NickName = "石利民";
-                            Loginer.LoginerUser.ProFilePhoto = "123";
-                            Loginer.LoginerUser.CreateTime = DateTime.Now.ToString();
-
-                            #endregion
-
-                            this.Report = "初始化首页 . . .";
-                            
-                            //登陆成功发送消息
-                            SendMsg("LoginOK", "LoginOK");
-                        }
-                        else
-                            this.Report = task.msg;
-                    }
+                    Log4Helper.Info(this.GetType(), $"手机号:{UserName},登录：{result.msg}");
                 }
             }
             catch (Exception ex)
             {
+                SendMsg("Login", "Error");
                 Log4Helper.Error(this.GetType(), ex);
-                this.Report = "登录错误，请联系管理员！";
-            }
-            finally
-            {
-                this.IsCancel = true;
             }
         }
-
         #endregion
 
         #region 记住密码

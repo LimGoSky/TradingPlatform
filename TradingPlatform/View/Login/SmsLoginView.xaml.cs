@@ -14,7 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Trading.Common;
+using Trading.Logic;
+using Trading.Logic.Login;
 using Trading.Model.Common;
+using Trading.Model.Login;
+using TradingPlatform.Common;
 
 namespace TradingPlatform.View.Login
 {
@@ -24,16 +29,20 @@ namespace TradingPlatform.View.Login
     public partial class SmsLoginView : Page
     {
         Timer timer;
-        int secondCount = 60;//减秒
-        
+        int secondCount = 59;//减秒
+        string _phoneNo = "";
+
         public SmsLoginView(string phoneNo)
-        {
-            InitializeComponent();
-            
+        {            InitializeComponent();
+
+            this._phoneNo = phoneNo;
+
             labPhoneNo.Content = phoneNo.Substring(phoneNo.Length - 4, 4);
 
             InitTimer();
             this.timer.Start();
+            //发送短信
+            SendSms(phoneNo);
         }
 
         private void InitTimer()
@@ -97,23 +106,48 @@ namespace TradingPlatform.View.Login
         private void BtnSure_Click(object sender, RoutedEventArgs e)
         {
             string txtSms = SmsText.Text;
-            if(txtSms == "")
+            if (txtSms == "")
             {
-                MessageBox.Show("验证码不正确！");
+                MessageBox.Show("验证码不能为空！");
                 return;
             }
-            
-            var windowCollection = Application.Current.Windows;
-            foreach (var item in windowCollection)
+
+            LoginLogic logic = new LoginLogic();
+            ResultModel<Token> result = logic.LoginOrRegisterByCode(_phoneNo, txtSms);
+            if(result.code == 200)
             {
-                if (item.GetType() == typeof(LoginMainView))
+                #region 加载用户资料
+
+                UserLogic userlogic = new UserLogic();
+                ResultModel<UserInfoModel> userModel = userlogic.GetUserInfo(result.data.token);
+
+                Loginer.LoginerUser.UserId = userModel.data.userId;
+                Loginer.LoginerUser.NickName = userModel.data.nickname;
+                Loginer.LoginerUser.ProFilePhoto = userModel.data.profilePhoto;
+                Loginer.LoginerUser.CreateTime = userModel.data.createTime;
+                Loginer.LoginerUser.Token = result.data.token;
+
+                #endregion
+
+                var windowCollection = Application.Current.Windows;
+                foreach (var item in windowCollection)
                 {
-                    Window w = (Window)item;
-                    MainWindow m = new MainWindow();
-                    m.Show();
-                    w.Close();
+                    if (item.GetType() == typeof(LoginMainView))
+                    {
+                        Window w = (Window)item;
+                        MainWindow m = new MainWindow();
+                        m.Show();
+                        w.Close();
+                    }
                 }
             }
+            else
+            {
+                string msg = ((MessageStateEnum)result.code).ToString();
+                Log4Helper.Error(this.GetType(), $"手机号：{_phoneNo}发送注册短信失败！原因：{msg}");
+                MessageBox.Show(msg);
+            }
+            
         }
 
         /// <summary>
@@ -148,7 +182,24 @@ namespace TradingPlatform.View.Login
         {
             secondCount = 60;
             this.timer.Start();
+            SendSms(_phoneNo);
         }
 
+        /// <summary>
+        /// 发送短信
+        /// </summary>
+        /// <param name="phoneNo"></param>
+        private void SendSms(string phoneNo)
+        {
+            //发短信
+            LoginLogic logic = new LoginLogic();
+            ResultModel model = logic.SendMessage(phoneNo, CheckCodeTypeEnum.LOGIN.ToString());
+            if (model.code != 200)
+            {
+                string result = ((MessageStateEnum)model.code).ToString();
+                Log4Helper.Error(this.GetType(), $"手机号：{phoneNo}发送登录短信失败！原因：{result}");
+                MessageBox.Show(result);
+            }
+        }
     }
 }
