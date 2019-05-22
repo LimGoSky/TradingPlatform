@@ -13,7 +13,7 @@
             </WindowChrome.ResizeBorderThickness>
         </WindowChrome>
     </Window.Resources>
-    <Grid Background="#2a2a2a">
+    <Grid Background="#2a2a2a" MouseDown="Grid_MouseDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition ></RowDefinition>
@@ -22,7 +22,202 @@
             <Label x:Name="label" Content="设置条件单" FontSize="10" HorizontalAlignment="Center" Foreground="#FF707070" RenderTransformOrigin="0.739,0.378" Canvas.Top="0" FontFamily="PingFang HK"/>
         </StackPanel>
         <Canvas Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="98"></RowDefinition>
+                    <RowDefinition Height="95"></RowDefinition>
+                    <RowDefinition Height="95"></RowDefinition>
+                    <RowDefinition Height="95"></RowDefinition>
+                    <RowDefinition Height="95"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Canvas  Grid.Row="0">
+                <Label Content="条件：" Foreground="White" Canvas.Left="22" Canvas.Top="12" />
+                <Label Content="单位（¥）" Canvas.Left="325" Canvas.Top="4" Foreground="#FF707070" />
+                <Border BorderThickness="1" BorderBrush="#FF424242" Width="353" Height="41" CornerRadius="5" Canvas.Left="22" Canvas.Top="42" >
+                    <StackPanel>
+                        <ComboBox Name="chkPrice" Margin="30,7,219,9" SelectedIndex="0" BorderThickness="0,0,0,1" >
+                            <ComboBoxItem Content="最新价"></ComboBoxItem>
+                            <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBoxItem>1</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+                <ComboBox Canvas.Left="176" Canvas.Top="50" SelectedIndex="0">
+                    <ComboBoxItem Content=">="></ComboBoxItem>
+                    <ComboBoxItem Content="="></ComboBoxItem>
+                    <ComboBoxItem Content="&lt;="></ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="UserTextBox" Width="80" Canvas.Left="235" Canvas.Top="48" Height="29" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1" Background="#2a2a2a"  CaretBrush="White"></TextBox>
+                <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="17" Text=" 输入价格" VerticalAlignment="Center" Width="66" FontFamily="Microsoft YaHei" Canvas.Left="243" Canvas.Top="54" Panel.ZIndex="5">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=UserTextBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <TextBlock.TextDecorations>
+                        <TextDecorationCollection>
 
+                        </TextDecorationCollection>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+            </Canvas>
+            <Canvas  Grid.Row="1">
+                <Label Content="价格：" Foreground="White" Canvas.Left="20" Canvas.Top="106" />
+                <Label Content="数量：" Foreground="White" Canvas.Left="216" Canvas.Top="106" />
+                <Label Content="（手）" Foreground="White" Canvas.Left="242" Canvas.Top="106" />
+                <Border BorderThickness="1" BorderBrush="#FF424242" Width="160" Height="41" CornerRadius="5" Canvas.Left="20" Canvas.Top="136" >
+                    <StackPanel Margin="-1,1,1,-1">
+                        <ComboBox x:Name="chkPrice1" Margin="29,7,37,9" SelectedIndex="0" BorderThickness="0,0,0,1" >
+                            <ComboBoxItem Content="最新价"/>
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="1"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#FF424242" Width="160" Height="41" CornerRadius="5" Canvas.Left="216" Canvas.Top="136" >
+                    <Label x:Name="labCount" Foreground="White" Content="10" Margin="64,7,68,7"/>
+                </Border>
+                <Button x:Name="btnCut" Content="-" Canvas.Left="229" Canvas.Top="143" Height="24" Width="40" Foreground="White" FontSize="18">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <ContentPresenter Content="  -" Margin="0,0,11,7"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnAdd" Content="+" Canvas.Left="325" Canvas.Top="143" Height="24" Width="40" Foreground="White" FontSize="18">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <ContentPresenter Content="  +" Margin="0,0,11,7"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Canvas>
+            <Canvas  Grid.Row="2">
+                <Label Content="开平：" Foreground="White" Canvas.Left="20" Canvas.Top="199"></Label>
+                <Button Content="开仓" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="20" Canvas.Top="229" Height="49" Width="160" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="平仓" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="215" Canvas.Top="229" Height="49" Width="160" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Canvas>
+            <Canvas  Grid.Row="3">
+                <Label Content="方向：" Foreground="White" Canvas.Left="20" Canvas.Top="298"></Label>
+                <Button Content="卖出" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="20" Canvas.Top="334" Height="49" Width="160" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="买入" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="216" Canvas.Top="334" Height="49" Width="160" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Canvas>
+            <Canvas  Grid.Row="4">
+                <Button Content="取消" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="174" Canvas.Top="429" Height="20" Width="83" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="确定" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="284" Canvas.Top="430" Height="19" Width="83" Foreground="Gray" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1" CornerRadius="10,10,10,10" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.5" />
+                                        <GradientStop Color="#FF1E1E1E" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Canvas>
         </Canvas>
     </Grid>
 </Window>
