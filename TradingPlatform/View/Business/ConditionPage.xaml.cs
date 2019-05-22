@@ -23,5 +23,17 @@ namespace TradingPlatform.View.Business
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// 无边框拖动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
     }
 }
