@@ -74,7 +74,7 @@
             </CheckBox>
             <Label x:Name="ForgetPwd" Content="忘记密码" Canvas.Left="142" Canvas.Top="182" Foreground="#707070" Background="Transparent" Cursor="Hand" FontSize="10" FontFamily="{StaticResource PingFang}"/>
             <!--<Label x:Name="label4" Content="" Canvas.Left="14.5" Canvas.Top="276" Width="211" Height="36" BorderBrush="#666666" BorderThickness="1" />-->
-            <Border Canvas.Left="14.5" Canvas.Top="276" Width="211" Height="36"  BorderBrush="#666666" BorderThickness="1" CornerRadius="4">
+            <Border Canvas.Left="14.5" Canvas.Top="276" Width="211" Height="36"  BorderBrush="#333333" BorderThickness="1" CornerRadius="4">
 
             </Border>
             <!--<Border Margin="50,220,20,0" BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Background="#2a2a2a" Height="40" Width="140" MouseDown="BussinesLogin_MouseDown" Cursor="Hand">
