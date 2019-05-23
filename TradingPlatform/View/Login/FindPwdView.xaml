@@ -22,7 +22,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入手机号" VerticalAlignment="Center" Width="110" FontFamily="Microsoft YaHei" Panel.ZIndex="5" Canvas.Left="40" Canvas.Top="90">
+            <TextBlock Foreground="#707070"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入手机号" VerticalAlignment="Center" Width="110" FontFamily="PingFang HK" Panel.ZIndex="5" Canvas.Left="40" Canvas.Top="93" FontSize="10">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -39,7 +39,7 @@
                     </TextDecorationCollection>
                 </TextBlock.TextDecorations>
             </TextBlock>
-            <Label x:Name="label2" Content="找回密码" Canvas.Left="31" Canvas.Top="24" Foreground="#FF79A3EE" FontSize="14" Width="83"/>
+            <Label x:Name="label2" Content="找回密码" Canvas.Left="31" Canvas.Top="24" Foreground="#2d8ced" FontSize="14" Width="83" />
             <TextBox x:Name="SmsText" Text="{Binding CheckCode}" Foreground="White" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="146" Width="74" FontFamily="Apple Braille" PreviewTextInput="tb_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Panel.ZIndex="5" BorderBrush="{x:Null}" BorderThickness="0" MaxLength="11">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -48,7 +48,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <TextBlock Foreground="#FF858080"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入验证码" VerticalAlignment="Center" Width="80" FontFamily="Microsoft YaHei" Panel.ZIndex="5" Canvas.Left="40" Canvas.Top="155">
+            <TextBlock Foreground="#707070" Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入验证码" VerticalAlignment="Center" Width="80" FontFamily="PingFang HK" Panel.ZIndex="5" Canvas.Left="40" Canvas.Top="158" FontSize="10">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -65,16 +65,31 @@
                     </TextDecorationCollection>
                 </TextBlock.TextDecorations>
             </TextBlock>
-            <Button x:Name="BtnSure" Content="确认" Command="{Binding SureCommand}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Background="#FF79A3EE" Foreground="White" Canvas.Left="60" Canvas.Top="285" />
+            <Button x:Name="BtnSure" Content="确认" Command="{Binding SureCommand}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="32" Background="#FF79A3EE" Foreground="White" Canvas.Left="70" Canvas.Top="286" FontFamily="PingFang HK" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="15,15,15,15" Name="PART_Background">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#2d8ced" Offset="0.0" />
+                                    <GradientStop Color="#2d8ced" Offset="0.5" />
+                                    <GradientStop Color="#2d8ced" Offset="0.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Label x:Name="label3" Content="" Canvas.Left="31" Canvas.Top="139" Height="49" Width="163" Background="#FF1E1E1E"/>
-            <Label x:Name="BtnRepeat" Content="发短信" Canvas.Left="150" Canvas.Top="152" Height="22" Width="44" Foreground="#FF858080" FontSize="10" Cursor="Hand" MouseLeftButtonDown="BtnRepeat_MouseLeftButtonDown"/>
-            <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#FF858080" RenderTransformOrigin="0.692,-0.64"/>
+            <Label x:Name="BtnRepeat" Content="发短信" Canvas.Left="150" Canvas.Top="153" Height="22" Width="44" Foreground="#707070" FontSize="10" Cursor="Hand" MouseLeftButtonDown="BtnRepeat_MouseLeftButtonDown" FontFamily="PingFang HK"/>
+            <Label x:Name="label5" Content="|" Canvas.Left="120" Canvas.Top="150" Foreground="#707070" RenderTransformOrigin="0.692,-0.64"/>
             <Label x:Name="Second" Content="" Canvas.Left="130" Canvas.Top="152" Foreground="#FF328DD8" FontSize="10"/>
             <Label x:Name="label6" Content="" Canvas.Left="31" Canvas.Top="74" Width="163" Height="49" Background="#FF1E1E1E"/>
             <Label x:Name="label7" Content="" Canvas.Left="31" Canvas.Top="204" Width="163" Height="49" Background="#FF1E1E1E"/>
 
             <TextBox x:Name="Pwd" Text="{Binding Password}" Grid.Row="1" VerticalAlignment="Center"  Height="36" VerticalContentAlignment="Center" Background="#1e1e1e" FontSize="14" CaretBrush="White" Canvas.Left="40" Canvas.Top="212" Width="145" FontFamily="Apple Braille" BorderBrush="{x:Null}" BorderThickness="0" Foreground="Transparent"/>
-            <TextBlock Foreground="#FF858080" Grid.Row="2"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入密码" VerticalAlignment="Center" Width="116" FontFamily="Microsoft YaHei" Canvas.Left="40" Canvas.Top="220">
+            <TextBlock Foreground="#707070" Grid.Row="2"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="22" Text=" 请输入密码" VerticalAlignment="Center" Width="116" FontFamily="PingFang HK" Canvas.Left="40" Canvas.Top="223" FontSize="10">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -87,10 +102,28 @@
                 </TextBlock.Style>
             </TextBlock>
         </Canvas>
-        <Canvas Background="#1e1e1e" Grid.Row="0" Grid.Column="1">
-            <Label x:Name="label" Content="Welcome Back!" Canvas.Left="24" Canvas.Top="76" Foreground="White" FontSize="20"/>
-            <Label x:Name="label1" Content="快捷登陆更方便" Canvas.Left="24" Canvas.Top="147" Foreground="#FF858080"/>
-            <Button x:Name="btnLogin" Content="登陆" Canvas.Left="55" Canvas.Top="284" Width="100" Height="29" Background="Red" Foreground="White" FontSize="14" Click="BtnLogin_Click"/>
+        <Canvas Grid.Row="0" Grid.Column="1">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/TradingPlatform;component/Styles/images/log_bg.png"/>
+            </Canvas.Background>
+            <Label x:Name="label" Content="Welcome Back!" Canvas.Left="24" Canvas.Top="76" Foreground="White" FontSize="20"  FontFamily="PingFang HK"/>
+            <Label x:Name="label1" Content="快捷登陆更方便" Canvas.Left="24" Canvas.Top="147" Foreground="#707070" FontFamily="PingFang HK" FontSize="10"/>
+            <Button x:Name="btnLogin" Content="登陆" Canvas.Left="55" Canvas.Top="286" Width="100" Height="32" Foreground="White" FontSize="14" Click="BtnLogin_Click" FontFamily="PingFang HK" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FF2D8CEB" BorderThickness="1" CornerRadius="15,15,15,15" Name="PART_Background">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#1e1e1e" Offset="0.0" />
+                                    <GradientStop Color="#1e1e1e" Offset="0.5" />
+                                    <GradientStop Color="#1e1e1e" Offset="0.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Canvas>
 
     </Grid>
