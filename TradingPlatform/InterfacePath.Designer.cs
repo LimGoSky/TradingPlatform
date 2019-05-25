@@ -130,5 +130,17 @@ namespace TradingPlatform {
                 this["tiaojiandan"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com/contract/list/detail")]
+        public string hangqinglist {
+            get {
+                return ((string)(this["hangqinglist"]));
+            }
+            set {
+                this["hangqinglist"] = value;
+            }
+        }
     }
 }

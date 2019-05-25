@@ -117,6 +117,12 @@
         <GradientStop Color="#FF0F0F0F" Offset="0.5"/>
     </LinearGradientBrush>
     <Style x:Key="CheckTextBlockFontStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="pingfang hk"/>
+        <Setter Property="Background" Value="#2a2a2a"/>
+        <Setter Property="Foreground" Value="#FF8B8787"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">

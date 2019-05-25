@@ -16,7 +16,7 @@
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="WindowChrome.WindowChrome" >
                 <Setter.Value>
-                    <WindowChrome CaptionHeight="30" ResizeBorderThickness="20"  />
+                    <WindowChrome CaptionHeight="5" ResizeBorderThickness="5"  />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -107,7 +107,7 @@
 
             <TabControl x:Name="Tab_Page" FontFamily="pingfang hk" Background="#FF383535" BorderThickness="0" Tag="215" >
                 <TabItem Header="行情" FontSize="16" Style="{StaticResource Tab_Page}" Margin="0,0,0,0">
-                    <Grid Background="#FF383535" Margin="0">
+                    <Grid Background="#FF383535" Margin="0" SizeChanged="Box_exchange_SizeChanged">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="30"/>
@@ -117,31 +117,28 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel x:Name="box_exchangeparent" Grid.Row="0" Orientation="Horizontal" Background="#2a2a2a" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                            <ListBox x:Name="box_exchange" Margin="0" SizeChanged="Box_exchange_SizeChanged" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                                <ListBoxItem>自选</ListBoxItem>
-                                <ListBoxItem>主连合约</ListBoxItem>
-                            </ListBox>
+                            <ToolBar Band="1" ToolBarTray.IsLocked="True" HorizontalAlignment="Left" Margin="0" BandIndex="1" ToolBar.OverflowMode="AsNeeded" x:Name="tooblar" Background="#2a2a2a" FontSize="14" Foreground="#FF8B8787" FontFamily="pingfang hk">
+                                <ListBox Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                    <ListBoxItem>自选</ListBoxItem>
+                                </ListBox>
+                                <ListBox x:Name="box_exchange" Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                    
+                                </ListBox>
+                            </ToolBar>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#191919">
-                            <ListBox FontSize="14" FontFamily="pingfang hk" Background="#191919" Foreground="#808080" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                            <ListBox x:Name="secondMenu" FontSize="14" FontFamily="pingfang hk" Background="#191919" Foreground="#808080" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal" />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
-                                <ListBoxItem>白银(5)</ListBoxItem>
-                                <ListBoxItem>黄金(7)</ListBoxItem>
                             </ListBox>
                         </StackPanel>
                         <WrapPanel Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <DataGrid Name="grid_saffer" RowHeaderWidth="0" Background="#FF373737"
-                                  AlternationCount="4"  BorderThickness="0,0,0,1" 
-                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" 
+                                  AlternationCount="4"  BorderThickness="0,0,0,1" CanUserAddRows="False" Tag="25"
+                                  AutoGenerateColumns="False" MouseDown="Grid_MainTitle_MouseDown" SizeChanged="Grid_saffer_SizeChanged"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                                 <DataGrid.RowStyle>
                                     <Style TargetType="DataGridRow">
@@ -168,16 +165,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <Image Source="/Styles/images/home_side_like.png"  Height="15" Width="15"></Image>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="序号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Right}">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                                                    <TextBlock  Text="{Binding data.SerialNumber}" />
+                                                    <Image Source="{Binding iscontaint}" Height="15" Width="15"></Image>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -186,7 +174,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <TextBlock Text="{Binding data.contractCode}" Margin="5,0,0,0" />
+                                                    <TextBlock Text="{Binding contractId}" Margin="5,0,0,0" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -195,7 +183,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                    <TextBlock Text="{Binding data.contractName}"/>
+                                                    <TextBlock Text="{Binding contractName}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -204,7 +192,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.latestPrice}" Foreground="{Binding Path=data.latestPrice,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding lastPrice}" Foreground="{Binding Path=latestPrice,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -213,7 +201,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}"/>
+                                                    <TextBlock Text="{Binding bidVol}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -223,7 +211,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.ask}" Foreground="{Binding Path=data.ask,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding bidPrice1}" Foreground="{Binding Path=ask,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -232,7 +220,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bid}" Foreground="{Binding Path=data.bid,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding askPrice1}" Foreground="{Binding Path=bid,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -241,7 +229,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}" />
+                                                    <TextBlock Text="{Binding askVolume1}" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -250,7 +238,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.askVol}" />
+                                                    <TextBlock Text="{Binding bidVolume1}" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -259,7 +247,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.volume}" />
+                                                    <TextBlock Text="{Binding volume}" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -268,7 +256,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding bidVol}" Foreground="{Binding Path=bidVol,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -277,7 +265,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding bidVol}" Foreground="{Binding Path=bidVol,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -286,7 +274,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}"/>
+                                                    <TextBlock Text="{Binding bidVol}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -295,7 +283,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.openPrice}"/>
+                                                    <TextBlock Text="{Binding openPrice}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -304,7 +292,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.highestPrice}"/>
+                                                    <TextBlock Text="{Binding highestPrice}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -313,7 +301,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.lowestPrice}"/>
+                                                    <TextBlock Text="{Binding lowestPrice}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -322,7 +310,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}"/>
+                                                    <TextBlock Text="{Binding preClosePrice}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -331,7 +319,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}"/>
+                                                    <TextBlock Text="{Binding preSettlementPrice}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -340,7 +328,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding upperLimitPrice}" Foreground="{Binding Path=bidVol,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -349,7 +337,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding data.bidVol}" Foreground="{Binding Path=data.bidVol,Converter={StaticResource cvtDate}}"/>
+                                                    <TextBlock Text="{Binding lowerLimitPrice}" Foreground="{Binding Path=bidVol,Converter={StaticResource cvtDate}}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>

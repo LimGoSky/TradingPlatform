@@ -287,7 +287,6 @@
     <Content Include="document\UI规范.html" />
     <Fakes Include="Fakes\AmCharts.Windows.Stock.fakes" />
     <None Include="Resources\1.bmp" />
-    <Resource Include="maichu.png" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

@@ -18,6 +18,7 @@ using TradingPlatform.Common;
 using TradingPlatform.View.BusinessLogin;
 using Trading.Model.Model_Main;
 using TradingPlatform.View.Login;
+using System.Windows.Media;
 
 namespace TradingPlatform
 {
@@ -26,102 +27,63 @@ namespace TradingPlatform
     /// </summary>
     public partial class MainWindow : Window
     {
-        System.Timers.Timer timer;
         public MainWindow()
         {
-            //LoginLogic model = new LoginLogic();
-            //ResultModel result = model.SendMessage("15620938880", CheckCodeTypeEnum.REGISTER.ToString());
-            //Log4Helper.Info(this.GetType(), "abc");
             InitializeComponent();
-
-
-            //Task task = Task.Factory.StartNew(() => {
-            //    var dic = new Dictionary<string, string>();
-            //    dic.Add("contractCode", "FDAX1906");
-            //WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
-            //    ws.Connect(delegate (string data)
-            //    {
-            //        Quotation obj = JsonHelper.JsonToObj<Quotation>(data);
-            //        List<Quotation> objList = new List<Quotation>();
-            //        objList.Add(obj);
-            //        this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
-            //    });
-            //}, TaskCreationOptions.LongRunning);
-
-            //var dic = new Dictionary<string, string>();
-            //string result = ApiHelper.SendPost("http://k.quotation.qianzijr.com/app/quotation/latestPrice", dic, "get");
-            GetExchange();
-            BindList();
-            InitTimer();
-            this.timer.Start();
-
-
-
-
+            GetExchange();//绑定交易所
+            BindList();//绑定列表
         }
-
-        private void InitTimer()
-        {
-            //设置定时间隔(毫秒为单位)
-            int interval = 1000;
-            timer = new System.Timers.Timer(interval);
-            //设置执行一次（false）还是一直执行(true)
-            timer.AutoReset = true;
-            //设置是否执行System.Timers.Timer.Elapsed事件
-            timer.Enabled = true;
-            //绑定Elapsed事件
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
-        }
-        public List<Quotation> objList = new List<Quotation>();
+        /// <summary>
+        /// 交易所列表
+        /// </summary>
+        public List<ExchangeModel> exchangeModels;
+        /// <summary>
+        /// 当前选中交易所
+        /// </summary>
+        public string exchangeModel;
+        /// <summary>
+        /// 所有合约集合
+        /// </summary>
+        public List<QuotationChildren> objList;
+        /// <summary>
+        /// 当前选择的合约集合
+        /// </summary>
+        public List<contractDtoDetail> objDetailList;
+        /// <summary>
+        /// 当前选择行情编号
+        /// </summary>
+        public string secondCode;
         /// <summary>
         /// 绑定列表
         /// </summary>
         public void BindList()
         {
-            Random random = new Random();
-            for (int i = 0; i < 20; i++)
-            {
-                Quotation quotation = new Quotation();
-                quotation.topic = "topic";
-                quotation.data = new data();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("condition", "true");
+            dic.Add("exchangeId", exchangeModel);
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.hangqinglist, dic, header, "post");
 
-                quotation.data.SerialNumber = i + 1;
-                quotation.data.contractCode = "SK" + i;
-                quotation.data.contractName = "合约名" + i;
-                quotation.data.ask = random.Next(-10, 100).ToString();
-                quotation.data.bid = random.Next(-10, 100).ToString();
-                quotation.data.openPrice = random.Next(-10, 100).ToString();
-                quotation.data.volume = random.Next(-10, 100).ToString();
-                quotation.data.lowestPrice = random.Next(-10, 100).ToString();
-                quotation.data.latestPrice = random.Next(-10, 100).ToString();
-                quotation.data.highestPrice = random.Next(-10, 100).ToString();
-                quotation.data.bidVol = random.Next(-10, 100).ToString();
-                quotation.data.askVol = random.Next(-10, 100).ToString();
+            Quotation resultmodel = JsonHelper.JsonToObj<Quotation>(result);
 
-                objList.Add(quotation);
-            }
-            this.grid_saffer.Dispatcher.Invoke(new Action(() => { this.grid_saffer.ItemsSource = objList; }));
-        }
-        private void TimerUp(object sender, ElapsedEventArgs e)
-        {
-            Random random = new Random();
-            int tmp = random.Next(0, 20);
-            objList.FindAll(x => x.data.SerialNumber == tmp).ForEach(x =>
-              {
-                  x.data.ask = random.Next(-10, 100).ToString();
-                  x.data.bid = random.Next(-10, 100).ToString();
-                  x.data.openPrice = random.Next(-10, 100).ToString();
-                  x.data.volume = random.Next(-10, 100).ToString();
-                  x.data.lowestPrice = random.Next(-10, 100).ToString();
-                  x.data.latestPrice = random.Next(-10, 100).ToString();
-                  x.data.highestPrice = random.Next(-10, 100).ToString();
-                  x.data.bidVol = random.Next(-10, 100).ToString();
-                  x.data.askVol = random.Next(-10, 100).ToString();
-              });
+            objList = resultmodel.data;
             this.grid_saffer.Dispatcher.Invoke(new Action(() =>
             {
-                this.grid_saffer.ItemsSource = objList;
-                this.grid_saffer.Items.Refresh();
+                for (int i = 0; i < resultmodel.data.Count; i++)
+                {
+                    ListBoxItem listBoxItem = new ListBoxItem();
+                    listBoxItem.Content = resultmodel.data[i].productName;
+                    this.secondMenu.Items.Add(listBoxItem);
+                    if (i == 0)
+                    {
+                        this.secondCode = resultmodel.data[i].productName;
+                    }
+                }
+                objDetailList = objList[0].contractDtoList;
+                this.grid_saffer.ItemsSource = objDetailList;
             }));
         }
 
@@ -256,11 +218,11 @@ namespace TradingPlatform
         private void datagrid_DoubleClick(object sender)
         {
             DataGrid dg = (DataGrid)sender;
-            Quotation rowSelected = dg.SelectedItem as Quotation;
-            if (rowSelected != null)
+            contractDtoDetail rowSelected = dg.SelectedItem as contractDtoDetail;
+            if (rowSelected != null && !string.IsNullOrEmpty(rowSelected.contractId))
             {
-                string contractCode = rowSelected.data.contractCode;
-                string contractName = rowSelected.data.contractName;
+                string contractCode = rowSelected.contractId;
+                string contractName = rowSelected.contractName;
 
 
                 bool isExists = false;
@@ -304,50 +266,107 @@ namespace TradingPlatform
             Dictionary<string, string> header = new Dictionary<string, string>();
             string result = ApiHelper.SendPostByHeader(InterfacePath.Default.jiaoyisuo, dic, header, "post");
             ResultModel<List<ExchangeModel>> resultModel = JsonHelper.JsonToObj<ResultModel<List<ExchangeModel>>>(result);
+            exchangeModels = resultModel.data;
             Dispatcher.Invoke(new Action(() =>
             {
                 foreach (ExchangeModel item in resultModel.data)
                 {
-                    if (!this.box_exchange.Items.Contains(item.name))
+                    if (!this.tooblar.Items.Contains(item.name))
                     {
-                        this.box_exchange.Items.Add(item.name);
+                        ListBox listBox = new ListBox();
+                        listBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2a2a2a"));
+                        listBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8B8787"));
+                        listBox.BorderThickness = new Thickness(0);
+                        listBox.Margin = new Thickness(0);
+                        listBox.FontFamily = new FontFamily("pingfang hk"); ;
+                        listBox.FontSize = 14;
+                        listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
+                        ListBoxItem listBoxItem = new ListBoxItem();
+                        listBoxItem.Content = item.name;
+                        listBox.Items.Add(listBoxItem);
+                        this.tooblar.Items.Add(listBox);
+                    }
+                }
+                exchangeModel = resultModel.data[0].code;
+                for (int i = 0; i < this.tooblar.Items.Count; i++)
+                {
+                    if ((this.tooblar.Items[i] as ListBox).Items.Count > 0)
+                    {
+                        ((this.tooblar.Items[i] as ListBox).Items[0] as ListBoxItem).MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
                     }
                 }
             }));
-            
+
 
 
         }
+
+        private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            for (int i = 0; i < this.tooblar.Items.Count; i++)
+            {
+                ListBox listBox = (this.tooblar.Items[i] as ListBox);
+                ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
+                listBoxItem.IsSelected = false;
+            }
+        }
+
         #endregion
 
         private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if ((this.box_exchange.ActualWidth) - (this.Width - 80) > 10)
+            this.tooblar.Width = this.Width;
+            //this.box_exchange.Width = this.Width;
+            //if ((this.box_exchange.ActualWidth) - (this.Width - 80) > 10)
+            //{
+            //    MenuItem menuItem = new MenuItem();
+            //    menuItem.Header = this.box_exchange.Items[this.box_exchange.Items.Count - 1].ToString();
+            //    if (this.box_exchangeparent.Children.Contains(menuItem))
+            //    {
+            //        Menu menuchildren = new Menu();
+            //        menuchildren.Items.Add(menuItem);
+            //        Menu menu = (this.box_exchangeparent.FindName("MenuTitle") as Menu);
+            //        menu.HorizontalAlignment = HorizontalAlignment.Left;
+            //        menu.VerticalAlignment = VerticalAlignment.Top;
+            //        menu.Width = 200;
+            //        menu.Items.Add(menuchildren);
+            //    }
+            //    else
+            //    {
+            //        Menu menu = new Menu();
+            //        menu.Name = "MenuTitle";
+            //        menu.HorizontalAlignment = HorizontalAlignment.Left;
+            //        menu.VerticalAlignment = VerticalAlignment.Top;
+            //        menu.Width = 200;
+            //        menu.Items.Add(menuItem);
+            //        this.box_exchangeparent.Children.Add(menu);
+            //    }
+            //    this.box_exchange.Items.RemoveAt(this.box_exchange.Items.Count - 1);
+            //}
+        }
+
+        private void Grid_saffer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.grid_saffer.IsLoaded)
             {
-                MenuItem menuItem = new MenuItem();
-                menuItem.Header = this.box_exchange.Items[this.box_exchange.Items.Count - 1].ToString();
-                if (this.box_exchangeparent.Children.Contains(menuItem))
+                Dispatcher.InvokeAsync(() =>
                 {
-                    Menu menuchildren = new Menu();
-                    menuchildren.Items.Add(menuItem);
-                    Menu menu = (this.box_exchangeparent.FindName("MenuTitle") as Menu);
-                    menu.HorizontalAlignment = HorizontalAlignment.Left;
-                    menu.VerticalAlignment = VerticalAlignment.Top;
-                    menu.Width = 200;
-                    menu.Items.Add(menuchildren);
-                }
-                else
-                {
-                    Menu menu = new Menu();
-                    menu.Name = "MenuTitle";
-                    menu.HorizontalAlignment = HorizontalAlignment.Left;
-                    menu.VerticalAlignment = VerticalAlignment.Top;
-                    menu.Width = 200;
-                    menu.Items.Add(menuItem);
-                    this.box_exchangeparent.Children.Add(menu);
-                }
-                this.box_exchange.Items.RemoveAt(this.box_exchange.Items.Count - 1);
+                    List<contractDtoDetail> list = this.grid_saffer.ItemsSource as List<contractDtoDetail>;
+                    this.grid_saffer.Height = (this.grid_saffer.Parent as WrapPanel).ActualHeight;
+                    double tag = Convert.ToDouble(this.grid_saffer.Tag);//每行高度
+                    double height = Convert.ToDouble(this.grid_saffer.Tag) * list.Count;//总高度
+                    if (this.grid_saffer.Height - height > tag)//如果空白高度大于行高手动添加行
+                    {
+                        int rowNumber = Convert.ToInt32(Math.Round((this.grid_saffer.Height - height) / tag, 0));
+                        for (int i = 0; i < rowNumber; i++)
+                        {
+                            objDetailList.Add(new contractDtoDetail());
+                            this.grid_saffer.Items.Refresh();
+                        }
+                    }
+                });
             }
         }
+
     }
 }

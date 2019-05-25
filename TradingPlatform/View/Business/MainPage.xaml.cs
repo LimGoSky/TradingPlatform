@@ -25,6 +25,7 @@ namespace TradingPlatform.Business
     /// </summary>
     public partial class MainPage : Window
     {
+        public string topicid { get; set; }
         public MainPage()
         {
             #region 获取MQTT连接信息
@@ -43,8 +44,22 @@ namespace TradingPlatform.Business
             #region 连接MQTT
             SubscribeClient subscribeClient = new SubscribeClient(MqttEntity._instance);
             #endregion
-
+            Init();
             InitializeComponent();
+        }
+        public void Init() {
+            topicid = "CL1906";
+            Task task = Task.Factory.StartNew(() =>
+            {
+                var dic = new Dictionary<string, string>();
+                dic.Add("sub-1", "/topic/latest_quotation_CME.CL.CL1906");
+                WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
+                ws.Connect(delegate (string data)
+                {
+                    txt_topic.Text = data;
+                });
+            }, TaskCreationOptions.LongRunning);
+
         }
         #region 标题栏事件
 
@@ -92,15 +107,15 @@ namespace TradingPlatform.Business
             if (selectindex == 0)//持仓
             {
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chicang, dic, header, "post");
-                ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
-                if (resultmodel.code == 402)
-                {
-                    ReloadLogin();
-                }
-                if (resultmodel.data != null)
-                {
-                    this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
-                }
+                //ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
+                //if (resultmodel.code == 402)
+                //{
+                //    ReloadLogin();
+                //}
+                //if (resultmodel.data != null)
+                //{
+                //    this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
+                //}
             }
             if (selectindex == 1)//委托
             {
@@ -252,13 +267,13 @@ namespace TradingPlatform.Business
 
         private void JiaoYiDanJiaAdd_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.limitPrice.Text = (Convert.ToInt32(this.limitPrice.Text) + 0.01).ToString();
+            this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) + 0.01).ToString();
         }
         private void JiaoYiDanJiaReduce_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Convert.ToInt32(this.limitPrice.Text) > 0)
+            if (Convert.ToDouble(this.limitPrice.Text) > 0)
             {
-                this.limitPrice.Text = (Convert.ToInt32(this.limitPrice.Text) - 0.01).ToString();
+                this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) - 0.01).ToString();
             }
         }
 
