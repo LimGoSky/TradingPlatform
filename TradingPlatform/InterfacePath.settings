@@ -29,5 +29,8 @@
     <Setting Name="tiaojiandan" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://trade.xgj.alibaba.com/trading/order/list</Value>
     </Setting>
+    <Setting Name="hangqinglist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://market.future.alibaba.com/contract/list/detail</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

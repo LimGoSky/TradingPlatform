@@ -67,8 +67,8 @@ namespace TradingPlatform.View.Login
         private void BussinesLogin_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("user", "1297005");
-            dic.Add("password", "1297005");
+            dic.Add("user", this.UserTextBox.Text);
+            dic.Add("password",this.PwdTextBox.Text);
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);
