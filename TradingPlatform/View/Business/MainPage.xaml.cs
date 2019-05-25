@@ -25,7 +25,7 @@ namespace TradingPlatform.Business
     /// </summary>
     public partial class MainPage : Window
     {
-        public string topicid { get; set; }
+        public string instrumentId { get; set; }
         public MainPage()
         {
             #region 获取MQTT连接信息
@@ -48,11 +48,12 @@ namespace TradingPlatform.Business
             InitializeComponent();
         }
         public void Init() {
-            topicid = "CL1906";
+            instrumentId = "CL1906";
             Task task = Task.Factory.StartNew(() =>
             {
                 var dic = new Dictionary<string, string>();
-                dic.Add("sub-1", "/topic/latest_quotation_CME.CL.CL1906");
+                dic.Add("sub-0", "/topic/latest_quotation_CME.CL.CL1906");
+
                 WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
                 ws.Connect(delegate (string data)
                 {
@@ -149,7 +150,7 @@ namespace TradingPlatform.Business
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("contingentCondition", "IMMEDIATELY");
             dic.Add("direction", "BUY");//BUY,SELL
-            dic.Add("instrumentId", "");
+            dic.Add("instrumentId", this.instrumentId);
             dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
             if (this.rdo_kaicang.IsChecked == true)
             {
@@ -187,7 +188,7 @@ namespace TradingPlatform.Business
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("contingentCondition", "IMMEDIATELY");
             dic.Add("direction", "SELL");//BUY,SELL
-            dic.Add("instrumentId", "");
+            dic.Add("instrumentId", this.instrumentId);
             dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
             if (this.rdo_kaicang.IsChecked == true)
             {
@@ -224,7 +225,7 @@ namespace TradingPlatform.Business
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("exchangeId", "");
-            dic.Add("instrumentId", "");
+            dic.Add("instrumentId", this.instrumentId);
             dic.Add("orderSysId", "");
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());

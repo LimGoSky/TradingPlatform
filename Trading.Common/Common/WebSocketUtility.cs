@@ -101,6 +101,14 @@ namespace Trading.Common
         /// </summary>
         private void SubscribeStomp()
         {
+            // 
+
+            var sub_test = new StompMessage(StompFrame.SUBSCRIBE);
+            //unique Key per subscription
+            sub_test["id"] = "sub-0";
+            sub_test["destination"] = "/topic/latest_quotation_detail_CL1906";
+            webSocket.Send(serializer.Serialize(sub_test));
+
             //var sub = new StompMessage(StompFrame.SUBSCRIBE);
             ////unique Key per subscription
             //sub["id"] = "sub-0";

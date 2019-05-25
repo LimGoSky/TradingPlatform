@@ -34,14 +34,23 @@ namespace Trading.Demo
             //ThreadPool.QueueUserWorkItem(fn => {
             //    Connect();
             //});
+            try
+            {
+                Task task = Task.Factory.StartNew(() => {
+                    var dic = new Dictionary<string, string>();
+                    //dic.Add("sub-1", "/topic/latest_quotation_detail_CL1906");
+                    //dic.Add("sub-2", "/topic/ask_bid_CL1906");
+                    dic.Add("sub-1", "/topic/test");
 
-            Task task = Task.Factory.StartNew(() => {
-                var dic = new Dictionary<string, string>();
-                dic.Add("sub-1", "/topic/latest_quotation_detail_CL1906");
-                dic.Add("sub-2", "/topic/ask_bid_CL1906");
-                WebSocketUtility ws = WebSocketUtility.Create("ws://k.quotation.qianzijr.com/webSocket/market", dic);
-                ws.Connect(onMessage);
-            }, TaskCreationOptions.LongRunning);
+                    WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
+                    ws.Connect(onMessage);
+                }, TaskCreationOptions.LongRunning);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         
         void onMessage(string data)

@@ -122,10 +122,10 @@
                     </Border>
                 </Canvas>
                 <Canvas Grid.Row="4">
-                    <Image Source="/Styles/images/mairu.png" Height="100" Margin="25,0,25,25" Width="200"></Image>
+                    <Image Source="/Styles/images/mairu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="Purchase_Click"></Image>
                 </Canvas>
                 <Canvas Grid.Row="5">
-                    <Image Source="/Styles/images/maichu.png" Height="100" Margin="25,0,25,25" Width="200"></Image>
+                    <Image Source="/Styles/images/maichu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="SellOut_Click"></Image>
                 </Canvas>
             </Grid>
         </Canvas>

@@ -35,7 +35,7 @@
                             <Border CornerRadius="15" Height="42" Margin="50,0,0,0" Width="386" BorderThickness="1" BorderBrush="#FF737070" Background="#1e1e1e">
                                 <TextBox BorderThickness="0" Margin="0,10,0,0" FontFamily="pingfang hk" Height="42" Width="320" FontSize="16" Text="输入期货代码/名称/拼音" Foreground="#3b3b3b" Background="#1e1e1e"/>
                             </Border>
-                            
+
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -116,18 +116,18 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel x:Name="box_exchangeparent" Grid.Row="0" Orientation="Horizontal" Background="#2a2a2a" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                            <ToolBar Band="1" ToolBarTray.IsLocked="True" HorizontalAlignment="Left" Margin="0" BandIndex="1" ToolBar.OverflowMode="AsNeeded" x:Name="tooblar" Background="#2a2a2a" FontSize="14" Foreground="#FF8B8787" FontFamily="pingfang hk">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#2a2a2a" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ToolBar x:Name="tooblar" Band="1" ToolBarTray.IsLocked="True" HorizontalAlignment="Left" Margin="0,0,0,0" BandIndex="1" ToolBar.OverflowMode="AsNeeded" Background="#2a2a2a" FontSize="14" Foreground="#FF8B8787" FontFamily="pingfang hk" Style="{DynamicResource MenuFirst}">
                                 <ListBox Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
-                                    <ListBoxItem>自选</ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock MouseLeftButtonDown="MainWindow_MouseLeftButtonDown">自选</TextBlock></ListBoxItem>
                                 </ListBox>
                                 <ListBox x:Name="box_exchange" Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
-                                    
                                 </ListBox>
                             </ToolBar>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#191919">
-                            <ListBox x:Name="secondMenu" FontSize="14" FontFamily="pingfang hk" Background="#191919" Foreground="#808080" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                            <ListBox x:Name="secondMenu" FontSize="14" FontFamily="pingfang hk" Background="#191919" Foreground="#808080" BorderThickness="0" >
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal" />
@@ -362,7 +362,7 @@
                         <Frame HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Source="./View/Business/MainPage.xaml" Name="frame1" VerticalAlignment="Top" />
                     </StackPanel>
                 </TabItem>-->
-                
+
             </TabControl>
 
         </DockPanel>

@@ -58,33 +58,39 @@ namespace TradingPlatform
         /// </summary>
         public void BindList()
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("condition", "true");
-            dic.Add("exchangeId", exchangeModel);
-            Dictionary<string, string> header = new Dictionary<string, string>();
-            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
-            header.Add("GeneralParam", GeneralParam);
-            header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
-            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.hangqinglist, dic, header, "post");
+            Task.Run(() => {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("condition", "true");
+                dic.Add("exchangeId", exchangeModel);
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+                header.Add("GeneralParam", GeneralParam);
+                header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.hangqinglist, dic, header, "post");
 
-            Quotation resultmodel = JsonHelper.JsonToObj<Quotation>(result);
+                Quotation resultmodel = JsonHelper.JsonToObj<Quotation>(result);
 
-            objList = resultmodel.data;
-            this.grid_saffer.Dispatcher.Invoke(new Action(() =>
-            {
-                for (int i = 0; i < resultmodel.data.Count; i++)
+                objList = resultmodel.data;
+                this.grid_saffer.Dispatcher.Invoke(new Action(() =>
                 {
-                    ListBoxItem listBoxItem = new ListBoxItem();
-                    listBoxItem.Content = resultmodel.data[i].productName;
-                    this.secondMenu.Items.Add(listBoxItem);
-                    if (i == 0)
+                    for (int i = 0; i < resultmodel.data.Count; i++)
                     {
-                        this.secondCode = resultmodel.data[i].productName;
+                        ListBoxItem listBoxItem = new ListBoxItem();
+                        listBoxItem.Content = resultmodel.data[i].productName;
+                        this.secondMenu.Items.Add(listBoxItem);
+                        if (i == 0)
+                        {
+                            this.secondCode = resultmodel.data[i].productName;
+                        }
                     }
-                }
-                objDetailList = objList[0].contractDtoList;
-                this.grid_saffer.ItemsSource = objDetailList;
-            }));
+                    if (objList.Count > 0)
+                    {
+                        objDetailList = objList[0].contractDtoList;
+                        this.grid_saffer.ItemsSource = objDetailList;
+                        Grid_saffer_SizeChanged(null, null);
+                    }
+                }));
+            });
         }
 
         #region 标题栏窗口事件
@@ -282,23 +288,16 @@ namespace TradingPlatform
                         listBox.FontSize = 14;
                         listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
                         ListBoxItem listBoxItem = new ListBoxItem();
-                        listBoxItem.Content = item.name;
+                        TextBlock txt = new TextBlock();
+                        txt.Text = item.name;
+                        txt.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
+                        listBoxItem.Content = txt;
                         listBox.Items.Add(listBoxItem);
                         this.tooblar.Items.Add(listBox);
                     }
                 }
                 exchangeModel = resultModel.data[0].code;
-                for (int i = 0; i < this.tooblar.Items.Count; i++)
-                {
-                    if ((this.tooblar.Items[i] as ListBox).Items.Count > 0)
-                    {
-                        ((this.tooblar.Items[i] as ListBox).Items[0] as ListBoxItem).MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-                    }
-                }
             }));
-
-
-
         }
 
         private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -306,9 +305,25 @@ namespace TradingPlatform
             for (int i = 0; i < this.tooblar.Items.Count; i++)
             {
                 ListBox listBox = (this.tooblar.Items[i] as ListBox);
-                ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
-                listBoxItem.IsSelected = false;
+                if (listBox.Items.Count>0)
+                {
+                    ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
+                    if (listBoxItem.IsSelected)
+                    {
+                        listBoxItem.IsSelected = false;
+                    }
+                }
             }
+
+            TextBlock txt = sender as TextBlock;
+            ListBoxItem boxItem = txt.Parent as ListBoxItem;
+            boxItem.IsSelected = true;
+
+            //修改当前交易所
+            this.exchangeModel = exchangeModels.Find(x => x.name == txt.Text).code;
+            //重新绑定列表
+            BindList();
+
         }
 
         #endregion
@@ -316,33 +331,6 @@ namespace TradingPlatform
         private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.tooblar.Width = this.Width;
-            //this.box_exchange.Width = this.Width;
-            //if ((this.box_exchange.ActualWidth) - (this.Width - 80) > 10)
-            //{
-            //    MenuItem menuItem = new MenuItem();
-            //    menuItem.Header = this.box_exchange.Items[this.box_exchange.Items.Count - 1].ToString();
-            //    if (this.box_exchangeparent.Children.Contains(menuItem))
-            //    {
-            //        Menu menuchildren = new Menu();
-            //        menuchildren.Items.Add(menuItem);
-            //        Menu menu = (this.box_exchangeparent.FindName("MenuTitle") as Menu);
-            //        menu.HorizontalAlignment = HorizontalAlignment.Left;
-            //        menu.VerticalAlignment = VerticalAlignment.Top;
-            //        menu.Width = 200;
-            //        menu.Items.Add(menuchildren);
-            //    }
-            //    else
-            //    {
-            //        Menu menu = new Menu();
-            //        menu.Name = "MenuTitle";
-            //        menu.HorizontalAlignment = HorizontalAlignment.Left;
-            //        menu.VerticalAlignment = VerticalAlignment.Top;
-            //        menu.Width = 200;
-            //        menu.Items.Add(menuItem);
-            //        this.box_exchangeparent.Children.Add(menu);
-            //    }
-            //    this.box_exchange.Items.RemoveAt(this.box_exchange.Items.Count - 1);
-            //}
         }
 
         private void Grid_saffer_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -368,5 +356,9 @@ namespace TradingPlatform
             }
         }
 
+        private void ListBoxItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("s");
+        }
     }
 }
