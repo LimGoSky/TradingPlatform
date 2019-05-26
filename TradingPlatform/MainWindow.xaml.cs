@@ -279,7 +279,7 @@ namespace TradingPlatform
                 {
                     if (win.GetType() == typeof(MainPage))
                     {
-                        (win as MainPage).TiaoJianDanList();
+                        //(win as MainPage).TiaoJianDanList();
                         win.Show();
                         return;
                     }
