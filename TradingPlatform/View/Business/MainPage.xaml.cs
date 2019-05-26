@@ -47,7 +47,11 @@ namespace TradingPlatform.Business
             Init();
             InitializeComponent();
         }
-        public void Init() {
+        /// <summary>
+        /// 初始化合约信息
+        /// </summary>
+        public void Init()
+        {
             instrumentId = "CL1906";
             Task task = Task.Factory.StartNew(() =>
             {
@@ -62,6 +66,8 @@ namespace TradingPlatform.Business
             }, TaskCreationOptions.LongRunning);
 
         }
+
+
         #region 标题栏事件
 
         ///// <summary>

@@ -214,27 +214,15 @@
     <Style x:Key="ToolBarHorizontalOverflowButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource ToolBarToggleButtonHorizontalBackground}"/>
         <Setter Property="MinHeight" Value="0"/>
-        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="Background" Value="Red"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="#FF2A2A2A">
-                        <!--<Border.OpacityMask>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF2A2A2A" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.OpacityMask>-->
-                        <!--<Canvas Width="40" VerticalAlignment="Center" SnapsToDevicePixels="true" Margin="40,2,2,2" Height="40" HorizontalAlignment="Right" OpacityMask="#FF979393">
-                            --><!--<Canvas.Background>
-                                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/pull_down_big.png"/>
-                            </Canvas.Background>-->
-                            <!--<Path Data="M -0.5 3 L 5.5 3 L 2.5 6 Z" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40">
-                                <Path.Fill>
-                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/pull_down_big.png"/>
-                                </Path.Fill>
-                            </Path>--><!--
-                        </Canvas>-->
-                        <TextBlock>胡冰冰</TextBlock>
+                    <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="Red">
+                        <Canvas Width="40" VerticalAlignment="Center" SnapsToDevicePixels="true" Margin="40,2,2,2" Height="40" HorizontalAlignment="Right" OpacityMask="#FF6E3C3C">
+                            <Path Data="M -0.5 3 L 5.5 3 L 2.5 6 Z" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40"/>
+                        </Canvas>
                         <!--<Image Source="pack://siteoforigin:,,,/Resources/pull_down_big.png" Width="80" Height="80"></Image>-->
                     </Border>
                     <ControlTemplate.Triggers>
@@ -302,7 +290,7 @@
                 <ControlTemplate TargetType="{x:Type ToolBar}">
                     <Grid x:Name="Grid" Margin="0,1,1,1" SnapsToDevicePixels="true">
                         <Grid x:Name="OverflowGrid" HorizontalAlignment="Right" Background="#FF2A2A2A" Width="40" Height="40" Margin="0,0,0,0" VerticalAlignment="Center">
-                            <ToggleButton x:Name="OverflowButton" ClickMode="Press" FocusVisualStyle="{x:Null}" IsChecked="{Binding IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" IsEnabled="{TemplateBinding HasOverflowItems}" Style="{StaticResource ToolBarHorizontalOverflowButtonStyle}" OpacityMask="{x:Null}" Margin="0,0,0,0" Foreground="#FFE8DBDB" BorderBrush="#FFF1ECEC" Width="50" Background="#FF2A2A2A" Height="30"/>
+                            <ToggleButton x:Name="OverflowButton" ClickMode="Press" FocusVisualStyle="{x:Null}" IsChecked="{Binding IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" IsEnabled="{TemplateBinding HasOverflowItems}" Style="{StaticResource ToolBarHorizontalOverflowButtonStyle}" OpacityMask="{x:Null}" Margin="0,0,0,0" Foreground="#FFE8DBDB" BorderBrush="#FFF1ECEC" Width="50" Background="Gray" Height="30"/>
                             <Popup x:Name="OverflowPopup" AllowsTransparency="true" Focusable="false" IsOpen="{Binding IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" StaysOpen="false" OpacityMask="#FF2A2A2A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxWidth="120">
                                 <Themes:SystemDropShadowChrome x:Name="Shdw" Color="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Border x:Name="ToolBarSubMenuBorder" BorderBrush="{StaticResource ToolBarMenuBorder}" BorderThickness="1" Background="#FF2A2A2A" RenderOptions.ClearTypeHint="Enabled" HorizontalAlignment="Center" VerticalAlignment="Center">

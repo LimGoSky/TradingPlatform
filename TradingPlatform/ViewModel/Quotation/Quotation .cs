@@ -7,6 +7,9 @@ using System.Windows.Data;
 
 namespace TradingPlatform.ViewModel.Quotation
 {
+    /// <summary>
+    /// 行情列表
+    /// </summary>
 
     public class Quotation
     {
@@ -187,5 +190,43 @@ namespace TradingPlatform.ViewModel.Quotation
         /// 成交量
         /// </summary>
         public string volume { get; set; }
+
+        #region 颜色
+        public string lastPriceColor
+        {
+            get
+            {
+                return (lastPrice == null || preSettlementPrice == null) ? "#b1b1b1" : (Convert.ToDouble(lastPrice) > Convert.ToDouble(preSettlementPrice) ? "#de0504" : (Convert.ToDouble(lastPrice) < Convert.ToDouble(preSettlementPrice) ? "#3d9755" : "#b1b1b1"));
+            }
+        }
+        public string bidPrice1Color
+        {
+            get
+            {
+                return (bidPrice1 == null || preSettlementPrice == null) ? "#b1b1b1" : (Convert.ToDouble(bidPrice1) > Convert.ToDouble(preSettlementPrice) ? "#de0504" : (Convert.ToDouble(bidPrice1) < Convert.ToDouble(preSettlementPrice) ? "#3d9755" : "#b1b1b1"));
+            }
+        }
+        public string askPrice1Color
+        {
+            get
+            {
+                return (askPrice1 == null || preSettlementPrice == null) ? "#b1b1b1" : (Convert.ToDouble(askPrice1) > Convert.ToDouble(preSettlementPrice) ? "#de0504" : (Convert.ToDouble(askPrice1) < Convert.ToDouble(preSettlementPrice) ? "#3d9755" : "#b1b1b1"));
+            }
+        }
+        public string upperLimitPriceColor
+        {
+            get
+            {
+                return upperLimitPrice == null ? "#b1b1b1" : (Convert.ToDouble(upperLimitPrice) == 0 ? "#b1b1b1" : (Convert.ToDouble(upperLimitPrice) > 0 ? "#de0504" : "#3d9755"));
+            }
+        }
+        public string lowerLimitPriceColor
+        {
+            get
+            {
+                return lowerLimitPrice == null ? "#b1b1b1" : (Convert.ToDouble(lowerLimitPrice) == 0 ? "#b1b1b1" : (Convert.ToDouble(lowerLimitPrice) > 0 ? "#de0504" : "#3d9755"));
+            }
+        }
+        #endregion
     }
 }

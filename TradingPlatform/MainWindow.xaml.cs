@@ -58,7 +58,8 @@ namespace TradingPlatform
         /// </summary>
         public void BindList()
         {
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("condition", "true");
                 dic.Add("exchangeId", exchangeModel);
@@ -73,24 +74,79 @@ namespace TradingPlatform
                 objList = resultmodel.data;
                 this.grid_saffer.Dispatcher.Invoke(new Action(() =>
                 {
-                    for (int i = 0; i < resultmodel.data.Count; i++)
+                    if (this.secondMenu.Items.Count == 0)
                     {
-                        ListBoxItem listBoxItem = new ListBoxItem();
-                        listBoxItem.Content = resultmodel.data[i].productName;
-                        this.secondMenu.Items.Add(listBoxItem);
-                        if (i == 0)
+                        for (int i = 0; i < resultmodel.data.Count; i++)
                         {
-                            this.secondCode = resultmodel.data[i].productName;
+                            ListBox listBox = new ListBox();
+                            listBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#191919"));
+                            listBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#808080"));
+                            listBox.BorderThickness = new Thickness(0);
+                            listBox.Margin = new Thickness(0);
+                            listBox.FontFamily = new FontFamily("pingfang hk"); ;
+                            listBox.FontSize = 14;
+                            listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
+                            ListBoxItem listBoxItem = new ListBoxItem();
+                            TextBlock txt = new TextBlock();
+                            txt.Text = resultmodel.data[i].productName;
+                            txt.MouseLeftButtonDown += SecondToolBar_MouseLeftButtonDown; ;
+                            listBoxItem.Content = txt;
+                            if (i == 0)
+                            {
+                                listBoxItem.IsSelected = true;
+                            }
+                            listBox.Items.Add(listBoxItem);
+                            this.secondMenu.Items.Add(listBox);
+                            if (i == 0)
+                            {
+                                this.secondCode = resultmodel.data[i].productId;
+                            }
                         }
                     }
                     if (objList.Count > 0)
                     {
-                        objDetailList = objList[0].contractDtoList;
+                        if (objDetailList!=null && objDetailList.Count > 0)
+                        {
+                            QuotationChildren model = objList.Find(x => x.productId == this.secondCode);
+                            if (model!=null)
+                            {
+                                objDetailList = model.contractDtoList;
+                            }
+                        }
+                        else
+                        {
+                            objDetailList = objList[0].contractDtoList;
+                        }
                         this.grid_saffer.ItemsSource = objDetailList;
                         Grid_saffer_SizeChanged(null, null);
                     }
                 }));
             });
+        }
+
+        private void SecondToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            for (int i = 0; i < this.secondMenu.Items.Count; i++)
+            {
+                ListBox listBox = (this.secondMenu.Items[i] as ListBox);
+                if (listBox.Items.Count > 0)
+                {
+                    ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
+                    if (listBoxItem.IsSelected)
+                    {
+                        listBoxItem.IsSelected = false;
+                    }
+                }
+            }
+
+            TextBlock txt = sender as TextBlock;
+            ListBoxItem boxItem = txt.Parent as ListBoxItem;
+            boxItem.IsSelected = true;
+
+            //修改当前行情编号
+            this.secondCode = objList.Find(x => x.productName == txt.Text).productId;
+            //重新绑定列表
+            BindList();
         }
 
         #region 标题栏窗口事件
@@ -204,7 +260,7 @@ namespace TradingPlatform
         }
         #endregion
 
-        #region 行双击事件
+        #region 行情行双击事件
         /// <summary>
         /// 行双击事件
         /// </summary>
@@ -215,6 +271,19 @@ namespace TradingPlatform
             if (e.ClickCount == 2 && e.ChangedButton == MouseButton.Left)
             {
                 datagrid_DoubleClick(sender);
+                //if (mainPage != null && mainPage.IsActive)
+                //{
+                //    ChangeExchangeInfo();
+                //}
+                foreach (Window win in App.Current.Windows)
+                {
+                    if (win.GetType() == typeof(MainPage))
+                    {
+                        (win as MainPage).TiaoJianDanList();
+                        win.Show();
+                        return;
+                    }
+                }
             }
         }
         /// <summary>
@@ -275,9 +344,9 @@ namespace TradingPlatform
             exchangeModels = resultModel.data;
             Dispatcher.Invoke(new Action(() =>
             {
-                foreach (ExchangeModel item in resultModel.data)
+                for (int i = 0; i < resultModel.data.Count; i++)
                 {
-                    if (!this.tooblar.Items.Contains(item.name))
+                    if (!this.tooblar.Items.Contains(resultModel.data[i].name))
                     {
                         ListBox listBox = new ListBox();
                         listBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2a2a2a"));
@@ -289,9 +358,13 @@ namespace TradingPlatform
                         listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
                         ListBoxItem listBoxItem = new ListBoxItem();
                         TextBlock txt = new TextBlock();
-                        txt.Text = item.name;
+                        txt.Text = resultModel.data[i].name;
                         txt.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
                         listBoxItem.Content = txt;
+                        if (i==0)
+                        {
+                            listBoxItem.IsSelected = true;
+                        }
                         listBox.Items.Add(listBoxItem);
                         this.tooblar.Items.Add(listBox);
                     }
@@ -305,7 +378,7 @@ namespace TradingPlatform
             for (int i = 0; i < this.tooblar.Items.Count; i++)
             {
                 ListBox listBox = (this.tooblar.Items[i] as ListBox);
-                if (listBox.Items.Count>0)
+                if (listBox.Items.Count > 0)
                 {
                     ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
                     if (listBoxItem.IsSelected)
@@ -340,25 +413,24 @@ namespace TradingPlatform
                 Dispatcher.InvokeAsync(() =>
                 {
                     List<contractDtoDetail> list = this.grid_saffer.ItemsSource as List<contractDtoDetail>;
-                    this.grid_saffer.Height = (this.grid_saffer.Parent as WrapPanel).ActualHeight;
-                    double tag = Convert.ToDouble(this.grid_saffer.Tag);//每行高度
-                    double height = Convert.ToDouble(this.grid_saffer.Tag) * list.Count;//总高度
-                    if (this.grid_saffer.Height - height > tag)//如果空白高度大于行高手动添加行
+                    if (list != null && list.Count > 0)
                     {
-                        int rowNumber = Convert.ToInt32(Math.Round((this.grid_saffer.Height - height) / tag, 0));
-                        for (int i = 0; i < rowNumber; i++)
+                        this.grid_saffer.Height = (this.grid_saffer.Parent as WrapPanel).ActualHeight;
+                        double tag = Convert.ToDouble(this.grid_saffer.Tag);//每行高度
+                        double height = Convert.ToDouble(this.grid_saffer.Tag) * list.Count;//总高度
+                        if (this.grid_saffer.Height - height > tag)//如果空白高度大于行高手动添加行
                         {
-                            objDetailList.Add(new contractDtoDetail());
-                            this.grid_saffer.Items.Refresh();
+                            int rowNumber = Convert.ToInt32(Math.Round((this.grid_saffer.Height - height) / tag, 0));
+                            for (int i = 0; i < rowNumber; i++)
+                            {
+                                objDetailList.Add(new contractDtoDetail());
+                                this.grid_saffer.Items.Refresh();
+                            }
                         }
                     }
                 });
             }
         }
 
-        private void ListBoxItem_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("s");
-        }
     }
 }
