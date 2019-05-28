@@ -12,7 +12,7 @@ namespace Trading.Model.Model_Business
     public class RecordModel {
 
         public string haveNext { get; set; }
-        public List<EntrustModel_List> list { get; set; }
+        public List<RecordModel_List> list { get; set; }
     }
     public class RecordModel_List
     {

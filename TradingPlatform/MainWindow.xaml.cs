@@ -38,10 +38,6 @@ namespace TradingPlatform
         /// </summary>
         public List<ExchangeModel> exchangeModels;
         /// <summary>
-        /// 当前选中交易所
-        /// </summary>
-        public string exchangeModel;
-        /// <summary>
         /// 所有合约集合
         /// </summary>
         public List<QuotationChildren> objList;
@@ -50,19 +46,27 @@ namespace TradingPlatform
         /// </summary>
         public List<contractDtoDetail> objDetailList;
         /// <summary>
-        /// 当前选择行情编号
+        /// 当前选中交易所Id
         /// </summary>
-        public string secondCode;
+        public string exchangeId;
+        /// <summary>
+        /// 当前产品id
+        /// </summary>
+        public string productId { get; set; }
+        /// <summary>
+        /// 当前合约id
+        /// </summary>
+        public string contractId { get; set; }
         /// <summary>
         /// 绑定列表
         /// </summary>
         public void BindList()
         {
-            Task.Run(() =>
+            Task.Run((Action)(() =>
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("condition", "true");
-                dic.Add("exchangeId", exchangeModel);
+                dic.Add("exchangeId", (string)this.exchangeId);
                 Dictionary<string, string> header = new Dictionary<string, string>();
                 string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
                 header.Add("GeneralParam", GeneralParam);
@@ -99,16 +103,16 @@ namespace TradingPlatform
                             this.secondMenu.Items.Add(listBox);
                             if (i == 0)
                             {
-                                this.secondCode = resultmodel.data[i].productId;
+                                this.productId = resultmodel.data[i].productId;
                             }
                         }
                     }
                     if (objList.Count > 0)
                     {
-                        if (objDetailList!=null && objDetailList.Count > 0)
+                        if (objDetailList != null && objDetailList.Count > 0)
                         {
-                            QuotationChildren model = objList.Find(x => x.productId == this.secondCode);
-                            if (model!=null)
+                            QuotationChildren model = objList.Find(x => x.productId == this.productId);
+                            if (model != null)
                             {
                                 objDetailList = model.contractDtoList;
                             }
@@ -121,7 +125,7 @@ namespace TradingPlatform
                         Grid_saffer_SizeChanged(null, null);
                     }
                 }));
-            });
+            }));
         }
 
         private void SecondToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -144,7 +148,7 @@ namespace TradingPlatform
             boxItem.IsSelected = true;
 
             //修改当前行情编号
-            this.secondCode = objList.Find(x => x.productName == txt.Text).productId;
+            this.productId = objList.Find(x => x.productName == txt.Text).productId;
             //重新绑定列表
             BindList();
         }
@@ -271,16 +275,13 @@ namespace TradingPlatform
             if (e.ClickCount == 2 && e.ChangedButton == MouseButton.Left)
             {
                 datagrid_DoubleClick(sender);
-                //if (mainPage != null && mainPage.IsActive)
-                //{
-                //    ChangeExchangeInfo();
-                //}
+                //页面传递数据
                 foreach (Window win in App.Current.Windows)
                 {
                     if (win.GetType() == typeof(MainPage))
                     {
-                        //(win as MainPage).TiaoJianDanList();
-                        win.Show();
+                        (win as MainPage).ChangePageInfo(exchangeId, productId, contractId);
+                        //win.Show();
                         return;
                     }
                 }
@@ -296,7 +297,7 @@ namespace TradingPlatform
             contractDtoDetail rowSelected = dg.SelectedItem as contractDtoDetail;
             if (rowSelected != null && !string.IsNullOrEmpty(rowSelected.contractId))
             {
-                string contractCode = rowSelected.contractId;
+                string contractCode = contractId = rowSelected.contractId;
                 string contractName = rowSelected.contractName;
 
 
@@ -369,7 +370,7 @@ namespace TradingPlatform
                         this.tooblar.Items.Add(listBox);
                     }
                 }
-                exchangeModel = resultModel.data[0].code;
+                exchangeId = resultModel.data[0].code;
             }));
         }
 
@@ -393,7 +394,7 @@ namespace TradingPlatform
             boxItem.IsSelected = true;
 
             //修改当前交易所
-            this.exchangeModel = exchangeModels.Find(x => x.name == txt.Text).code;
+            this.exchangeId = exchangeModels.Find(x => x.name == txt.Text).code;
             //重新绑定列表
             BindList();
 

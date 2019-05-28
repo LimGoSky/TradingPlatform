@@ -142,5 +142,17 @@ namespace TradingPlatform {
                 this["hangqinglist"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com//contract/detail/list")]
+        public string heyuepeizhi {
+            get {
+                return ((string)(this["heyuepeizhi"]));
+            }
+            set {
+                this["heyuepeizhi"] = value;
+            }
+        }
     }
 }

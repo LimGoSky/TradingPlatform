@@ -32,5 +32,8 @@
     <Setting Name="hangqinglist" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://market.future.alibaba.com/contract/list/detail</Value>
     </Setting>
+    <Setting Name="heyuepeizhi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://market.future.alibaba.com//contract/detail/list</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

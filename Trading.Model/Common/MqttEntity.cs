@@ -23,5 +23,6 @@ namespace Trading.Model.Common
         public string password { get; set; }
         public string topic { get; set; }
         public string userName { get; set; }
+        public string clientId { get; set; }
     }
 }
