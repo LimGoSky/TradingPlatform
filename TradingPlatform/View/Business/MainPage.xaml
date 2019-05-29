@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="" Height="600" Width="900"
+        Title="" Height="600" Width="900" Loaded="Window_Loaded"
         Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Window.Style>
         <!--窗口拖动-->
@@ -32,7 +32,7 @@
         </Grid.ColumnDefinitions>
         <Border Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
             <Canvas Height="50" Background="#2a2a2a" VerticalAlignment="Center">
-                <Label Content="CL1906" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
+                <Label x:Name="labTitle" Content="CL1906" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
 
                 <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Canvas.Right="0" MouseLeftButtonDown="btn_close_Click">
                     <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,10,10,0" />
@@ -73,7 +73,7 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Foreground="White" HorizontalAlignment="Center" Height="40" x:Name="volume">2</TextBlock>
+                                <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,20,0,0" Height="40" FontSize="30" x:Name="volume">2</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
                                     <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
                                         <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiShouShuReduce_MouseDown"></TextBlock>
@@ -96,13 +96,13 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Foreground="White">20</TextBlock>
+                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Margin="0,20,0,0" FontSize="30" Foreground="White">20</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
-                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
-                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaAdd_MouseDown"></TextBlock>
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100" MouseDown="JiaoYiDanJiaReduce_MouseDown">
+                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     </Border>
-                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
-                                        <TextBlock Foreground="White" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaReduce_MouseDown"></TextBlock>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100" MouseDown="JiaoYiDanJiaAdd_MouseDown">
+                                        <TextBlock Foreground="White" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
@@ -122,9 +122,11 @@
                     </Border>
                 </Canvas>
                 <Canvas Grid.Row="4">
+                    <TextBlock Foreground="Silver" Panel.ZIndex="1" FontSize="16" x:Name="txtPurchase" Margin="140,46,0,0">(0.00)</TextBlock>
                     <Image Source="/Styles/images/mairu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="Purchase_Click"></Image>
                 </Canvas>
                 <Canvas Grid.Row="5">
+                    <TextBlock Foreground="Silver" Panel.ZIndex="1" FontSize="16" x:Name="txtSellOut" Margin="140,35,0,0">(0.00)</TextBlock>
                     <Image Source="/Styles/images/maichu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="SellOut_Click"></Image>
                 </Canvas>
             </Grid>
@@ -371,9 +373,10 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="交易记录" Style="{StaticResource Tab_Page_Bussines}">
-                <DataGrid Name="grid_record" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                <DataGrid Name="grid_record" RowHeaderWidth="0" Background="#FF373737"
+                                  AlternationCount="2"  BorderThickness="0,0,0,1" CanUserAddRows="False" Tag="25"
                                   AutoGenerateColumns="False" 
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}">
                             <Style.Triggers>

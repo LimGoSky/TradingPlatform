@@ -67,16 +67,36 @@ namespace TradingPlatform.Business
             Init();
             InitializeComponent();
         }
+        /// <summary>
+        /// 页面加载完成执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //计算买入卖出按钮上数值
+            ReloadTotal();
+            this.labTitle.Content = this.contractId = "CL1906";
+        }
+        /// <summary>
+        /// 主页切换合约
+        /// </summary>
+        /// <param name="exchangeId"></param>
+        /// <param name="productId"></param>
+        /// <param name="contractId"></param>
         public void ChangePageInfo(string exchangeId, string productId, string contractId)
         {
-            if (this.contractId != contractId)
+            if (this.contractId != contractId)//如果和当前合约不一致就修改
             {
                 this.exchangeId = exchangeId;
                 this.productId = productId;
                 this.contractId = contractId;
+                this.labTitle.Content = contractId;
                 Init();
+                activanum = 0;
             }
         }
+        private int activanum = 0;
         /// <summary>
         /// 当前窗口活动时执行
         /// </summary>
@@ -84,14 +104,17 @@ namespace TradingPlatform.Business
         /// <param name="e"></param>
         private void Window_Activated(object sender, EventArgs e)
         {
-            Init();
+            if (activanum == 0)
+            {
+                activanum++;
+                Init();
+            }
         }
         /// <summary>
         /// 初始化合约信息
         /// </summary>
         public void Init()
         {
-            productId = "CL1906";
             Task task = Task.Factory.StartNew(() =>
             {
                 var dic = new Dictionary<string, string>();
@@ -109,7 +132,6 @@ namespace TradingPlatform.Business
             //Dictionary<string, string> header = new Dictionary<string, string>();
             //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.heyuepeizhi, dic, header, "post");
             #endregion
-
         }
 
 
@@ -223,7 +245,7 @@ namespace TradingPlatform.Business
                 {
                     ReloadLogin();
                 }
-                if ((t as ResultModel<EntrustModel_List>).data==null)
+                if ((t as ResultModel<EntrustModel_List>).data == null)
                 {
                     (t as ResultModel<EntrustModel_List>).data = resultmodel.data;
                     return t;
@@ -264,9 +286,8 @@ namespace TradingPlatform.Business
         private void Purchase_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("contingentCondition", "IMMEDIATELY");
             dic.Add("direction", "BUY");//BUY,SELL
-            dic.Add("instrumentId", this.productId);
+            dic.Add("instrumentId", this.contractId);
             dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
             if (this.rdo_kaicang.IsChecked == true)
             {
@@ -277,7 +298,6 @@ namespace TradingPlatform.Business
                 dic.Add("offsetFlag", "CLOSE");//平仓
             }
             dic.Add("priceType", "LIMIT_PRICE");
-            dic.Add("stopPrice", "100");
             dic.Add("volume", this.volume.Text);
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
@@ -302,9 +322,8 @@ namespace TradingPlatform.Business
         private void SellOut_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("contingentCondition", "IMMEDIATELY");
             dic.Add("direction", "SELL");//BUY,SELL
-            dic.Add("instrumentId", this.productId);
+            dic.Add("instrumentId", this.contractId);
             dic.Add("limitPrice", this.limitPrice.Text);//若选择市价,则 priceType=MARKET_PRICE,limitPrice为空, 若选择对手价,最新价,排队价,或者用户手动输入,则priceType=LIMIT_PRICE，limitPrice为对应的价格
             if (this.rdo_kaicang.IsChecked == true)
             {
@@ -315,7 +334,6 @@ namespace TradingPlatform.Business
                 dic.Add("offsetFlag", "CLOSE");//平仓
             }
             dic.Add("priceType", "LIMIT_PRICE");
-            dic.Add("stopPrice", "100");
             dic.Add("volume", this.volume.Text);
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
@@ -341,7 +359,7 @@ namespace TradingPlatform.Business
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("exchangeId", "");
-            dic.Add("instrumentId", this.productId);
+            dic.Add("instrumentId", this.contractId);
             dic.Add("orderSysId", "");
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
@@ -373,27 +391,36 @@ namespace TradingPlatform.Business
         private void JiaoYiShouShuAdd_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.volume.Text = (Convert.ToInt32(this.volume.Text) + 1).ToString();
+                ReloadTotal();
         }
         private void JiaoYiShouShuReduce_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Convert.ToInt32(this.volume.Text) > 0)
             {
                 this.volume.Text = (Convert.ToInt32(this.volume.Text) - 1).ToString();
+                ReloadTotal();
             }
         }
 
         private void JiaoYiDanJiaAdd_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) + 0.01).ToString();
+                ReloadTotal();
         }
         private void JiaoYiDanJiaReduce_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Convert.ToDouble(this.limitPrice.Text) > 0)
             {
                 this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) - 0.01).ToString();
+                ReloadTotal();
             }
         }
-
+        /// <summary>
+        /// 重新计算买入卖出数值
+        /// </summary>
+        public void ReloadTotal() {
+            this.txtPurchase.Text = this.txtSellOut.Text = (Convert.ToDouble(this.volume.Text) * Convert.ToDouble(this.limitPrice.Text)).ToString("0.00");
+        }
         public void TiaoJianDanList()
         {
             int selectindex = this.tab_bussines.SelectedIndex;
