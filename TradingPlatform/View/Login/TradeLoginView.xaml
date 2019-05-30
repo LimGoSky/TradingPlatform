@@ -80,7 +80,7 @@
             <!--<Border Margin="50,220,20,0" BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Background="#2a2a2a" Height="40" Width="140" MouseDown="BussinesLogin_MouseDown" Cursor="Hand">
                 <TextBlock FontSize="16" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">登录</TextBlock>
             </Border>-->
-            <Button Content="登录" Height="40" Width="140" BorderBrush="Gray" Canvas.Left="52" Canvas.Top="217" Background="#2a2a2a" Foreground="#2d8ceb" MouseLeftButtonDown="BussinesLogin_MouseDown" MouseDown="BussinesLogin_MouseDown">
+            <Button Content="登录" Height="40" Width="140" BorderBrush="Gray" Canvas.Left="52" Canvas.Top="217" Background="#2a2a2a" Foreground="#2d8ceb" Cursor="Hand" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border BorderBrush="#707070" BorderThickness="1" CornerRadius="15,15,15,15" Name="PART_Background">

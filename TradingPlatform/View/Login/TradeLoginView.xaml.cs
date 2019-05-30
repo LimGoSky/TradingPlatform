@@ -80,5 +80,25 @@ namespace TradingPlatform.View.Login
             mainPage.Show();
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("user", this.UserTextBox.Text);
+            dic.Add("password", this.PwdTextBox.Text);
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+            header.Add("GeneralParam", GeneralParam);
+
+            string result = ApiHelper.SendPost(InterfacePath.Default.bussinelogin, dic, header, "post");
+
+            //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussinelogin, dic, header, "post");
+
+            //ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
+            //BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;
+            MainPage mainPage = new MainPage();
+            mainPage.Show();
+            this.Close();
+        }
     }
 }

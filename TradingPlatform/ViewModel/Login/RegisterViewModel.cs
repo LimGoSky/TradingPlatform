@@ -103,7 +103,7 @@ namespace TradingPlatform.ViewModel.Login
                 }
 
                 LoginLogic loginLogic = new LoginLogic();
-                ResultModel<Token> result = loginLogic.Register(CheckCode, UserName, NickName, Password, "", "");
+                ResultModel<Token> result = loginLogic.Register(InterfacePath.Default.Register, CheckCode, UserName, NickName, Password, "", "");
                 SendMsg("register", result.code.ToString());
                 Log4Helper.Info(this.GetType(), $"手机号:{UserName},注册：{result.msg}");
             }

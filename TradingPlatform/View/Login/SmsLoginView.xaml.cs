@@ -113,13 +113,13 @@ namespace TradingPlatform.View.Login
             }
 
             LoginLogic logic = new LoginLogic();
-            ResultModel<Token> result = logic.LoginOrRegisterByCode(_phoneNo, txtSms);
+            ResultModel<Token> result = logic.LoginOrRegisterByCode(InterfacePath.Default.LoginOrRegisterByCode, _phoneNo, txtSms);
             if(result.code == 200)
             {
                 #region 加载用户资料
 
                 UserLogic userlogic = new UserLogic();
-                ResultModel<UserInfoModel> userModel = userlogic.GetUserInfo(result.data.token);
+                ResultModel<UserInfoModel> userModel = userlogic.GetUserInfo(InterfacePath.Default.GetUserInfo, result.data.token);
 
                 Loginer.LoginerUser.UserId = userModel.data.userId;
                 Loginer.LoginerUser.NickName = userModel.data.nickname;
@@ -193,7 +193,7 @@ namespace TradingPlatform.View.Login
         {
             //发短信
             LoginLogic logic = new LoginLogic();
-            ResultModel model = logic.SendMessage(phoneNo, CheckCodeTypeEnum.LOGIN.ToString());
+            ResultModel model = logic.SendMessage(InterfacePath.Default.SendMessage, phoneNo, CheckCodeTypeEnum.LOGIN.ToString());
             if (model.code != 200)
             {
                 string result = ((MessageStateEnum)model.code).ToString();

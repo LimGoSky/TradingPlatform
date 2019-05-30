@@ -150,7 +150,7 @@ namespace TradingPlatform.View.Login
             {
                 //发短信
                 LoginLogic logic = new LoginLogic();
-                ResultModel model = logic.SendMessage(PhoneNo.Text, CheckCodeTypeEnum.RESET_PASSWORD.ToString());
+                ResultModel model = logic.SendMessage(InterfacePath.Default.SendMessage, PhoneNo.Text, CheckCodeTypeEnum.RESET_PASSWORD.ToString());
                 if (model.code == 200)
                 {
                     secondCount = 59;

@@ -28,6 +28,7 @@ namespace TradingPlatform.Common
         private string _ProFilePhoto = string.Empty;
         private string _CreateTime = string.Empty;
         private string _Token = string.Empty;
+        private string _GeneralParam = string.Empty;
 
         /// <summary>
         /// 登录名
@@ -75,6 +76,12 @@ namespace TradingPlatform.Common
         {
             get { return _Token; }
             set { _Token = value; RaisePropertyChanged(); }
+        }
+
+        public string GeneralParam
+        {
+            get { return _GeneralParam; }
+            set { _GeneralParam = value;RaisePropertyChanged(); }
         }
     }
 }
