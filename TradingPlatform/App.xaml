@@ -14,6 +14,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Resources/Business.xaml"/>
                 <ResourceDictionary Source="./Resources/GridList.xaml"/>
+                <ResourceDictionary Source="./Resources/ComBox.xaml"/>
+                <ResourceDictionary Source="./Resources/ComBoxProduct.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--初始化-->
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:TradingPlatform.ViewModel" />
