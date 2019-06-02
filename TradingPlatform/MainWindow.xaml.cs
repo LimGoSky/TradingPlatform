@@ -52,11 +52,15 @@ namespace TradingPlatform
         /// <summary>
         /// 当前产品id
         /// </summary>
-        public string productId { get; set; }
+        public string productId;
         /// <summary>
         /// 当前合约id
         /// </summary>
-        public string contractId { get; set; }
+        public string contractId;
+        /// <summary>
+        /// 当前最新价
+        /// </summary>
+        public string newprice;
         /// <summary>
         /// 绑定列表
         /// </summary>
@@ -123,9 +127,27 @@ namespace TradingPlatform
                         }
                         this.grid_saffer.ItemsSource = objDetailList;
                         Grid_saffer_SizeChanged(null, null);
+                        BindSocket();
                     }
                 }));
             }));
+        }
+        /// <summary>
+        /// 初始化socket
+        /// </summary>
+        public void BindSocket()
+        {
+            Task task = Task.Factory.StartNew(() =>
+            {
+                var dic = new Dictionary<string, string>();
+                dic.Add("sub-0", "/topic/latest_quotation_" + exchangeId + "." + productId);
+
+                WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
+                ws.Connect(delegate (string data)
+                {
+                    
+                });
+            }, TaskCreationOptions.LongRunning);
         }
 
         private void SecondToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -280,7 +302,7 @@ namespace TradingPlatform
                 {
                     if (win.GetType() == typeof(MainPage))
                     {
-                        (win as MainPage).ChangePageInfo(exchangeId, productId, contractId);
+                        (win as MainPage).ChangePageInfo(exchangeId, productId, contractId, newprice);
                         //win.Show();
                         return;
                     }
@@ -297,8 +319,9 @@ namespace TradingPlatform
             contractDtoDetail rowSelected = dg.SelectedItem as contractDtoDetail;
             if (rowSelected != null && !string.IsNullOrEmpty(rowSelected.contractId))
             {
-                string contractCode = contractId = rowSelected.contractId;
+                string contractCode = this.contractId = rowSelected.contractId;
                 string contractName = rowSelected.contractName;
+                this.newprice = rowSelected.lastPrice;
 
 
                 bool isExists = false;
@@ -362,7 +385,7 @@ namespace TradingPlatform
                         txt.Text = resultModel.data[i].name;
                         txt.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
                         listBoxItem.Content = txt;
-                        if (i==0)
+                        if (i == 0)
                         {
                             listBoxItem.IsSelected = true;
                         }
@@ -401,6 +424,7 @@ namespace TradingPlatform
         }
 
         #endregion
+
 
         private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
         {

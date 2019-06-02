@@ -54,7 +54,7 @@
                 </Grid.ColumnDefinitions>
                 <Canvas Grid.Row="0" Margin="25,0,0,25">
                     <Border CornerRadius="5" Background="#1e1e1e" Width="200">
-                        <TextBox x:Name="txt_topic" Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox x:Name="txt_topic" Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="Txt_topic_KeyUp">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}">
                                     <Setter Property="Foreground" Value="Gray"></Setter>
@@ -73,7 +73,7 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,20,0,0" Height="40" FontSize="30" x:Name="volume">2</TextBlock>
+                                <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,20,0,0" Height="40" FontSize="30" x:Name="volume">1</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
                                     <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
                                         <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiShouShuReduce_MouseDown"></TextBlock>
@@ -96,7 +96,7 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Margin="0,20,0,0" FontSize="30" Foreground="White">20</TextBlock>
+                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Margin="0,20,0,0" FontSize="30" Foreground="White">0</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
                                     <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100" MouseDown="JiaoYiDanJiaReduce_MouseDown">
                                         <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>

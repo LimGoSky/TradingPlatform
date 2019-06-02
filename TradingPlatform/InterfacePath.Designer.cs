@@ -145,7 +145,7 @@ namespace TradingPlatform {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com//contract/detail/list")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com/contract/detail")]
         public string heyuepeizhi {
             get {
                 return ((string)(this["heyuepeizhi"]));

@@ -37,6 +37,7 @@ namespace TradingPlatform.Business
         /// 当前合约id
         /// </summary>
         public string contractId { get; set; }
+        public ContractModel contractModel;
         public MainPage()
         {
             #region 获取MQTT连接信息
@@ -64,7 +65,6 @@ namespace TradingPlatform.Business
             {
                 MessageBox.Show(ex.Message);
             }
-            Init();
             InitializeComponent();
         }
         /// <summary>
@@ -74,6 +74,7 @@ namespace TradingPlatform.Business
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Init();
             //计算买入卖出按钮上数值
             ReloadTotal();
             this.labTitle.Content = this.contractId = "CL1906";
@@ -84,7 +85,7 @@ namespace TradingPlatform.Business
         /// <param name="exchangeId"></param>
         /// <param name="productId"></param>
         /// <param name="contractId"></param>
-        public void ChangePageInfo(string exchangeId, string productId, string contractId)
+        public void ChangePageInfo(string exchangeId, string productId, string contractId,string newprice)
         {
             if (this.contractId != contractId)//如果和当前合约不一致就修改
             {
@@ -115,25 +116,62 @@ namespace TradingPlatform.Business
         /// </summary>
         public void Init()
         {
-            Task task = Task.Factory.StartNew(() =>
-            {
-                var dic = new Dictionary<string, string>();
-                dic.Add("sub-0", "/topic/latest_quotation_CME.CL.CL1906");
-
-                WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
-                ws.Connect(delegate (string data)
-                {
-                    txt_topic.Text = data;
-                });
-            }, TaskCreationOptions.LongRunning);
-
+            ///加载合约配置信息
+            IntilContract();
+        }
+        /// <summary>
+        /// 最小变动价位
+        /// </summary>
+        public double priceTick;
+        /// <summary>
+        /// 合约数量乘数
+        /// </summary>
+        public int volumeMultiple;
+        /// <summary>
+        /// 加载合约配置信息
+        /// </summary>
+        public void IntilContract()
+        {
             #region 初始化合约配置
-            //Dictionary<string, string> dic = new Dictionary<string, string>();
-            //Dictionary<string, string> header = new Dictionary<string, string>();
-            //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.heyuepeizhi, dic, header, "post");
+            if (!string.IsNullOrEmpty(this.contractId) && this.contractId != "填写合约代码")
+            {
+                try
+                {
+                    Dictionary<string, string> dic_Contract = new Dictionary<string, string>();
+                    dic_Contract.Add("contractId", this.contractId);
+                    Dictionary<string, string> header_Contract = new Dictionary<string, string>();
+                    string result = ApiHelper.SendPostByHeader(InterfacePath.Default.heyuepeizhi, dic_Contract, header_Contract, "post");
+                    ResultModel<ContractModel> resultmodel_Contract = JsonHelper.JsonToObj<ResultModel<ContractModel>>(result);
+                    contractModel = resultmodel_Contract.data;
+
+                    this.txt_topic.Text = this.contractId;
+                    this.volume.Text = contractModel.volumeMultiple.ToString();
+                    this.priceTick = Convert.ToDouble(contractModel.priceTick);
+                    this.volumeMultiple = Convert.ToInt32(contractModel.volumeMultiple);
+                    this.limitPrice.Text = contractModel.latestPrice;
+                }
+                catch (Exception ex)
+                {
+                    //这里不做处理，因为合约代码可能不完整引发请求异常
+                }
+            }
+            else {
+                this.priceTick = 0.01;
+                this.volumeMultiple = 1;
+            }
             #endregion
         }
-
+        /// <summary>
+        /// 修改合约编号更新合约信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Txt_topic_KeyUp(object sender, KeyEventArgs e)
+        {
+            this.contractId = this.txt_topic.Text;
+            ///加载合约配置信息
+            IntilContract();
+        }
 
         #region 标题栏事件
 
@@ -390,35 +428,36 @@ namespace TradingPlatform.Business
         }
         private void JiaoYiShouShuAdd_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.volume.Text = (Convert.ToInt32(this.volume.Text) + 1).ToString();
-                ReloadTotal();
+            this.volume.Text = (Convert.ToInt32(this.volume.Text) + this.volumeMultiple).ToString();
+            ReloadTotal();
         }
         private void JiaoYiShouShuReduce_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Convert.ToInt32(this.volume.Text) > 0)
             {
-                this.volume.Text = (Convert.ToInt32(this.volume.Text) - 1).ToString();
+                this.volume.Text = (Convert.ToInt32(this.volume.Text) - this.volumeMultiple).ToString();
                 ReloadTotal();
             }
         }
 
         private void JiaoYiDanJiaAdd_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) + 0.01).ToString();
-                ReloadTotal();
+            this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) + this.priceTick).ToString();
+            ReloadTotal();
         }
         private void JiaoYiDanJiaReduce_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Convert.ToDouble(this.limitPrice.Text) > 0)
             {
-                this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) - 0.01).ToString();
+                this.limitPrice.Text = (Convert.ToDouble(this.limitPrice.Text) - this.priceTick).ToString();
                 ReloadTotal();
             }
         }
         /// <summary>
         /// 重新计算买入卖出数值
         /// </summary>
-        public void ReloadTotal() {
+        public void ReloadTotal()
+        {
             this.txtPurchase.Text = this.txtSellOut.Text = (Convert.ToDouble(this.volume.Text) * Convert.ToDouble(this.limitPrice.Text)).ToString("0.00");
         }
         public void TiaoJianDanList()
