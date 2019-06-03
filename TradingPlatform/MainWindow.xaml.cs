@@ -75,11 +75,12 @@ namespace TradingPlatform
             Task task = Task.Factory.StartNew(() =>
             {
                 var dic = new Dictionary<string, string>();
-                dic.Add("sub-0", "/topic/latest_quotation_" + exchangeId + "." + productId);
+                dic.Add("sub-0", "/topic/latest_quotation_" + exchangeId + "." + productId+".*");
 
                 WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
                 ws.Connect(delegate (string data)
                 {
+
 
                 });
             }, TaskCreationOptions.LongRunning);

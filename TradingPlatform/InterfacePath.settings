@@ -35,5 +35,8 @@
     <Setting Name="heyuepeizhi" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://market.future.alibaba.com/contract/detail</Value>
     </Setting>
+    <Setting Name="bussineloginout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/user/logout</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

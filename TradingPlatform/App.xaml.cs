@@ -6,6 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Trading.Common;
+using Trading.Model.Common;
+using TradingPlatform.Common;
 using TradingPlatform.View.Login;
 using TradingPlatform.ViewModel.Login;
 
@@ -22,6 +25,18 @@ namespace TradingPlatform
             cracker.Cracker();
 
             base.OnStartup(e);
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
+            {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+                header.Add("GeneralParam", GeneralParam);
+                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussineloginout, dic, header, "post");
+            }
         }
     }
 }
