@@ -262,5 +262,17 @@ namespace TradingPlatform {
                 this["UpdateUserInfo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/user/logout")]
+        public string bussineloginout {
+            get {
+                return ((string)(this["bussineloginout"]));
+            }
+            set {
+                this["bussineloginout"] = value;
+            }
+        }
     }
 }

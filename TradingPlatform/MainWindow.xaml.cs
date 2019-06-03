@@ -31,7 +31,12 @@ namespace TradingPlatform
         {
             InitializeComponent();
             GetExchange();//绑定交易所
-            BindList();//绑定列表
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            #region 重新排版加载交易所产品
+            ReloadExchange();
+            #endregion
         }
         /// <summary>
         /// 交易所列表
@@ -61,77 +66,7 @@ namespace TradingPlatform
         /// 当前最新价
         /// </summary>
         public string newprice;
-        /// <summary>
-        /// 绑定列表
-        /// </summary>
-        public void BindList()
-        {
-            Task.Run((Action)(() =>
-            {
-                Dictionary<string, string> dic = new Dictionary<string, string>();
-                dic.Add("condition", "true");
-                dic.Add("exchangeId", (string)this.exchangeId);
-                Dictionary<string, string> header = new Dictionary<string, string>();
-                string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
-                header.Add("GeneralParam", GeneralParam);
-                header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
-                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.hangqinglist, dic, header, "post");
 
-                Quotation resultmodel = JsonHelper.JsonToObj<Quotation>(result);
-
-                objList = resultmodel.data;
-                this.grid_saffer.Dispatcher.Invoke(new Action(() =>
-                {
-                    if (this.secondMenu.Items.Count == 0)
-                    {
-                        for (int i = 0; i < resultmodel.data.Count; i++)
-                        {
-                            ListBox listBox = new ListBox();
-                            listBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#191919"));
-                            listBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#808080"));
-                            listBox.BorderThickness = new Thickness(0);
-                            listBox.Margin = new Thickness(0);
-                            listBox.FontFamily = new FontFamily("pingfang hk"); ;
-                            listBox.FontSize = 14;
-                            listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
-                            ListBoxItem listBoxItem = new ListBoxItem();
-                            TextBlock txt = new TextBlock();
-                            txt.Text = resultmodel.data[i].productName;
-                            txt.MouseLeftButtonDown += SecondToolBar_MouseLeftButtonDown; ;
-                            listBoxItem.Content = txt;
-                            if (i == 0)
-                            {
-                                listBoxItem.IsSelected = true;
-                            }
-                            listBox.Items.Add(listBoxItem);
-                            this.secondMenu.Items.Add(listBox);
-                            if (i == 0)
-                            {
-                                this.productId = resultmodel.data[i].productId;
-                            }
-                        }
-                    }
-                    if (objList.Count > 0)
-                    {
-                        if (objDetailList != null && objDetailList.Count > 0)
-                        {
-                            QuotationChildren model = objList.Find(x => x.productId == this.productId);
-                            if (model != null)
-                            {
-                                objDetailList = model.contractDtoList;
-                            }
-                        }
-                        else
-                        {
-                            objDetailList = objList[0].contractDtoList;
-                        }
-                        this.grid_saffer.ItemsSource = objDetailList;
-                        Grid_saffer_SizeChanged(null, null);
-                        BindSocket();
-                    }
-                }));
-            }));
-        }
         /// <summary>
         /// 初始化socket
         /// </summary>
@@ -140,40 +75,17 @@ namespace TradingPlatform
             Task task = Task.Factory.StartNew(() =>
             {
                 var dic = new Dictionary<string, string>();
-                dic.Add("sub-0", "/topic/latest_quotation_" + exchangeId + "." + productId);
+                dic.Add("sub-0", "/topic/latest_quotation_" + exchangeId + "." + productId+".*");
 
                 WebSocketUtility ws = WebSocketUtility.Create("ws://market.future.alibaba.com/webSocket/zd/market", dic);
                 ws.Connect(delegate (string data)
                 {
-                    
+
+
                 });
             }, TaskCreationOptions.LongRunning);
         }
 
-        private void SecondToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            for (int i = 0; i < this.secondMenu.Items.Count; i++)
-            {
-                ListBox listBox = (this.secondMenu.Items[i] as ListBox);
-                if (listBox.Items.Count > 0)
-                {
-                    ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
-                    if (listBoxItem.IsSelected)
-                    {
-                        listBoxItem.IsSelected = false;
-                    }
-                }
-            }
-
-            TextBlock txt = sender as TextBlock;
-            ListBoxItem boxItem = txt.Parent as ListBoxItem;
-            boxItem.IsSelected = true;
-
-            //修改当前行情编号
-            this.productId = objList.Find(x => x.productName == txt.Text).productId;
-            //重新绑定列表
-            BindList();
-        }
 
         #region 标题栏窗口事件
 
@@ -354,82 +266,7 @@ namespace TradingPlatform
         }
         #endregion
 
-        #region 接口
-        /// <summary>
-        /// 获取交易所
-        /// </summary>
-        public void GetExchange()
-        {
 
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            Dictionary<string, string> header = new Dictionary<string, string>();
-            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.jiaoyisuo, dic, header, "post");
-            ResultModel<List<ExchangeModel>> resultModel = JsonHelper.JsonToObj<ResultModel<List<ExchangeModel>>>(result);
-            exchangeModels = resultModel.data;
-            Dispatcher.Invoke(new Action(() =>
-            {
-                for (int i = 0; i < resultModel.data.Count; i++)
-                {
-                    if (!this.tooblar.Items.Contains(resultModel.data[i].name))
-                    {
-                        ListBox listBox = new ListBox();
-                        listBox.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2a2a2a"));
-                        listBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8B8787"));
-                        listBox.BorderThickness = new Thickness(0);
-                        listBox.Margin = new Thickness(0);
-                        listBox.FontFamily = new FontFamily("pingfang hk"); ;
-                        listBox.FontSize = 14;
-                        listBox.ItemContainerStyle = Application.Current.Resources["CheckTextBlockFontStyle"] as Style;
-                        ListBoxItem listBoxItem = new ListBoxItem();
-                        TextBlock txt = new TextBlock();
-                        txt.Text = resultModel.data[i].name;
-                        txt.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-                        listBoxItem.Content = txt;
-                        if (i == 0)
-                        {
-                            listBoxItem.IsSelected = true;
-                        }
-                        listBox.Items.Add(listBoxItem);
-                        this.tooblar.Items.Add(listBox);
-                    }
-                }
-                exchangeId = resultModel.data[0].code;
-            }));
-        }
-
-        private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            for (int i = 0; i < this.tooblar.Items.Count; i++)
-            {
-                ListBox listBox = (this.tooblar.Items[i] as ListBox);
-                if (listBox.Items.Count > 0)
-                {
-                    ListBoxItem listBoxItem = listBox.Items[0] as ListBoxItem;
-                    if (listBoxItem.IsSelected)
-                    {
-                        listBoxItem.IsSelected = false;
-                    }
-                }
-            }
-
-            TextBlock txt = sender as TextBlock;
-            ListBoxItem boxItem = txt.Parent as ListBoxItem;
-            boxItem.IsSelected = true;
-
-            //修改当前交易所
-            this.exchangeId = exchangeModels.Find(x => x.name == txt.Text).code;
-            //重新绑定列表
-            BindList();
-
-        }
-
-        #endregion
-
-
-        private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            this.tooblar.Width = this.Width;
-        }
 
         private void Grid_saffer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -454,6 +291,271 @@ namespace TradingPlatform
                         }
                     }
                 });
+            }
+        }
+        #region 交易所产品
+
+        /// <summary>
+        /// 获取交易所
+        /// </summary>
+        public void GetExchange()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.jiaoyisuo, dic, header, "post");
+            ResultModel<List<ExchangeModel>> resultModel = JsonHelper.JsonToObj<ResultModel<List<ExchangeModel>>>(result);
+            exchangeModels = resultModel.data;
+            Dispatcher.Invoke(new Action(() =>
+            {
+                for (int i = 0; i < resultModel.data.Count; i++)
+                {
+                    ListBoxItem listBoxItem = new ListBoxItem();
+                    TextBlock text = new TextBlock();
+                    text.Text = resultModel.data[i].name;
+                    text.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
+                    listBoxItem.Content = text;
+                    this.listbox_exchange.Items.Add(listBoxItem);
+                }
+                (this.listbox_exchange.Items[0] as ListBoxItem).IsSelected = true;
+                exchangeId = resultModel.data[0].code;
+                BindProductList();//绑定列表
+            }));
+        }
+
+        private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock txt = sender as TextBlock;
+
+            //修改当前交易所
+            this.exchangeId = exchangeModels.Find(x => x.name == txt.Text).code;
+            //重新绑定列表
+            this.listbox_product.Items.Clear();
+            BindProductList();
+
+        }
+        /// <summary>
+        /// 把超出长度的交易所放到列表中
+        /// </summary>
+        public void ReloadExchange()
+        {
+            this.listbox_exchange.Width = this.listbox_exchange.ActualWidth;
+            if ((this.listbox_exchange.ActualWidth) > (this.Width - 80))//菜单比窗口长
+            {
+                for (int i = this.listbox_exchange.Items.Count; i > 0; i--)
+                {
+
+                    if (this.listbox_exchange.Width - (this.listbox_exchange.Items[i - 1] as ListBoxItem).ActualWidth < (this.Width - 120))
+                    {
+                        break;
+                    }
+                    ComboBoxItem menuItem = new ComboBoxItem();
+
+                    TextBlock text = (this.listbox_exchange.Items[i - 1] as ListBoxItem).Content as TextBlock;
+
+
+                    menuItem.Content = text.Text;
+                    menuItem.Selected += ChangeItem_Selected;
+                    menuItem.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF383535"));
+                    listbox_exchangeother.Items.Add(menuItem);
+                    this.listbox_exchange.Width = (this.listbox_exchange.Width - (this.listbox_exchange.Items[i - 1] as ListBoxItem).ActualWidth);
+                    this.listbox_exchange.Items.RemoveAt(i - 1);
+                }
+            }
+            else {
+                if (this.listbox_exchangeother.Items.Count>0)
+                {
+                    for (int i = this.listbox_exchangeother.Items.Count; i >0; i--)
+                    {
+                        if ((this.listbox_exchange.Width) < (this.Width - 200))
+                        {
+                            ListBoxItem listBoxItem = new ListBoxItem();
+                            TextBlock text = new TextBlock();
+                            text.Text = (this.listbox_exchangeother.Items[i - 1] as ComboBoxItem).Content.ToString();
+                            text.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
+                            listBoxItem.Content = text;
+                            this.listbox_exchange.Items.Add(listBoxItem);
+                            this.listbox_exchange.Width += (this.listbox_exchangeother.Items[i - 1] as ComboBoxItem).Width;
+                            this.listbox_exchangeother.Items.RemoveAt(i - 1);
+                        }
+                    }
+                }
+                
+            }
+        }
+
+        private void ChangeItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+            this.listbox_exchange.SelectedIndex = -1;
+            ComboBoxItem txt = sender as ComboBoxItem;
+
+            //修改当前交易所
+            this.exchangeId = exchangeModels.Find(x => x.name == txt.Content).code;
+            //重新绑定列表
+            BindProductList();
+        }
+
+        /// <summary>
+        /// 把超出长度的产品放到列表中
+        /// </summary>
+        public void ReloadProduct()
+        {
+            if (!(this.listbox_product.Width > 0))
+            {
+                this.listbox_product.Width = this.Width;
+            }
+            if ((this.listbox_product.Width) > (this.Width - 80))
+            {
+                this.listbox_product.Width = 0;
+                for (int i = 0; i < this.listbox_product.Items.Count; i++)
+                {
+                    if (this.listbox_product.Width < this.Width - 200)
+                    {
+                        if ((this.listbox_product.Items[i] as ListBoxItem).ActualWidth == 0)
+                        {
+                            this.listbox_product.Width += ((this.listbox_product.Items[i] as ListBoxItem).Content as TextBlock).Text.Length * 10;
+                        }
+                        else
+                        {
+                            this.listbox_product.Width += (this.listbox_product.Items[i] as ListBoxItem).ActualWidth;
+                        }
+                    }
+                    else
+                    {
+                        ComboBoxItem menuItem = new ComboBoxItem();
+
+                        TextBlock text = (this.listbox_product.Items[i - 1] as ListBoxItem).Content as TextBlock;
+
+                        menuItem.Content = text.Text;
+                        menuItem.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF383535"));
+                        menuItem.Selected += ProductItem_Selected;
+                        listbox_productother.Items.Add(menuItem);
+
+                        if (i < this.listbox_product.Items.Count)
+                        {
+                            this.listbox_product.Items.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (this.listbox_productother.Items.Count > 0)
+                {
+                    for (int i = this.listbox_productother.Items.Count; i > 0; i--)
+                    {
+                        if ((this.listbox_product.Width) < (this.Width - 200))
+                        {
+                            ListBoxItem listBoxItem = new ListBoxItem();
+                            TextBlock text = new TextBlock();
+                            text.Text = (this.listbox_productother.Items[i - 1] as ComboBoxItem).Content.ToString();
+                            text.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
+                            listBoxItem.Content = text;
+                            this.listbox_product.Items.Add(listBoxItem);
+                            this.listbox_product.Width += (this.listbox_productother.Items[i - 1] as ComboBoxItem).Width;
+                            this.listbox_exchangeother.Items.RemoveAt(i - 1);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private void ProductItem_Selected(object sender, RoutedEventArgs e)
+        {
+            this.listbox_product.SelectedIndex = -1;
+            ComboBoxItem txt = sender as ComboBoxItem;
+
+            //修改当前行情编号
+            this.productId = objList.Find(x => x.productName == txt.Content.ToString()).productId;
+            //重新绑定列表
+            BindProductList();
+        }
+
+        /// <summary>
+        /// 绑定产品和列表
+        /// </summary>
+        public void BindProductList()
+        {
+            Task.Run((Action)(() =>
+            {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("condition", "true");
+                dic.Add("exchangeId", (string)this.exchangeId);
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
+                header.Add("GeneralParam", GeneralParam);
+                header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
+                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.hangqinglist, dic, header, "post");
+
+                Quotation resultmodel = JsonHelper.JsonToObj<Quotation>(result);
+
+                objList = resultmodel.data;
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    if (this.listbox_product.Items.Count == 0)
+                    {
+                        for (int i = 0; i < resultmodel.data.Count; i++)
+                        {
+                            ListBoxItem listBoxItem = new ListBoxItem();
+                            TextBlock txt = new TextBlock();
+                            txt.Text = resultmodel.data[i].productName;
+                            txt.MouseLeftButtonDown += SecondToolBar_MouseLeftButtonDown;
+                            listBoxItem.Content = txt;
+                            if (i == 0)
+                            {
+                                listBoxItem.IsSelected = true;
+                            }
+                            this.listbox_product.Items.Add(listBoxItem);
+                            if (i == 0)
+                            {
+                                this.productId = resultmodel.data[i].productId;
+                            }
+                        }
+                        ReloadProduct();
+                    }
+                    if (objList.Count > 0)
+                    {
+                        if (objDetailList != null && objDetailList.Count > 0)
+                        {
+                            QuotationChildren model = objList.Find(x => x.productId == this.productId);
+                            if (model != null)
+                            {
+                                objDetailList = model.contractDtoList;
+                            }
+                        }
+                        else
+                        {
+                            objDetailList = objList[0].contractDtoList;
+                        }
+                        this.grid_saffer.ItemsSource = objDetailList;
+                        Grid_saffer_SizeChanged(null, null);
+                        BindSocket();
+                    }
+                }));
+            }));
+        }
+        private void SecondToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock txt = sender as TextBlock;
+
+            //修改当前行情编号
+            this.productId = objList.Find(x => x.productName == txt.Text).productId;
+            //重新绑定列表
+            BindProductList();
+        }
+        #endregion
+
+        private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            try
+            {
+                ReloadExchange();
+                ReloadProduct();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

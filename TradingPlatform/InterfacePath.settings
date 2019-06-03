@@ -62,5 +62,8 @@
     <Setting Name="UpdateUserInfo" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://front.future.alibaba.com/user/info/update</Value>
     </Setting>
+    <Setting Name="bussineloginout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/user/logout</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
