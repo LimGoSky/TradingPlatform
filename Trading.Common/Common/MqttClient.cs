@@ -26,8 +26,7 @@ namespace Trading.Common
             // 注册接收消息事件 
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
-            string clientId = Guid.NewGuid().ToString();
-            client.Connect(clientId);
+            client.Connect(model.groupId + "@@@" + model.clientId, model.userName, model.password);
 
             // 订阅主题 "/home/temperature"， 订阅质量 QoS 2 
             client.Subscribe(new string[] { topic }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });

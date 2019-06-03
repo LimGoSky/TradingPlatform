@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="" Height="600" Width="900"
-        Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="" Height="600" Width="900" Loaded="Window_Loaded"
+        Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
@@ -32,7 +32,7 @@
         </Grid.ColumnDefinitions>
         <Border Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Line}">
             <Canvas Height="50" Background="#2a2a2a" VerticalAlignment="Center">
-                <Label Content="CL1906" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
+                <Label x:Name="labTitle" Content="CL1906" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Style="{StaticResource LabelFontStyle}"  />
 
                 <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Canvas.Right="0" MouseLeftButtonDown="btn_close_Click">
                     <Image Source="/Styles/images/guanbi.png" Height="20" Width="20" Margin="0,10,10,0" />
@@ -54,7 +54,7 @@
                 </Grid.ColumnDefinitions>
                 <Canvas Grid.Row="0" Margin="25,0,0,25">
                     <Border CornerRadius="5" Background="#1e1e1e" Width="200">
-                        <TextBox x:Name="txt_topic" Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox x:Name="txt_topic" Height="40" BorderThickness="0" Width="190" Background="#1e1e1e" Text="填写合约代码" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="Txt_topic_KeyUp">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}">
                                     <Setter Property="Foreground" Value="Gray"></Setter>
@@ -73,7 +73,7 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Foreground="White" HorizontalAlignment="Center" Height="40" x:Name="volume">2</TextBlock>
+                                <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,20,0,0" Height="40" FontSize="30" x:Name="volume">1</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
                                     <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
                                         <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiShouShuReduce_MouseDown"></TextBlock>
@@ -96,13 +96,13 @@
                     <StackPanel Margin="0,15,0,15">
                         <Border BorderThickness="1" BorderBrush="#2a2a2a" Width="200" Margin="25" CornerRadius="5">
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Foreground="White">20</TextBlock>
+                                <TextBlock HorizontalAlignment="Center" Height="40" x:Name="limitPrice" Margin="0,20,0,0" FontSize="30" Foreground="White">0</TextBlock>
                                 <StackPanel Orientation="Horizontal" Height="30">
-                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100">
-                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaAdd_MouseDown"></TextBlock>
+                                    <Border BorderThickness="0,1,1,0" BorderBrush="#2a2a2a" Width="100" MouseDown="JiaoYiDanJiaReduce_MouseDown">
+                                        <TextBlock Foreground="White" Text="-" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     </Border>
-                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100">
-                                        <TextBlock Foreground="White" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="JiaoYiDanJiaReduce_MouseDown"></TextBlock>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="#2a2a2a" Width="100" MouseDown="JiaoYiDanJiaAdd_MouseDown">
+                                        <TextBlock Foreground="White" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
@@ -122,9 +122,11 @@
                     </Border>
                 </Canvas>
                 <Canvas Grid.Row="4">
+                    <TextBlock Foreground="Silver" Panel.ZIndex="1" FontSize="16" x:Name="txtPurchase" Margin="140,46,0,0">(0.00)</TextBlock>
                     <Image Source="/Styles/images/mairu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="Purchase_Click"></Image>
                 </Canvas>
                 <Canvas Grid.Row="5">
+                    <TextBlock Foreground="Silver" Panel.ZIndex="1" FontSize="16" x:Name="txtSellOut" Margin="140,35,0,0">(0.00)</TextBlock>
                     <Image Source="/Styles/images/maichu.png" Height="100" Margin="25,0,25,25" Width="200" MouseDown="SellOut_Click"></Image>
                 </Canvas>
             </Grid>
@@ -156,10 +158,10 @@
                         <Style TargetType="{x:Type DataGridRow}">
                             <Style.Triggers>
                                 <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                    <Setter Property="Background" Value="#FFE4DDB3" />
+                                    <Setter Property="Background" Value="#272727" />
                                 </Trigger>
                                 <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                    <Setter Property="Background" Value="#FFF2F2F2" />
+                                    <Setter Property="Background" Value="#1e1e1e" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -169,7 +171,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -178,7 +180,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -187,7 +189,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!--BUY/SELL  对应 多/空-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -197,7 +199,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -206,7 +208,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -215,7 +217,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding openPrice}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding openPrice}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -224,7 +226,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding position}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding position}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!--通过行情websocket获取并实时刷新-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -234,7 +236,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!-- (当前价 - 开仓价) * 合约规模 * 手数 ,其中合约规模从合约接口获取-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -244,7 +246,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -264,15 +266,28 @@
             </TabItem>
             <TabItem Header="平仓" Style="{StaticResource Tab_Page_Bussines}"></TabItem>
             <TabItem Header="待成交" Style="{StaticResource Tab_Page_Bussines}">
-                <DataGrid Name="grid_entrust" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                <DataGrid Name="grid_entrust"  RowHeaderWidth="0" Background="#FF373737"
+                                  AlternationCount="2"  BorderThickness="0,0,0,1" CanUserAddRows="False" Tag="25"
                                   AutoGenerateColumns="False" 
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#272727" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#1e1e1e" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -281,7 +296,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding Direction}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!--BUY/SELL -> 买/卖-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -291,7 +306,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding OffsetFlag}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!--OPEN/CLOSE -> 开/平-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -301,7 +316,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding orderPriceType}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding LimitPrice}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!--如果 orderPriceType为MARKET_PRICE,展示汉字 "市价" ,否则展示limitPrice字段-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -311,7 +326,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding volumeTotalOriginal}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -320,7 +335,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding volumeTraded}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -329,7 +344,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding TradingDay}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -338,7 +353,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding orderTime}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding OrderTime}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -358,15 +373,28 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="交易记录" Style="{StaticResource Tab_Page_Bussines}">
-                <DataGrid Name="grid_record" Background="#1e1e1e" AlternationCount="2" BorderThickness="0,0,0,1" 
+                <DataGrid Name="grid_record" RowHeaderWidth="0" Background="#FF373737"
+                                  AlternationCount="2"  BorderThickness="0,0,0,1" CanUserAddRows="False" Tag="25"
                                   AutoGenerateColumns="False" 
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#272727" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#1e1e1e" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="合约编号" IsReadOnly="True" Width="1*" HeaderStyle="{StaticResource GridList_Title_Bussines_Right}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding instrumentId}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding instrumentId}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -375,7 +403,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding Direction}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!-- BUY/SELL 买/卖-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -385,7 +413,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding OffsetFlag}" Foreground="#808080" Margin="5,0,0,0" />
                                         <!-- OPEN/CLOSE 开/平-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -395,7 +423,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding price}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding price}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -404,7 +432,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding volume}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding volume}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -413,7 +441,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding tradeTime}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding tradeTime}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -422,7 +450,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding tradingDay}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding TradingDay}" Foreground="#808080" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -484,7 +512,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding offsetFlag}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding OffsetFlag}" Margin="5,0,0,0" />
                                         <!--OPEN/CLOSE,对应 开仓/平仓-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -494,7 +522,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding direction}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding Direction}" Margin="5,0,0,0" />
                                         <!--BUY/SELL，对应 买/卖-->
                                     </StackPanel>
                                 </DataTemplate>
@@ -513,7 +541,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding orderTime}" Margin="5,0,0,0" />
+                                        <TextBlock Text="{Binding OrderTime}" Margin="5,0,0,0" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

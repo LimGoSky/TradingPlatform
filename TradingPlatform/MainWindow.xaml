@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TradingPlatform.ViewModel.Quotation"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1024" Visibility="Visible" AllowsTransparency="True" WindowStyle="None"
-        SizeChanged="Window_SizeChanged" WindowStartupLocation="CenterScreen">
+        SizeChanged="Window_SizeChanged" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Style>
         <!--窗口拖动-->
         <Style TargetType="Window">
@@ -116,20 +116,51 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#2a2a2a" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                            <ToolBar x:Name="tooblar" Band="1" ToolBarTray.IsLocked="True" HorizontalAlignment="Left" Margin="0,0,0,0" BandIndex="1" ToolBar.OverflowMode="AsNeeded" Background="#2a2a2a" FontSize="14" Foreground="#FF8B8787" FontFamily="pingfang hk" Style="{DynamicResource MenuFirst}">
-                                <!--<ListBox Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
-                                    <ListBoxItem>
-                                        <TextBlock MouseLeftButtonDown="MainWindow_MouseLeftButtonDown">自选</TextBlock></ListBoxItem>
-                                </ListBox>-->
-                                <ListBox x:Name="box_exchange" Margin="0" FontSize="14" FontFamily="pingfang hk" Background="#2a2a2a" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
-                                </ListBox>
-                            </ToolBar>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF383535" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ListBox x:Name="listbox_exchange" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF383535" Foreground="#FF8B8787" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <ComboBox x:Name="listbox_exchangeother" Foreground="#FF8B8787" Margin="20,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ComboBoxStyle1}" BorderBrush="#FF383535" >
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                        <GradientStop Color="#FF383535" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Margin="0,0,0,0" Background="#191919">
-                            <ToolBar x:Name="secondMenu" Band="1" ToolBarTray.IsLocked="True" HorizontalAlignment="Left" Margin="0,0,0,0" BandIndex="1" ToolBar.OverflowMode="AsNeeded" Background="#2a2a2a" FontSize="14" Foreground="#FF8B8787" FontFamily="pingfang hk" Style="{DynamicResource MenuFirst}">
-                                
-                            </ToolBar>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,0" Background="#191919">
+                            <ListBox x:Name="listbox_product" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#191919" Foreground="#808080" BorderThickness="0" ItemContainerStyle="{StaticResource CheckTextBlockFontStyle}" >
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                            <ComboBox x:Name="listbox_productother" Foreground="#FF8B8787" Margin="20,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ComboBoxStyle2}" BorderBrush="#FF383535" >
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                        <GradientStop Color="#FF383535" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
                         </StackPanel>
                         <WrapPanel Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <DataGrid Name="grid_saffer" RowHeaderWidth="0" Background="#FF373737"

@@ -145,6 +145,18 @@ namespace TradingPlatform {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://market.future.alibaba.com/contract/detail")]
+        public string heyuepeizhi {
+            get {
+                return ((string)(this["heyuepeizhi"]));
+            }
+            set {
+                this["heyuepeizhi"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/login/pass")]
         public string Login {
             get {
@@ -248,6 +260,18 @@ namespace TradingPlatform {
             }
             set {
                 this["UpdateUserInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://trade.xgj.alibaba.com/user/logout")]
+        public string bussineloginout {
+            get {
+                return ((string)(this["bussineloginout"]));
+            }
+            set {
+                this["bussineloginout"] = value;
             }
         }
     }

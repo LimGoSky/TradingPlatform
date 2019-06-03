@@ -32,6 +32,9 @@
     <Setting Name="hangqinglist" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://market.future.alibaba.com/contract/list/detail</Value>
     </Setting>
+    <Setting Name="heyuepeizhi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://market.future.alibaba.com/contract/detail</Value>
+    </Setting>
     <Setting Name="Login" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/login/pass</Value>
     </Setting>
@@ -58,6 +61,9 @@
     </Setting>
     <Setting Name="UpdateUserInfo" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://front.future.alibaba.com/user/info/update</Value>
+    </Setting>
+    <Setting Name="bussineloginout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://trade.xgj.alibaba.com/user/logout</Value>
     </Setting>
   </Settings>
 </SettingsFile>
