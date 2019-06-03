@@ -117,7 +117,7 @@ namespace TradingPlatform.ViewModel.Login
                 if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
                 {
                     this.IsCancel = false;
-                    var result = new LoginLogic().Login(UserName, Password);
+                    var result = new LoginLogic().Login(InterfacePath.Default.Login, UserName, Password);
                     if (result.code == 200)//登录成功
                     {
                         //保存登录信息
@@ -126,7 +126,7 @@ namespace TradingPlatform.ViewModel.Login
                         #region 加载用户资料
 
                         UserLogic logic = new UserLogic();
-                        ResultModel<UserInfoModel> userModel = logic.GetUserInfo(result.data.token);
+                        ResultModel<UserInfoModel> userModel = logic.GetUserInfo(InterfacePath.Default.GetUserInfo, result.data.token);
 
                         Loginer.LoginerUser.UserId = userModel.data.userId;
                         Loginer.LoginerUser.NickName = userModel.data.nickname;

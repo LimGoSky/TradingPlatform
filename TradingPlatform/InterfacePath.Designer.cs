@@ -154,5 +154,113 @@ namespace TradingPlatform {
                 this["heyuepeizhi"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/login/pass")]
+        public string Login {
+            get {
+                return ((string)(this["Login"]));
+            }
+            set {
+                this["Login"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/register")]
+        public string Register {
+            get {
+                return ((string)(this["Register"]));
+            }
+            set {
+                this["Register"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/checkCode/send")]
+        public string SendMessage {
+            get {
+                return ((string)(this["SendMessage"]));
+            }
+            set {
+                this["SendMessage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/checkCode/verify")]
+        public string CheckMessageCode {
+            get {
+                return ((string)(this["CheckMessageCode"]));
+            }
+            set {
+                this["CheckMessageCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/login/sms")]
+        public string LoginOrRegisterByCode {
+            get {
+                return ((string)(this["LoginOrRegisterByCode"]));
+            }
+            set {
+                this["LoginOrRegisterByCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/refreshToken")]
+        public string RefreshToken {
+            get {
+                return ((string)(this["RefreshToken"]));
+            }
+            set {
+                this["RefreshToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/auth/resetPass")]
+        public string ResetPassWord {
+            get {
+                return ((string)(this["ResetPassWord"]));
+            }
+            set {
+                this["ResetPassWord"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/info")]
+        public string GetUserInfo {
+            get {
+                return ((string)(this["GetUserInfo"]));
+            }
+            set {
+                this["GetUserInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://front.future.alibaba.com/user/info/update")]
+        public string UpdateUserInfo {
+            get {
+                return ((string)(this["UpdateUserInfo"]));
+            }
+            set {
+                this["UpdateUserInfo"] = value;
+            }
+        }
     }
 }

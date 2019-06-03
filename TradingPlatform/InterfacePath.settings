@@ -35,5 +35,32 @@
     <Setting Name="heyuepeizhi" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://market.future.alibaba.com/contract/detail</Value>
     </Setting>
+    <Setting Name="Login" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/login/pass</Value>
+    </Setting>
+    <Setting Name="Register" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/register</Value>
+    </Setting>
+    <Setting Name="SendMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/checkCode/send</Value>
+    </Setting>
+    <Setting Name="CheckMessageCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/checkCode/verify</Value>
+    </Setting>
+    <Setting Name="LoginOrRegisterByCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/login/sms</Value>
+    </Setting>
+    <Setting Name="RefreshToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/refreshToken</Value>
+    </Setting>
+    <Setting Name="ResetPassWord" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/auth/resetPass</Value>
+    </Setting>
+    <Setting Name="GetUserInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/info</Value>
+    </Setting>
+    <Setting Name="UpdateUserInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://front.future.alibaba.com/user/info/update</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

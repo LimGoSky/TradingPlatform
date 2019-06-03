@@ -18,14 +18,18 @@ namespace Trading.Logic
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <param name="checkCodeType"></param>
-        public ResultModel SendMessage(string mobile, string checkCodeType)
+        public ResultModel SendMessage(string strUrl,string mobile, string checkCodeType)
         {
             Log4Helper.Info(this.GetType(), $"手机号；{mobile}发送短信一次！");
-            string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/send";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCodeType", checkCodeType);
             param.Add("mobile", mobile);
-            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param,header, "post"));
         }
 
         /// <summary>
@@ -35,14 +39,18 @@ namespace Trading.Logic
         /// <param name="checkCodeType"></param>
         /// <param name="mobile">手机号</param>
         [Obsolete]
-        public ResultModel CheckMessageCode(string checkCode, string checkCodeType, string mobile)
+        public ResultModel CheckMessageCode(string strUrl,string checkCode, string checkCodeType, string mobile)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/verify";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/checkCode/verify";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCode", checkCode);
             param.Add("checkCodeType", checkCodeType);
             param.Add("mobile", mobile);
-            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel>(ApiHelper.SendPost(strUrl, param, header, "post"));
         }
 
         /// <summary>
@@ -50,13 +58,17 @@ namespace Trading.Logic
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <param name="password">密码</param>
-        public ResultModel<Token> Login(string mobile, string password)
+        public ResultModel<Token> Login(string strUrl, string mobile, string password)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/login/pass";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/login/pass";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("password", password);
-            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param,header, "post"));
         }
 
         /// <summary>
@@ -65,23 +77,27 @@ namespace Trading.Logic
         /// <param name="mobile">手机号</param>
         /// <param name="checkCode">验证码</param>
         /// <returns></returns>
-        public ResultModel<Token> LoginOrRegisterByCode(string mobile, string checkCode)
+        public ResultModel<Token> LoginOrRegisterByCode(string strUrl, string mobile, string checkCode)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/login/sms";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/login/sms";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("checkCode", checkCode);
-            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
+            
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param,header, "post"));
         }
 
         /// <summary>
         /// 令牌刷新
         /// </summary>
         /// <returns></returns>
-        public ResultModel<Token> RefreshToken()
+        public ResultModel<Token> RefreshToken(string strUrl)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/refreshToken";
-            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, new Dictionary<string, string>(), "post"));
+            //string strUrl = "http://front.future.alibaba.com/user/auth/refreshToken";
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, new Dictionary<string, string>(), new Dictionary<string, string>(), "post"));
         }
 
         /// <summary>
@@ -94,9 +110,9 @@ namespace Trading.Logic
         /// <param name="profilePhoto">头像</param>
         /// <param name="qq">qq</param>
         /// <returns></returns>
-        public ResultModel<Token> Register(string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
+        public ResultModel<Token> Register(string strUrl, string checkCode, string mobile, string nickname, string password, string profilePhoto, string qq)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/register";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/register";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("mobile", mobile);
             param.Add("checkCode", checkCode);
@@ -104,7 +120,11 @@ namespace Trading.Logic
             param.Add("password", password);
             param.Add("profilePhoto", profilePhoto);
             param.Add("qq", qq);
-            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, header, "post"));
         }
 
 
@@ -115,14 +135,18 @@ namespace Trading.Logic
         /// <param name="mobile">手机号</param>
         /// <param name="password">密码</param>
         /// <returns></returns>
-        public ResultModel<Token> ResetPassWord(string checkCode, string mobile, string password)
+        public ResultModel<Token> ResetPassWord(string strUrl, string checkCode, string mobile, string password)
         {
-            string strUrl = "http://front.future.alibaba.com/user/auth/resetPass";
+            //string strUrl = "http://front.future.alibaba.com/user/auth/resetPass";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("checkCode", checkCode);
             param.Add("mobile", mobile);
             param.Add("password", password);
-            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, "post"));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+
+            return JsonHelper.JsonToObj<ResultModel<Token>>(ApiHelper.SendPost(strUrl, param, header, "post"));
         }
 
     }

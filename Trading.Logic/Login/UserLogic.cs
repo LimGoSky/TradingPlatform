@@ -16,21 +16,31 @@ namespace Trading.Logic.Login
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public ResultModel<UserInfoModel> GetUserInfo(string token)
+        public ResultModel<UserInfoModel> GetUserInfo(string strUrl,string token)
         {
-            string strUrl = "http://front.future.alibaba.com/user/info";
+            //string strUrl = "http://front.future.alibaba.com/user/info";
             Dictionary<string, string> param = new Dictionary<string, string>();
-            return JsonHelper.JsonToObj<ResultModel<UserInfoModel>>(ApiHelper.SendPost(strUrl, param, "post",token));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+            header.Add("Authorization", "Bearer " + token);
+
+            return JsonHelper.JsonToObj<ResultModel<UserInfoModel>>(ApiHelper.SendPost(strUrl, param, header, "post"));
         }
 
-        public ResultModel<UserInfoModel> UpdateUserInfo(string token)
+        public ResultModel<UserInfoModel> UpdateUserInfo(string strUrl,string token)
         {
-            string strUrl = "http://front.future.alibaba.com/user/info/update";
+            //string strUrl = "http://front.future.alibaba.com/user/info/update";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("nickname", "石头");
             param.Add("profilePhoto", "");
             param.Add("qq", "123");
-            return JsonHelper.JsonToObj<ResultModel<UserInfoModel>>(ApiHelper.SendPost(strUrl, param, "post", token));
+
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            header.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+            header.Add("Authorization", "Bearer " + token);
+
+            return JsonHelper.JsonToObj<ResultModel<UserInfoModel>>(ApiHelper.SendPost(strUrl, param, header, "post"));
         }
     }
 }

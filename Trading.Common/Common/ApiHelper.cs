@@ -21,7 +21,7 @@ namespace Trading.Common
         /// <param name="parameters">请求参数</param>
         /// <param name="method">请求方法</param>
         /// <returns>响应内容</returns>
-        public static string SendPost(string url, IDictionary<string, string> parameters, string method,string token = "")
+        public static string SendPost(string url, IDictionary<string, string> parameters, IDictionary<string, string> header, string method)
         {
             if (method.ToLower() == "post")
             {
@@ -32,11 +32,15 @@ namespace Trading.Common
                 {
                     req = (HttpWebRequest)WebRequest.Create(url);
                     req.Method = method;
-                    req.Headers.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
-                    if(token != "")
+                    foreach (var item in header)
                     {
-                        req.Headers.Add("Authorization", "Bearer " + token);
+                        req.Headers.Add(item.Key, item.Value);
                     }
+                    //req.Headers.Add("GeneralParam", JsonHelper.ToJson(SoftwareInformation.Instance()));
+                    //if(token != "")
+                    //{
+                    //    req.Headers.Add("Authorization", "Bearer " + token);
+                    //}
                     req.KeepAlive = false;
                     req.ProtocolVersion = HttpVersion.Version10;
                     req.Timeout = 5000;

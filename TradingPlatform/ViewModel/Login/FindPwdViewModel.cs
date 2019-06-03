@@ -85,7 +85,7 @@ namespace TradingPlatform.ViewModel.Login
                     return;
                 }
 
-                var result = new LoginLogic().ResetPassWord(CheckCode, UserName, Password);
+                var result = new LoginLogic().ResetPassWord(InterfacePath.Default.ResetPassWord, CheckCode, UserName, Password);
                 SendMsg("resetPassWord", result.code.ToString());
                 Log4Helper.Info(this.GetType(), $"手机号:{UserName},找回密码：{result.msg}");
             }
