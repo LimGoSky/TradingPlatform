@@ -24,6 +24,7 @@ namespace TradingPlatform.Common
         }
 
         private string _UserId = string.Empty;
+        private string _PhoneNo = string.Empty;
         private string _NickName = string.Empty;
         private string _ProFilePhoto = string.Empty;
         private string _CreateTime = string.Empty;
@@ -31,16 +32,25 @@ namespace TradingPlatform.Common
         private string _GeneralParam = string.Empty;
 
         /// <summary>
-        /// 登录名
+        /// 用户ID
         /// </summary>
         public string UserId
         {
             get { return _UserId; }
             set { _UserId = value; RaisePropertyChanged(); }
         }
+        
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        public string PhoneNo
+        {
+            get { return _PhoneNo; }
+            set { _PhoneNo = value;RaisePropertyChanged(); }
+        }
 
         /// <summary>
-        /// 用户名
+        /// 昵称
         /// </summary>
         public string NickName
         {

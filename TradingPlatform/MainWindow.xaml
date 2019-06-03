@@ -61,7 +61,7 @@
                     </Ellipse>
                     <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="34,0,0,0" Text="我的账户" FontSize="18" Foreground="#707070"/>
                 </WrapPanel>
-                <TextBlock Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="18,0,0,0" Text="157****3362" FontSize="14" Foreground="#ffffff"/>
+                <TextBlock Name="txtPhone" Height="20" FontFamily="pingfang hk" TextWrapping="Wrap" Margin="18,0,0,0" Text="157****3362" FontSize="14" Foreground="#ffffff"/>
                 <WrapPanel Height="45" Margin="20,0,0,0">
                     <Line X1="10" Y1="10" X2="10" Y2="50" Stroke="#1e1e1e" StrokeDashArray="20" StrokeThickness="1"></Line>
                     <Image Source="/Styles/images/home_nav_trade.png" Height="40" Width="20" Margin="15,0,0,0"></Image>

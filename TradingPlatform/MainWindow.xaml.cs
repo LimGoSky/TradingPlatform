@@ -30,6 +30,7 @@ namespace TradingPlatform
         public MainWindow()
         {
             InitializeComponent();
+            txtPhone.Text = Loginer.LoginerUser.PhoneNo.Substring(0, 3) + "****" + Loginer.LoginerUser.PhoneNo.Substring(Loginer.LoginerUser.PhoneNo.Length - 4);
             GetExchange();//绑定交易所
             BindList();//绑定列表
         }

@@ -129,6 +129,7 @@ namespace TradingPlatform.ViewModel.Login
                         ResultModel<UserInfoModel> userModel = logic.GetUserInfo(InterfacePath.Default.GetUserInfo, result.data.token);
 
                         Loginer.LoginerUser.UserId = userModel.data.userId;
+                        Loginer.LoginerUser.PhoneNo = UserName;
                         Loginer.LoginerUser.NickName = userModel.data.nickname;
                         Loginer.LoginerUser.ProFilePhoto = userModel.data.profilePhoto;
                         Loginer.LoginerUser.CreateTime = userModel.data.createTime;
