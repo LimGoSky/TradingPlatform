@@ -34,8 +34,8 @@ namespace Trading.Common
         }
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            // handle message received         
-            string str = string.Format("subscriber,topic:{0},content:{1}", e.Topic, Encoding.UTF8.GetString(e.Message));
+            ClientPublishReceivedAction(sender, e);
+            //// handle message received         
         }
     }
 

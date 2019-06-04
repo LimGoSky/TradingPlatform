@@ -17,6 +17,8 @@ using Trading.Common;
 using Trading.Model.Common;
 using TradingPlatform.View.BusinessLogin;
 using TradingPlatform.View.Login;
+using uPLibrary.Networking.M2Mqtt.Messages;
+using Trading.Model.Mqtt;
 
 namespace TradingPlatform.Business
 {
@@ -59,6 +61,7 @@ namespace TradingPlatform.Business
 
                 #region 连接MQTT
                 SubscribeClient subscribeClient = new SubscribeClient(MqttEntity._instance);
+                subscribeClient.ClientPublishReceivedAction = client_MqttMsgPublishReceived;
                 #endregion
             }
             catch (Exception ex)
@@ -66,6 +69,16 @@ namespace TradingPlatform.Business
                 MessageBox.Show(ex.Message);
             }
             InitializeComponent();
+        }
+        /// <summary>
+        /// MQTT接收
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            MessageBox.Show("添加单子后根据MQTT反馈信息进行后续处理！");
+            BussinesModel mqttMode = JsonHelper.JsonToObj<BussinesModel>(Encoding.UTF8.GetString(e.Message));
         }
         /// <summary>
         /// 页面加载完成执行
@@ -218,37 +231,18 @@ namespace TradingPlatform.Business
 
             if (selectindex == 0)//持仓
             {
-                string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chicang, dic, header, "post");
-                //ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
-                //if (resultmodel.code == 402)
-                //{
-                //    ReloadLogin();
-                //}
-                //if (resultmodel.data != null)
-                //{
-                //    this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
-                //}
+                ResultModel<List> resultmodel = new ResultModel<List>();
+                LoadList(resultmodel, 0);
+                //this.grid_entrust.Dispatcher.Invoke(new Action(() => { this.grid_entrust.ItemsSource = resultmodel.data; }));
             }
             if (selectindex == 2)//委托
             {
-                //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.weituo, dic, header, "post");
-                //ResultModel<EntrustModel_List> resultmodel = JsonHelper.JsonToObj<ResultModel<EntrustModel_List>>(result);
-                //if (resultmodel.code == 402)
-                //{
-                //    ReloadLogin();
-                //}
                 ResultModel<EntrustModel_List> resultmodel = new ResultModel<EntrustModel_List>();
                 LoadList(resultmodel, 2);
                 this.grid_entrust.Dispatcher.Invoke(new Action(() => { this.grid_entrust.ItemsSource = resultmodel.data.list; }));
             }
             if (selectindex == 3)//成交记录
             {
-                //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chengjiaojilu, dic, header, "post");
-                //ResultModel<RecordModel> resultmodel = JsonHelper.JsonToObj<ResultModel<RecordModel>>(result);
-                //if (resultmodel.code == 402)
-                //{
-                //    ReloadLogin();
-                //}
                 ResultModel<RecordModel> resultmodel = new ResultModel<RecordModel>();
                 LoadList(resultmodel, 3);
                 this.grid_record.Dispatcher.Invoke(new Action(() => { this.grid_record.ItemsSource = resultmodel.data.list; }));
@@ -265,15 +259,8 @@ namespace TradingPlatform.Business
             if (selectindex == 0)//持仓
             {
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.chicang, dic, header, "post");
-                //ResultModel<HoldModel> resultmodel = JsonHelper.JsonToObj<ResultModel<HoldModel>>(result);
-                //if (resultmodel.code == 402)
-                //{
-                //    ReloadLogin();
-                //}
-                //if (resultmodel.data != null)
-                //{
-                //    this.grid_hold.Dispatcher.Invoke(new Action(() => { this.grid_hold.ItemsSource = resultmodel.data.list; }));
-                //}
+                ResultModel resultmodel = JsonHelper.JsonToObj<ResultModel>(result);
+             
             }
             if (selectindex == 2)//委托
             {
@@ -336,7 +323,7 @@ namespace TradingPlatform.Business
                 dic.Add("offsetFlag", "CLOSE");//平仓
             }
             dic.Add("priceType", "LIMIT_PRICE");
-            dic.Add("volume", this.volume.Text);
+            dic.Add("volume", Convert.ToDouble(this.volume.Text).ToString("00"));
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);
@@ -372,7 +359,7 @@ namespace TradingPlatform.Business
                 dic.Add("offsetFlag", "CLOSE");//平仓
             }
             dic.Add("priceType", "LIMIT_PRICE");
-            dic.Add("volume", this.volume.Text);
+            dic.Add("volume", Convert.ToDouble(this.volume.Text).ToString("00"));
             Dictionary<string, string> header = new Dictionary<string, string>();
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);

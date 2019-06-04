@@ -29,12 +29,14 @@ namespace TradingPlatform
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
+            ///退出交易登录
             if (!string.IsNullOrEmpty(BussinesLoginer.bussinesLoginer.sessionId))
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 Dictionary<string, string> header = new Dictionary<string, string>();
                 string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
                 header.Add("GeneralParam", GeneralParam);
+                header.Add("Authorization", BussinesLoginer.bussinesLoginer.sessionId);
                 string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussineloginout, dic, header, "post");
             }
         }

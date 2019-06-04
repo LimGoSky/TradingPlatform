@@ -57,6 +57,7 @@
     <Compile Include="Model_Business\PriceStruct.cs" />
     <Compile Include="Model_Business\StockInfo.cs" />
     <Compile Include="Model_Main\ExchangeModel.cs" />
+    <Compile Include="Mqtt\BussinesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

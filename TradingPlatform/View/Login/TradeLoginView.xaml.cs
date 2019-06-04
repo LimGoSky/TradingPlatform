@@ -90,12 +90,12 @@ namespace TradingPlatform.View.Login
             string GeneralParam = JsonHelper.ToJson(SoftwareInformation.Instance());
             header.Add("GeneralParam", GeneralParam);
 
-            string result = ApiHelper.SendPost(InterfacePath.Default.bussinelogin, dic, header, "post");
+            //string result = ApiHelper.SendPost(InterfacePath.Default.bussinelogin, dic, header, "post");
 
-            //string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussinelogin, dic, header, "post");
+            string result = ApiHelper.SendPostByHeader(InterfacePath.Default.bussinelogin, dic, header, "post");
 
-            //ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
-            //BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;
+            ResultModel<BussinesLoginer> loginsession = JsonHelper.JsonToObj<ResultModel<BussinesLoginer>>(result);
+            BussinesLoginer.bussinesLoginer.sessionId = loginsession.data.sessionId;
             MainPage mainPage = new MainPage();
             mainPage.Show();
             this.Close();
