@@ -19,6 +19,8 @@ using TradingPlatform.View.BusinessLogin;
 using Trading.Model.Model_Main;
 using TradingPlatform.View.Login;
 using System.Windows.Media;
+using System.Windows.Interop;
+
 
 namespace TradingPlatform
 {
@@ -37,6 +39,7 @@ namespace TradingPlatform
             #region 重新排版加载交易所产品
             ReloadExchange();
             #endregion
+            //InitWindowActualHeight();
         }
         /// <summary>
         /// 交易所列表
@@ -545,7 +548,11 @@ namespace TradingPlatform
             BindProductList();
         }
         #endregion
-
+        /// <summary>
+        /// 重置交易所产品菜单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Box_exchange_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             try
@@ -559,5 +566,50 @@ namespace TradingPlatform
             }
         }
 
+        #region 窗口大小自适应
+
+        private const double WindowShadowHeight = 0;
+
+        private void InitWindowActualHeight()
+        {
+            //获取窗体所在屏幕的高度
+            var visibleAreaHeight = GetScreenHeight();
+
+            //可显示高度 > 窗口最大高度
+            if (visibleAreaHeight > RootGrid.MaxHeight + WindowShadowHeight)
+            {
+                //设置高度等于最大高度
+                RootGrid.Height = RootGrid.MaxHeight;
+            }
+            //可显示高度 < 窗口最小高度
+            else if (visibleAreaHeight < RootGrid.MinHeight + WindowShadowHeight)
+            {
+                //设置Viewbox高度=可视高度-阴影高度（此处通过绽放显示窗口，所以不能通过设置窗口或者设置内容的高度来实现）
+                RootViewbox.Height = visibleAreaHeight - WindowShadowHeight;
+                //等比例缩小
+                RootViewbox.Stretch = Stretch.Fill;
+            }
+            else
+            {
+                //设置高度等于最小高度
+                RootGrid.Height = RootGrid.MinHeight;
+            }
+        }
+        const double DpiPercent = 70;
+        private double GetScreenHeight()
+        {
+            var intPtr = new WindowInteropHelper(this).Handle;//获取当前窗口的句柄
+            var screen = System.Windows.Forms.Screen.FromHandle(intPtr);//获取当前屏幕
+
+            double height = 0;
+            using (System.Drawing.Graphics currentGraphics = System.Drawing.Graphics.FromHwnd(intPtr))
+            {
+                double dpiXRatio = currentGraphics.DpiX / DpiPercent;
+                double dpiYRatio = currentGraphics.DpiY / DpiPercent;
+                height = screen.WorkingArea.Height / dpiYRatio;
+            }
+            return height;
+        }
+        #endregion
     }
 }
