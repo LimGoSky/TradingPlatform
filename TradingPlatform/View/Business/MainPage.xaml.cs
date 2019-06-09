@@ -485,7 +485,8 @@ namespace TradingPlatform.Business
         /// <param name="e"></param>
         private void ShowTiaoJianDan_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            MainPage view = new MainPage();
+            view.Show();
         }
 
     }

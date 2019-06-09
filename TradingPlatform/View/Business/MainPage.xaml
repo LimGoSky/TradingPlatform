@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="" Height="600" Width="900" Loaded="Window_Loaded"
+        Title="" Height="900" Width="900" Loaded="Window_Loaded"
         Background="{StaticResource BackGround}" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Window.Style>
         <!--窗口拖动-->
@@ -567,7 +567,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Canvas>
-            <TextBlock Canvas.Bottom="20" Canvas.Left="400" Foreground="White" Text="+ 添加条件单" MouseDown="ShowTiaoJianDan_MouseDown"></TextBlock>
+            <TextBlock Canvas.Bottom="20" Canvas.Left="400" Foreground="White" Text="+ 添加条件单" MouseDown="ShowTiaoJianDan_MouseDown" Cursor="Hand"></TextBlock>
         </Canvas>
     </Grid>
 </Window>

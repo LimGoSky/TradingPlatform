@@ -38,14 +38,15 @@
                     <StackPanel>
                         <ComboBox Name="chkPrice" Margin="30,7,219,9" SelectedIndex="0" BorderThickness="0,0,0,1" >
                             <ComboBoxItem Content="最新价"></ComboBoxItem>
-                            <ComboBoxItem>1</ComboBoxItem>
-                            <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBoxItem>买价</ComboBoxItem>
+                            <ComboBoxItem>卖价</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                 </Border>
                 <ComboBox Canvas.Left="176" Canvas.Top="50" SelectedIndex="0">
+                    <ComboBoxItem Content=">"></ComboBoxItem>
                     <ComboBoxItem Content=">="></ComboBoxItem>
-                    <ComboBoxItem Content="="></ComboBoxItem>
+                    <ComboBoxItem Content="&lt;"></ComboBoxItem>
                     <ComboBoxItem Content="&lt;="></ComboBoxItem>
                 </ComboBox>
                 <TextBox x:Name="UserTextBox" Width="80" Canvas.Left="235" Canvas.Top="48" Height="29" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1" Background="#2a2a2a"  CaretBrush="White"></TextBox>
@@ -75,8 +76,7 @@
                     <StackPanel Margin="-1,1,1,-1">
                         <ComboBox x:Name="chkPrice1" Margin="29,7,37,9" SelectedIndex="0" BorderThickness="0,0,0,1" >
                             <ComboBoxItem Content="最新价"/>
-                            <ComboBoxItem Content="1"/>
-                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="市价"/>
                         </ComboBox>
                     </StackPanel>
                 </Border>
@@ -201,7 +201,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Content="确定" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="284" Canvas.Top="430" Height="19" Width="83" Foreground="Gray" >
+                <Button Content="确定" Name="btnSure" Cursor="Hand" RenderTransformOrigin="2.303,7.119" Canvas.Left="284" Canvas.Top="430" Height="19" Width="83" Foreground="Gray" Click="BtnSure_Click" >
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1" CornerRadius="10,10,10,10" Name="PART_Background">
